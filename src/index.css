@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&display=swap');
+
+@import "tailwindcss";
+@plugin "daisyui";
+
+.archivo-narrow-font{
+  font-family: "Archivo Narrow", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* blue and gray theme 
+#555879
+#98A1BC
+#DED3C4
+#F4EBD3
+*/
