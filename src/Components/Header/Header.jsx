@@ -21,7 +21,7 @@ const Header = () => {
                 </div>
                 <ul
                     tabIndex={0}
-                    className="menu menu-sm dropdown-content bg-base-200 rounded-box z-1 w-52 p-2 shadow text-5xl">
+                    className="navLinks menu menu-sm dropdown-content bg-base-200 rounded-box z-1 w-52 p-2 shadow text-5xl">
                     {
                         links
                     }
@@ -35,7 +35,7 @@ const Header = () => {
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1 text-[#080c3b] font-bold text-3xl">
+                <ul className="navLinks menu menu-horizontal px-1 text-[#080c3b] font-bold text-3xl">
                 {
                     links
                 }
