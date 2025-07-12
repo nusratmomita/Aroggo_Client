@@ -8,7 +8,7 @@ const Header = () => {
     const links = 
     <>
         <li className="navLinks mt-2"><NavLink to='/'>Home</NavLink></li>
-        <li className="navLinks mt-2"><NavLink to='/coverage'>Shop</NavLink></li>
+        <li className="navLinks mt-2"><NavLink to='/shop'>Shop</NavLink></li>
         <BsFillCartCheckFill size={30} className='mt-5 ml-2'></BsFillCartCheckFill>
     </>
 

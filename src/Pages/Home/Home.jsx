@@ -4,6 +4,7 @@ import DiscountOffers from '../../Components/DiscountOffers/DiscountOffers';
 import Slider from '../../Components/Slider/Slider';
 import Categories from '../../Components/Categories/Categories';
 import SuccessInNumber from '../../Components/SuccessInNumber/SuccessInNumber';
+import CustomerReview from '../../Components/CustomerReview/CustomerReview';
 
 const Home = () => {
     return (
@@ -12,6 +13,7 @@ const Home = () => {
             <Categories></Categories>
             <DiscountOffers></DiscountOffers>
             <SuccessInNumber></SuccessInNumber>
+            <CustomerReview></CustomerReview>
         </div>
     );
 };

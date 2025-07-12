@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import { Link } from 'react-router';
 
 // Static product data
 const discountProducts = [
@@ -56,7 +57,7 @@ const DiscountOffers = () => {
   const nextRef = useRef(null);
 
   return (
-    <div className="py-10 px-5 md:px-20  relative">
+    <div className="py-10 px-5 md:px-20 relative">
       <h2 className="text-6xl font-bold mb-15 text-center text-[#080c3b]">Discount Offers</h2>
 
       {/* Navigation Arrows */}
@@ -108,9 +109,11 @@ const DiscountOffers = () => {
                 <p className="text-[#080c3b] font-bold text-2xl">${product.discountedPrice.toFixed(2)}</p>
                 <p className="text-xl text-[red-500]">{product.discountPercent}% Off</p>
               </div>
-              <button className="mt-4 bg-[#98A1BC] cursor-pointer text-2xl font-bold text-[#080c3b] py-2 px-4 rounded transition w-full">
-                Buy Now
-              </button>
+              <Link to="/shop">
+                <button className="mt-4 bg-[#98A1BC] cursor-pointer text-2xl font-bold text-[#080c3b] py-2 px-4 rounded transition w-full">
+                  Buy Now
+                </button>
+              </Link>
             </div>
           </SwiperSlide>
         ))}
