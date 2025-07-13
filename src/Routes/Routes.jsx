@@ -7,6 +7,7 @@ import Login from "../Pages/Login/Login";
 import PrivateRoute from "../Pages/PrivateRoute/PrivateRoute";
 import MyCart from "../Pages/MyCart/MyCart";
 import DashboardRoot from "../Root/DashboardRoot";
+import ManageMedicine from "../Pages/SellerPages/ManageMedicine/ManageMedicine";
 
 
 
@@ -41,6 +42,12 @@ export const routers = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <PrivateRoute> <DashboardRoot></DashboardRoot> </PrivateRoute>
+        element: <PrivateRoute> <DashboardRoot></DashboardRoot> </PrivateRoute>,
+        children: [
+            {
+                path: "/dashboard/manageMedicine",
+                Component: ManageMedicine
+            }
+        ]
     }
 ])

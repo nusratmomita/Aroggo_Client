@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router";
 import { AuthContext } from "../../Authentication/AuthContext";
 import { toast } from "react-toastify";
 import axios from "axios";
-import UseCommonAxiosSecureAPI from "../../CustomeHooks/UseCommonAxiosSecureAPI";
+import UseCommonAxiosSecureAPI from "../../CustomHooks/UseCommonAxiosSecureAPI";
 
 const Register = () => {
   const {

@@ -46,7 +46,7 @@ const DashboardRoot = () => {
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu bg-base-200 text-2xl min-h-full w-80 p-4 flex flex-col justify-between"> 
                 {/* Sidebar content */}
-                <div>
+                <div className='mt-10'>
                     <li>
                     <NavLink to="/">
                         <FaHome className="inline-block mr-2" />
@@ -54,7 +54,7 @@ const DashboardRoot = () => {
                     </NavLink>
                     </li>
                     <li>
-                    <NavLink to="/dashboard/myParcels">
+                    <NavLink to="/dashboard/manageMedicine">
                         <FaCapsules className="inline-block mr-2" />
                         Manage Medicines
                     </NavLink>
