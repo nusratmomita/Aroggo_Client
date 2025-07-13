@@ -115,7 +115,7 @@ const JoinUs = () => {
               <p className="text-lg text-[#080c3b] dark:text-gray-600">
                 Create an Account to Continue
               </p>
-              <div className="divider"></div>
+              <div className="mt-5 border-b-2 border-dashed border-black"></div>
             </div>
             <form
               className="space-y-12 "
