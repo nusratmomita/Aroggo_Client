@@ -5,7 +5,6 @@ import Slider from '../../Components/Slider/Slider';
 import Categories from '../../Components/Categories/Categories';
 import SuccessInNumber from '../../Components/SuccessInNumber/SuccessInNumber';
 import CustomerReview from '../../Components/CustomerReview/CustomerReview';
-import Footer from '../../Components/Footer/Footer';
 
 const Home = () => {
     return (
@@ -15,7 +14,6 @@ const Home = () => {
             <DiscountOffers></DiscountOffers>
             <SuccessInNumber></SuccessInNumber>
             <CustomerReview></CustomerReview>
-            <Footer></Footer>
         </div>
     );
 };

@@ -52,8 +52,12 @@ const Header = () => {
                     <li><a>Bangla</a></li>
                     <li><a>English</a></li>
                     </ul>
-                    <button className="ml-6 lg:ml-3 p-3 flex gap-2 bg-[#98A1BC] rounded-2xl justify-center items-center cursor-pointer hover:rounded-4xl hover:bg-[#c2cce8] text-2xl">Join us</button>
-                    <button className="ml-6 lg:ml-3 p-3 flex gap-2 bg-[#98A1BC] rounded-2xl justify-center items-center cursor-pointer hover:rounded-4xl hover:bg-[#c2cce8] text-2xl">Login</button>
+                    <Link to="/register">
+                        <button className="ml-6 lg:ml-3 p-3 flex gap-2 bg-[#98A1BC] rounded-2xl justify-center items-center cursor-pointer hover:rounded-4xl hover:bg-[#c2cce8] text-2xl">Join us</button>                    
+                    </Link>
+                    <Link to="/login">
+                        <button className="ml-6 lg:ml-3 p-3 flex gap-2 bg-[#98A1BC] rounded-2xl justify-center items-center cursor-pointer hover:rounded-4xl hover:bg-[#c2cce8] text-2xl">Login</button>
+                    </Link>
                 </div>
             </div>
         </div>
