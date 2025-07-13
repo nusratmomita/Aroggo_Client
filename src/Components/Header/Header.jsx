@@ -22,7 +22,7 @@ const Header = () => {
     <>
         <li className="navLinks mt-2"><NavLink to='/'>Home</NavLink></li>
         <li className="navLinks mt-2"><NavLink to='/shop'>Shop</NavLink></li>
-        <BsFillCartCheckFill size={30} className='mt-5 ml-2'></BsFillCartCheckFill>
+        <li className="navLinks mt-2"><NavLink to='/myCart'> My Cart<BsFillCartCheckFill size={30} className='ml-1'></BsFillCartCheckFill> </NavLink></li>
     </>
     const handleSignOut = () => {
         handleLogout()
@@ -57,7 +57,7 @@ const Header = () => {
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="navLinks menu menu-horizontal px-1 text-[#080c3b] font-bold text-3xl">
+                <ul className="navLinks menu menu-horizontal px-1 text-[#F4EBD3] font-bold text-3xl">
                 {
                     links
                 }

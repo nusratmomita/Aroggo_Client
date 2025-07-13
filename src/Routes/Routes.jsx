@@ -4,6 +4,9 @@ import Home from "../Pages/Home/Home";
 import Shop from "../Pages/Shop/Shop";
 import JoinUs from "../Pages/JoinUs/JoinUs";
 import Login from "../Pages/Login/Login";
+import PrivateRoute from "../Pages/PrivateRoute/PrivateRoute";
+import MyCart from "../Pages/MyCart/MyCart";
+import DashboardRoot from "../Root/DashboardRoot";
 
 
 
@@ -27,10 +30,17 @@ export const routers = createBrowserRouter([
                 Component: JoinUs
             },
             {
+                path: "/myCart",
+                element: <PrivateRoute> <MyCart></MyCart> </PrivateRoute>
+            },
+            {
                 path: "/login",
                 Component: Login
-            }
+            },
         ]
     },
-
+    {
+        path: "/dashboard",
+        element: <PrivateRoute> <DashboardRoot></DashboardRoot> </PrivateRoute>
+    }
 ])
