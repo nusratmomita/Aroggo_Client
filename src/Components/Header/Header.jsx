@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, Links, NavLink } from 'react-router';
 import './Header.css'
 import siteLogo from '../../assets/siteLogo.png';
@@ -13,7 +13,11 @@ import { toast } from 'react-toastify';
 const Header = () => {
     const {user,handleLogout} = useContext(AuthContext);
     console.log(user)
-    console.log(user?.displayName , " " , user?.photoURL)
+    console.log(user?.displayName , " " , user?.photoURL);
+
+    const [showDropdown, setShowDropdown] = useState(false);
+
+
     const links = 
     <>
         <li className="navLinks mt-2"><NavLink to='/'>Home</NavLink></li>
@@ -71,33 +75,69 @@ const Header = () => {
                     <li><a>English</a></li>
                     </ul>
                     <div className='flex gap-2 lg:gap-4 justify-center items-center'>
-                    {
-                        user && user?.email ?
-                        <>
-                            <img className="w-10 h-10 bg-white p-1 rounded-full" src={user?.photoURL} alt="userPhoto" />
-                            <h1 className='text-[#2D336B] text-2xl font-bold'>Hi,{user?.displayName}</h1>
-                            {/* <h1>{user?.email}</h1> */}
-                        </>
-                        :
-                        <>
-                             <Link to="/register">
-                        <button className="ml-6 lg:ml-3 p-3 flex gap-2 bg-[#98A1BC] rounded-2xl justify-center items-center cursor-pointer hover:rounded-4xl hover:bg-[#c2cce8] text-2xl">Join us</button>                    
-                    </Link>
-                    <Link to="/login">
-                        <button className="ml-6 lg:ml-3 p-3 flex gap-2 bg-[#98A1BC] rounded-2xl justify-center items-center cursor-pointer hover:rounded-4xl hover:bg-[#c2cce8] text-2xl">Login</button>
-                    </Link>
-                    <FaUserCircle className="w-15 h-15 bg-white p-1 rounded-full" size={25}></FaUserCircle>
-                        </>
-                    }
-                </div>
-                {
-                    (user && user?.email) ?
-                    <button className="ml-6 lg:ml-3  p-3 flex gap-2 bg-[#B2A5FF] rounded-2xl justify-center items-center cursor-pointer hover:rounded-4xl hover:bg-[#a6ace0] text-2xl"  onClick={handleSignOut}><FiLogOut size={25} color='purple'></FiLogOut>Logout</button>
-                    :
-                    "" 
-                }
+                    <div className="relative">
+                        {user && user?.email ? (
+                            <>
+                            <div
+                                className="flex items-center gap-3 cursor-pointer"
+                                onClick={() => setShowDropdown(!showDropdown)}
+                            >
+                                <img
+                                className="w-15 h-15 bg-white p-1 rounded-full"
+                                src={user?.photoURL}
+                                alt="userPhoto"
+                                />
+                                <h1 className="text-[#F4EBD3] text-sm lg:text-3xl font-bold">
+                                Hi, {user?.displayName}
+                                </h1>
+                            </div>
+
+                            {showDropdown && (
+                                <div className="absolute right-0 mt-2 w-48 bg-white shadow-md rounded-lg z-50">
+                                <Link
+                                    to="/update-profile"
+                                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                                    onClick={() => setShowDropdown(false)}
+                                >
+                                    Update Profile
+                                </Link>
+                                <Link
+                                    to="/dashboard"
+                                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                                    onClick={() => setShowDropdown(false)}
+                                >
+                                    Dashboard
+                                </Link>
+                                <button
+                                    onClick={() => {
+                                    handleSignOut();
+                                    setShowDropdown(false);
+                                    }}
+                                    className="w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
+                                >
+                                    Logout
+                                </button>
+                                </div>
+                            )}
+                            </>
+                        ) : (
+                            <div className='flex gap-3'>
+                            <Link to="/register">
+                                <button className="ml-6 lg:ml-3 p-3 flex gap-2 bg-[#98A1BC] rounded-2xl justify-center items-center cursor-pointer hover:rounded-4xl hover:bg-[#c2cce8] text-2xl">
+                                Join us
+                                </button>
+                            </Link>
+                            <Link to="/login">
+                                <button className="ml-6 lg:ml-3 p-3 flex gap-2 bg-[#98A1BC] rounded-2xl justify-center items-center cursor-pointer hover:rounded-4xl hover:bg-[#c2cce8] text-2xl">
+                                Login
+                                </button>
+                            </Link>
+                        </div>
+                        )}
+                    </div>
                 </div>
             </div>
+         </div>
         </div>
     );
 };
