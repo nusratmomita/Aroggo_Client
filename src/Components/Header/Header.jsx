@@ -1,16 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Links, NavLink } from 'react-router';
 import './Header.css'
 import siteLogo from '../../assets/siteLogo.png';
 import { BsFillCartCheckFill } from "react-icons/bs";
+import { AuthContext } from '../../Authentication/AuthContext';
+import { FaUserCircle } from "react-icons/fa";
+import { FiLogOut } from "react-icons/fi";
+import { toast } from 'react-toastify';
+
+
 
 const Header = () => {
+    const {user,handleLogout} = useContext(AuthContext);
+    console.log(user)
+    console.log(user?.displayName , " " , user?.photoURL)
     const links = 
     <>
         <li className="navLinks mt-2"><NavLink to='/'>Home</NavLink></li>
         <li className="navLinks mt-2"><NavLink to='/shop'>Shop</NavLink></li>
         <BsFillCartCheckFill size={30} className='mt-5 ml-2'></BsFillCartCheckFill>
     </>
+    const handleSignOut = () => {
+        handleLogout()
+        .then(()=>{
+            toast.success("You've logged out successfully" );
+        })
+        .catch(()=>{
+        })
+    }
+
 
     return (
         <div className="navbar bg-gradient-to-l from-[#555879] to-[#98A1BC] shadow-sm">
@@ -52,12 +70,32 @@ const Header = () => {
                     <li><a>Bangla</a></li>
                     <li><a>English</a></li>
                     </ul>
-                    <Link to="/register">
+                    <div className='flex gap-2 lg:gap-4 justify-center items-center'>
+                    {
+                        user && user?.email ?
+                        <>
+                            <img className="w-10 h-10 bg-white p-1 rounded-full" src={user?.photoURL} alt="userPhoto" />
+                            <h1 className='text-[#2D336B] text-2xl font-bold'>Hi,{user?.displayName}</h1>
+                            {/* <h1>{user?.email}</h1> */}
+                        </>
+                        :
+                        <>
+                             <Link to="/register">
                         <button className="ml-6 lg:ml-3 p-3 flex gap-2 bg-[#98A1BC] rounded-2xl justify-center items-center cursor-pointer hover:rounded-4xl hover:bg-[#c2cce8] text-2xl">Join us</button>                    
                     </Link>
                     <Link to="/login">
                         <button className="ml-6 lg:ml-3 p-3 flex gap-2 bg-[#98A1BC] rounded-2xl justify-center items-center cursor-pointer hover:rounded-4xl hover:bg-[#c2cce8] text-2xl">Login</button>
                     </Link>
+                    <FaUserCircle className="w-15 h-15 bg-white p-1 rounded-full" size={25}></FaUserCircle>
+                        </>
+                    }
+                </div>
+                {
+                    (user && user?.email) ?
+                    <button className="ml-6 lg:ml-3  p-3 flex gap-2 bg-[#B2A5FF] rounded-2xl justify-center items-center cursor-pointer hover:rounded-4xl hover:bg-[#a6ace0] text-2xl"  onClick={handleSignOut}><FiLogOut size={25} color='purple'></FiLogOut>Logout</button>
+                    :
+                    "" 
+                }
                 </div>
             </div>
         </div>

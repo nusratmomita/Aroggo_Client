@@ -1,12 +1,12 @@
-// register page
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router";
 import { AuthContext } from "../../Authentication/AuthContext";
 import { toast } from "react-toastify";
+import axios from "axios";
 import UseCommonAxiosSecureAPI from "../../CustomeHooks/UseCommonAxiosSecureAPI";
 
-const JoinUs = () => {
+const Register = () => {
   const {
     register,
     handleSubmit,
@@ -17,92 +17,90 @@ const JoinUs = () => {
 
   const axiosApi = UseCommonAxiosSecureAPI();
 
-
   const navigate = useNavigate();
 
   const [profileImage , setProfileImage] = useState('');
 
-  const handleRegisterForm = async (data) => {
-  const { email, password, role, name } = data;
 
-  try {
-    await handleRegister(email, password);
-
-    const userInfo = {
-      email,
-      role,
-      created_at: new Date().toISOString(),
-    };
-
-    const res = await axiosApi.post("/users", userInfo);
-
-    if (res.data.insertedId) {
-      const updatedProfile = {
-        displayName: name,
-        photoURL: profileImage,
-      };
-      await handleUpdateProfile(updatedProfile);
-      toast.success("Account created successfully");
-      setTimeout(() => {
-        navigate("/");
-      }, 1500);
-    }
-  } 
-  catch (err) {
-    console.log(err)
-    toast.error("You have put invalid credentials. Please try again.");
-    }
-  };
-
-
-  const handleGoogle = () => {
-    handleGoogleAuth()
-    .then(async (result)=>{
-      const user = result.user;
-      // console.log(user);
-
-      const userInfo = {
-          email: user.email,
-          role: "user",
-          created_at: new Date().toISOString()
-      }
+  const handleRegisterForm = (data) => {
+    // console.log(data);
+    const email = data.email;
+    const password = data.password;
+    const role = data.role;
     
-      try{
-        const res = await axiosApi.post("/users", userInfo);
+    handleRegister(email,password)
+      .then(async()=>{
+        // const user = result.user;
+
+        // getting user info
+        const userInfo = {
+          email : data.email,
+          role : role,// default role
+          created_at : new Date().toISOString(),
+        }
+
+        const res = await axiosApi.post("/users" , userInfo);
         console.log(res.data);
 
-        if(res.data.insertedId){
-          toast.error("You have created a Google account successfully!")
-          setTimeout(()=>{
-            navigate('/');
-          },1500)
-      
+        const updateProfile = {
+          displayName:data.name,
+          photoURL: profileImage
         }
-      }
-      catch(err){
-        console.log(err)
-        toast.error("Something went wrong.Please try again.");
-      }
-  })
-    .catch((error)=>{
-      console.log(error)
-      toast.error("Google sign-in failed. Please try again.")
-    })
-  }
-    
-  const handlePhotoUpload = async(e) => {
-    const image = e.target.files[0];
-    // console.log(image);
+        // console.log(updateProfile)
 
-    const formData = new FormData();
-    formData.append("image" , image);
-    
-    const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_key_api}`;
-    // console.log(imageUploadUrl)
+        handleUpdateProfile(updateProfile)
+        .then(()=>{
+          // console.log("Profile updated done")
+          navigate('/')
+        })
+        .catch(()=>{
+          // console.log(error)
+        })
+      })
+    }
 
-    const res = await axiosApi.post(imageUploadUrl,formData);
-    setProfileImage(res.data.data.url);
-  }
+    const handleGoogle = () => {
+      handleGoogleAuth()
+      .then(async (result)=>{
+        const user = result.user;
+        console.log(user);
+
+        const userInfo = {
+          email : user.email,
+          role : 'user',
+          created_at : new Date().toISOString(),
+        }
+        const res = await axiosApi.post("/users" , userInfo);
+        // console.log(res.data);
+
+        if(!res.data.inserted){
+          toast.error("This user already exits");
+          return;
+        }
+        toast.success("You've successfully created an account!");
+        setTimeout(()=>{
+          navigate('/');
+        },1500)
+      })
+      .catch((error)=>{
+        console.log(error)
+        toast.error("Google sign-in failed. Please try again.")
+      })
+    }
+    
+    const handlePhotoUpload = async(e) => {
+      const image = e.target.files[0];
+      // console.log(image);
+
+      const formData = new FormData();
+      formData.append("image" , image);
+      
+      const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_key_api}`;
+      // console.log(imageUploadUrl)
+
+      const res = await axios.post(imageUploadUrl,formData);
+      setProfileImage(res.data.data.url);
+    }
 
 
   return (
@@ -111,7 +109,7 @@ const JoinUs = () => {
         <div className="p-2 rounded-2xl w-full max-w-lg shrink-0 shadow-2xl">
           <div className="p-6 flex flex-col max-w-lg rounded-2xl sm:p-10 bg-gray-50 text-gray-800">
             <div className="mb-8 text-center">
-              <h1 className="my-3 text-[#080c3b] text-4xl  font-bold underline">Register</h1>
+              <h1 className="my-3 text-[#080c3b] text-4xl  font-bold underline">Join Us</h1>
               <p className="text-lg text-[#080c3b] dark:text-gray-600">
                 Create an Account to Continue
               </p>
@@ -298,4 +296,4 @@ const JoinUs = () => {
   );
 };
 
-export default JoinUs;
+export default Register;
