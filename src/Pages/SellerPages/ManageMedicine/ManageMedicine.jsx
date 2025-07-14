@@ -3,10 +3,12 @@ import { FaPlus } from "react-icons/fa";
 import { AuthContext } from "../../../Authentication/AuthContext";
 import UseAxiosSecureAPI from "../../../CustomHooks/UseAxiosSecureAPI";
 import { toast } from "react-toastify";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const ManageMedicine = () => {
-  const medicines = ""; // Placeholder
   const { user } = useContext(AuthContext);
+
+  const queryClient = useQueryClient();
 
   const [showModal, setShowModal] = useState(false);
   const [medicineImage , setMedicineImage] = useState("");
@@ -47,6 +49,8 @@ const ManageMedicine = () => {
     console.log(res.data)
     if(res.data.insertedId){
       toast.success("New medicine added successfully!");
+
+      await queryClient.invalidateQueries({queryKey: ["myMedicines",user?.email]})
       form.reset();
       setMedicineImage("");
       showModal(false);
@@ -56,6 +60,23 @@ const ManageMedicine = () => {
     }
 
   };
+
+
+  // to load data per email
+  const { data: medicines = [], isLoading} = useQuery({
+    queryKey: ["myMedicines", user?.email],
+    enabled: !!user?.email,
+    queryFn: async () => {
+      const res = await axiosApi.get(`/medicines/email?email=${user?.email}`);
+      return res.data;
+    }
+  });
+
+  if(isLoading){
+    return <div className="flex justify-center items-center h-screen">
+              <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-blue-500"></div>
+            </div>
+  }
 
   return (
     <div className="p-6 mt-10">
@@ -74,10 +95,10 @@ const ManageMedicine = () => {
           You haven't added any medicines yet. Click “Add Medicine” to get started.
         </p>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="table w-full border">
+        <div className="overflow-x-auto mt-20">
+          <table className="table table-zebra w-full border  text-center">
             <thead className="bg-gray-100 text-[#080c3b]">
-              <tr>
+              <tr className="text-2xl">
                 <th>#</th>
                 <th>Name</th>
                 <th>Generic</th>
@@ -90,13 +111,13 @@ const ManageMedicine = () => {
             </thead>
             <tbody>
               {medicines.map((med, i) => (
-                <tr key={med._id}>
+                <tr className="text-2xl" key={med._id}>
                   <td>{i + 1}</td>
                   <td>{med.name}</td>
                   <td>{med.generic}</td>
                   <td>{med.company}</td>
                   <td>{med.unit}</td>
-                  <td>${med.price.toFixed(2)}</td>
+                  <td>ট{med.price.toFixed(2)}</td>
                   <td>{med.discount}%</td>
                   <td>
                     <img src={med.image} alt="med" className="w-12 h-12 rounded" />
@@ -108,16 +129,16 @@ const ManageMedicine = () => {
         </div>
       )}
 
-      {/* DaisyUI Modal */}
+      {/* Modal */}
       {showModal && (
         <dialog id="add_medicine_modal" className="modal modal-open">
-          <div className="mt-10 modal-box bg-[#555879] text-[#F4EBD3] max-w-2xl">
+          <div className="mt-10  modal-box bg-[#555879] text-[#F4EBD3] max-w-2xl">
             <form onSubmit={handleAddMedicine} className="space-y-4 text-lg">
               <h2 className="text-3xl font-semibold mb-4">Add New Medicine</h2>
-              <input name="name" required placeholder="Item Name" className="input input-bordered w-full text-black" />
-              <textarea name="description" required placeholder="Short Description" className="textarea textarea-bordered w-full text-black" />
-              <input type="file" required className="text-black file-input file-input-bordered w-full" onChange={handlePhotoUpload} />
-              <select name="category" required className="select select-bordered w-full text-black">
+              <input name="name" required placeholder="Medicine Name" className="text-xl input input-bordered w-full text-black" />
+              <textarea name="description" required placeholder="Short Description" className="text-xl textarea textarea-bordered w-full text-black" />
+              <input type="file" required className="text-black text-xl file-input file-input-bordered w-full" onChange={handlePhotoUpload} />
+              <select name="category" required className="text-xl select select-bordered w-full text-black">
                 <option defaultValue={true}>Select Category</option>
                 <option>Tablet</option>
                 <option>Syrup</option>
@@ -127,7 +148,7 @@ const ManageMedicine = () => {
                 <option>Drop</option>
                 <option>Inhaler</option>
               </select>
-              <select name="generic" required className="select select-bordered w-full text-black">
+              <select name="generic" required className="text-xl select select-bordered w-full text-black">
                 <option defaultValue={true}>Select Generic</option>
                 <option>Paracetamol</option>
                 <option>Ciprofloxacin</option>
@@ -137,7 +158,7 @@ const ManageMedicine = () => {
                 <option>Montelukast</option>
                 <option>Amlodipine</option>
               </select>
-              <select name="company" required className="select select-bordered w-full text-black">
+              <select name="company" required className="text-xl select select-bordered w-full text-black">
                 <option defaultValue={true}>Select Company</option>
                 <option>Square</option>
                 <option>Beximco</option>
@@ -149,13 +170,13 @@ const ManageMedicine = () => {
               </select>
 
               <label htmlFor="unit" className="font-bold text-2xl">Item Mass Unit</label>
-              <input name="unit" type="number" required placeholder="Item Mass Unit(ML or MG)" className="input input-bordered w-full text-black" />
+              <input name="unit" type="number" required placeholder="Item Mass Unit(ML or MG)" className="text-xl input input-bordered w-full text-black" />
 
               <label htmlFor="price" className="font-bold text-2xl">Per Unit Price</label>
-              <input name="price" type="number" min="0" required placeholder="Per Unit Price" className="input input-bordered w-full text-black" />
+              <input name="price" type="number" min="0" required placeholder="Per Unit Price" className="text-xl input input-bordered w-full text-black" />
 
               <label htmlFor="discount" className="font-bold text-2xl">Add Discount(if any)</label>
-              <input name="discount" type="number" defaultValue={0} min="0" max="50" placeholder="Discount (%)" className="input input-bordered w-full text-black" />
+              <input name="discount" type="number" defaultValue={0} min="0" max="50" placeholder="Discount (%)" className="text-xl input input-bordered w-full text-black" />
 
               <div className="modal-action">
                 <button type="submit" className="btn bg-[#98A1BC] text-[#080c3b] text-xl hover:bg-gray-300">Add Medicine</button>
