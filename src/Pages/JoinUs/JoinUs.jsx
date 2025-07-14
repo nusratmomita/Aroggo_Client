@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router";
 import { AuthContext } from "../../Authentication/AuthContext";
 import { toast } from "react-toastify";
-import axios from "axios";
 import UseCommonAxiosSecureAPI from "../../CustomHooks/UseCommonAxiosSecureAPI";
 
 const Register = () => {
@@ -98,7 +97,7 @@ const Register = () => {
       const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_key_api}`;
       // console.log(imageUploadUrl)
 
-      const res = await axios.post(imageUploadUrl,formData);
+      const res = await axiosApi.post(imageUploadUrl,formData);
       setProfileImage(res.data.data.url);
     }
 

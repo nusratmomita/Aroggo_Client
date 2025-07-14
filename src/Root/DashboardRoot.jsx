@@ -3,6 +3,7 @@ import {  NavLink, Outlet } from 'react-router';
 import siteLogo from ".././assets/siteLogo.png";
 import { FaHome, FaCapsules, FaCreditCard, FaBullhorn } from 'react-icons/fa';
 // import UseRoleQuery from '../CustomHooks/UseRoleQuery';
+import './DashboardRoot.css'
 
 
 const DashboardRoot = () => {
@@ -47,30 +48,33 @@ const DashboardRoot = () => {
                 <ul className="menu bg-base-200 text-2xl min-h-full w-80 p-4 flex flex-col justify-between"> 
                 {/* Sidebar content */}
                 <div className='mt-10'>
-                    <li>
-                    <NavLink to="/">
-                        <FaHome className="inline-block mr-2" />
-                        Home
-                    </NavLink>
-                    </li>
-                    <li>
-                    <NavLink to="/dashboard/manageMedicine">
-                        <FaCapsules className="inline-block mr-2" />
-                        Manage Medicines
-                    </NavLink>
-                    </li>
-                    <li>
-                    <NavLink to="/dashboard/paymentHistory">
-                        <FaCreditCard className="inline-block mr-2" />
-                        Payment History
-                    </NavLink>
-                    </li>
-                    <li>
-                    <NavLink to="/dashboard/track">
-                        <FaBullhorn className="inline-block mr-2" />
-                        Ask For Advertisement
-                    </NavLink>
-                    </li>
+                    {/* sidebar for seller */}
+                    <div>
+                        <li className='navLink'>
+                        <NavLink to="/">
+                            <FaHome className="inline-block mr-2" />
+                            Home
+                        </NavLink>
+                        </li>
+                        <li className='navLink'>
+                        <NavLink to="/dashboard/manageMedicine">
+                            <FaCapsules className="inline-block mr-2" />
+                            Manage Medicines
+                        </NavLink>
+                        </li>
+                        <li className='navLink'>
+                        <NavLink to="/dashboard/paymentHistory">
+                            <FaCreditCard className="inline-block mr-2" />
+                            Payment History
+                        </NavLink>
+                        </li>
+                        <li className='navLink'>
+                        <NavLink to="/dashboard/askForAd">
+                            <FaBullhorn className="inline-block mr-2" />
+                            Ask For Advertisement
+                        </NavLink>
+                        </li>
+                    </div>
                 </div>
 
                 <div className='-ml-15 flex justify-center items-center gap-2'>

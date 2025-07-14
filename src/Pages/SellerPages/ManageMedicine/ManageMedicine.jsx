@@ -1,122 +1,171 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { FaPlus } from "react-icons/fa";
+import { AuthContext } from "../../../Authentication/AuthContext";
+import UseAxiosSecureAPI from "../../../CustomHooks/UseAxiosSecureAPI";
+import { toast } from "react-toastify";
 
 const ManageMedicine = () => {
+  const medicines = ""; // Placeholder
+  const { user } = useContext(AuthContext);
 
+  const [showModal, setShowModal] = useState(false);
+  const [medicineImage , setMedicineImage] = useState("");
+
+  const axiosApi = UseAxiosSecureAPI();
+
+  const handlePhotoUpload = async (e) => {
+    const image = e.target.files[0];
+
+    const formData = new FormData();
+    formData.append("image" , image);
+
+    const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_key_api}`;
+
+    const res = await axiosApi.post(imageUploadUrl,formData);
+    setMedicineImage(res.data.data.url);
+  }
 
   const handleAddMedicine = async (e) => {
     e.preventDefault();
     const form = e.target;
 
-    const medicine = {
-    //   sellerEmail: user.email,
+    const medicineInfo = {
+      sellerEmail: user?.email,
       name: form.name.value,
-      generic: form.generic.value,
       description: form.description.value,
-    //   image: imageURL,
+      image: medicineImage,
       category: form.category.value,
+      generic: form.generic.value,
       company: form.company.value,
       unit: form.unit.value,
       price: parseFloat(form.price.value),
       discount: parseFloat(form.discount.value || 0),
       added_at: new Date().toISOString(),
     };
+    console.log(medicineInfo)
+    const res = await axiosApi.post("/medicines" , medicineInfo)
+    console.log(res.data)
+    if(res.data.insertedId){
+      toast.success("New medicine added successfully!");
+      form.reset();
+      setMedicineImage("");
+      showModal(false);
+    }
+    else{
+      toast.error("There are some error adding this medicine. Please try again.")
+    }
+
   };
 
   return (
-    <>
-        <h1>Hi</h1>
-    </>
-    // <div className="p-6">
-    //   <div className="flex justify-between items-center mb-6">
-    //     <h1 className="text-4xl font-bold text-[#080c3b]">Manage Your Medicines</h1>
-    //     <button
-    //     //   onClick={() => setShowModal(true)}
-    //       className="flex items-center gap-2 px-4 py-2 bg-[#98A1BC] text-white rounded-xl hover:bg-[#7f89a4]"
-    //     >
-    //       <FaPlus /> Add Medicine
-    //     </button>
-    //   </div>
+    <div className="p-6 mt-10">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-4xl font-bold text-[#080c3b]">Manage Your Medicines</h1>
+        <button
+          onClick={() => setShowModal(true)}
+          className="btn bg-[#98A1BC] text-[#080c3b] text-2xl hover:bg-[#7f89a4]"
+        >
+          <FaPlus /> Add Medicine
+        </button>
+      </div>
 
-    //   {/* {medicines.length === 0 ? (
-    //     <p className="text-xl text-gray-600">
-    //       You haven't added any medicines yet. Click “Add Medicine” to get started.
-    //     </p>
-    //   ) : (
-    //     <div className="overflow-x-auto">
-    //       <table className="table w-full border">
-    //         <thead className="bg-gray-100 text-[#080c3b]">
-    //           <tr>
-    //             <th>#</th>
-    //             <th>Name</th>
-    //             <th>Generic</th>
-    //             <th>Company</th>
-    //             <th>Unit</th>
-    //             <th>Price</th>
-    //             <th>Discount</th>
-    //             <th>Image</th>
-    //           </tr>
-    //         </thead>
-    //         <tbody>
-    //           {medicines.map((med, i) => (
-    //             <tr key={med._id}>
-    //               <td>{i + 1}</td>
-    //               <td>{med.name}</td>
-    //               <td>{med.generic}</td>
-    //               <td>{med.company}</td>
-    //               <td>{med.unit}</td>
-    //               <td>${med.price.toFixed(2)}</td>
-    //               <td>{med.discount}%</td>
-    //               <td>
-    //                 <img src={med.image} alt="med" className="w-12 h-12 rounded" />
-    //               </td>
-    //             </tr>
-    //           ))}
-    //         </tbody>
-    //       </table>
-    //     </div>
-    //   )}
+      {medicines.length === 0 ? (
+        <p className="text-xl text-gray-600">
+          You haven't added any medicines yet. Click “Add Medicine” to get started.
+        </p>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="table w-full border">
+            <thead className="bg-gray-100 text-[#080c3b]">
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Generic</th>
+                <th>Company</th>
+                <th>Unit</th>
+                <th>Price</th>
+                <th>Discount</th>
+                <th>Image</th>
+              </tr>
+            </thead>
+            <tbody>
+              {medicines.map((med, i) => (
+                <tr key={med._id}>
+                  <td>{i + 1}</td>
+                  <td>{med.name}</td>
+                  <td>{med.generic}</td>
+                  <td>{med.company}</td>
+                  <td>{med.unit}</td>
+                  <td>${med.price.toFixed(2)}</td>
+                  <td>{med.discount}%</td>
+                  <td>
+                    <img src={med.image} alt="med" className="w-12 h-12 rounded" />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
 
-    //   {/* Modal */}
-    //   {showModal && (
-    //     <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-    //       <div className="bg-white p-6 rounded-lg w-full max-w-xl relative">
-    //         <button
-    //           onClick={() => setShowModal(false)}
-    //           className="absolute right-4 top-3 text-xl"
-    //         >
-    //           ✖
-    //         </button>
-    //         <h2 className="text-2xl font-semibold mb-4 text-[#080c3b]">Add New Medicine</h2>
-    //         <form onSubmit={handleAddMedicine} className="space-y-4">
-    //           <input name="name" required placeholder="Item Name" className="input input-bordered w-full" />
-    //           <input name="generic" required placeholder="Generic Name" className="input input-bordered w-full" />
-    //           <textarea name="description" required placeholder="Short Description" className="textarea textarea-bordered w-full" />
-    //           <input type="file" required onChange={handleImageUpload} className="file-input file-input-bordered w-full" />
-    //           <select name="category" required className="select select-bordered w-full">
-    //             <option disabled selected>Select Category</option>
-    //             <option>Tablet</option>
-    //             <option>Syrup</option>
-    //             <option>Injection</option>
-    //           </select>
-    //           <select name="company" required className="select select-bordered w-full">
-    //             <option disabled selected>Select Company</option>
-    //             <option>Square</option>
-    //             <option>Beximco</option>
-    //             <option>ACI</option>
-    //           </select>
-    //           <select name="unit" required className="select select-bordered w-full">
-    //             <option>MG</option>
-    //             <option>ML</option>
-    //           </select>
-    //           <input name="price" type="number" min="0" required placeholder="Per Unit Price" className="input input-bordered w-full" />
-    //           <input name="discount" type="number" defaultValue={0} min="0" max="100" placeholder="Discount (%)" className="input input-bordered w-full" />
-    //           <button type="submit" className="btn w-full bg-[#98A1BC] text-white">Submit</button>
-    //         </form>
-    //       </div>
-    //     </div>
-    //   )} */}
-    // </div>
+      {/* DaisyUI Modal */}
+      {showModal && (
+        <dialog id="add_medicine_modal" className="modal modal-open">
+          <div className="mt-10 modal-box bg-[#555879] text-[#F4EBD3] max-w-2xl">
+            <form onSubmit={handleAddMedicine} className="space-y-4 text-lg">
+              <h2 className="text-3xl font-semibold mb-4">Add New Medicine</h2>
+              <input name="name" required placeholder="Item Name" className="input input-bordered w-full text-black" />
+              <textarea name="description" required placeholder="Short Description" className="textarea textarea-bordered w-full text-black" />
+              <input type="file" required className="text-black file-input file-input-bordered w-full" onChange={handlePhotoUpload} />
+              <select name="category" required className="select select-bordered w-full text-black">
+                <option defaultValue={true}>Select Category</option>
+                <option>Tablet</option>
+                <option>Syrup</option>
+                <option>Injection</option>
+                <option>Capsule</option>
+                <option>Ointment</option>
+                <option>Drop</option>
+                <option>Inhaler</option>
+              </select>
+              <select name="generic" required className="select select-bordered w-full text-black">
+                <option defaultValue={true}>Select Generic</option>
+                <option>Paracetamol</option>
+                <option>Ciprofloxacin</option>
+                <option>Azithromycin</option>
+                <option>Metronidazole</option>
+                <option>Esomeprazole</option>
+                <option>Montelukast</option>
+                <option>Amlodipine</option>
+              </select>
+              <select name="company" required className="select select-bordered w-full text-black">
+                <option defaultValue={true}>Select Company</option>
+                <option>Square</option>
+                <option>Beximco</option>
+                <option>ACI</option>
+                <option>Opsonin Pharma Ltd</option>
+                <option>Beacon Pharmaceuticals Ltd</option>
+                <option>Renata Limited</option>
+                <option>Aristopharma Ltd</option>
+              </select>
+
+              <label htmlFor="unit" className="font-bold text-2xl">Item Mass Unit</label>
+              <input name="unit" type="number" required placeholder="Item Mass Unit(ML or MG)" className="input input-bordered w-full text-black" />
+
+              <label htmlFor="price" className="font-bold text-2xl">Per Unit Price</label>
+              <input name="price" type="number" min="0" required placeholder="Per Unit Price" className="input input-bordered w-full text-black" />
+
+              <label htmlFor="discount" className="font-bold text-2xl">Add Discount(if any)</label>
+              <input name="discount" type="number" defaultValue={0} min="0" max="50" placeholder="Discount (%)" className="input input-bordered w-full text-black" />
+
+              <div className="modal-action">
+                <button type="submit" className="btn bg-[#98A1BC] text-[#080c3b] text-xl hover:bg-gray-300">Add Medicine</button>
+                <button onClick={() => setShowModal(false)} type="button" className="btn bg-[#98A1BC] text-[#080c3b] text-xl hover:bg-gray-300">Close</button>
+              </div>
+            </form>
+          </div>
+        </dialog>
+      )}
+    </div>
   );
 };
 

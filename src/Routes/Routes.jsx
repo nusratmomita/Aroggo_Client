@@ -8,6 +8,8 @@ import PrivateRoute from "../Pages/PrivateRoute/PrivateRoute";
 import MyCart from "../Pages/MyCart/MyCart";
 import DashboardRoot from "../Root/DashboardRoot";
 import ManageMedicine from "../Pages/SellerPages/ManageMedicine/ManageMedicine";
+import PaymentHistory from "../Pages/SellerPages/PaymentHistory/PaymentHistory";
+import AskForAd from "../Pages/SellerPages/AskForAd/AskForAd";
 
 
 
@@ -47,6 +49,14 @@ export const routers = createBrowserRouter([
             {
                 path: "/dashboard/manageMedicine",
                 Component: ManageMedicine
+            },
+            {
+                path: "/dashboard/paymentHistory",
+                Component: PaymentHistory
+            },
+            {
+                path: "/dashboard/askForAd",
+                Component: AskForAd
             }
         ]
     }
