@@ -10,6 +10,7 @@ import DashboardRoot from "../Root/DashboardRoot";
 import ManageMedicine from "../Pages/SellerPages/ManageMedicine/ManageMedicine";
 import PaymentHistory from "../Pages/SellerPages/PaymentHistory/PaymentHistory";
 import AskForAd from "../Pages/SellerPages/AskForAd/AskForAd";
+import CategoryDetails from "../CategoryDetails/CategoryDetails";
 
 
 
@@ -27,6 +28,10 @@ export const routers = createBrowserRouter([
             {
                 path: "/shop",
                 Component: Shop
+            },
+            {
+                path: "/category/:categoryName",
+                element: <PrivateRoute> <CategoryDetails></CategoryDetails> </PrivateRoute>
             },
             {
                 path: "/register",

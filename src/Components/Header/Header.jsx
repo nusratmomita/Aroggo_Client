@@ -12,8 +12,8 @@ import { toast } from 'react-toastify';
 
 const Header = () => {
     const {user,handleLogout} = useContext(AuthContext);
-    console.log(user)
-    console.log(user?.displayName , " " , user?.photoURL);
+    // console.log(user)
+    // console.log(user?.displayName , " " , user?.photoURL);
 
     const [showDropdown, setShowDropdown] = useState(false);
 
