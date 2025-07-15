@@ -15,6 +15,8 @@ const ManageMedicine = () => {
 
   const axiosApi = UseAxiosSecureAPI();
 
+  
+
   const handlePhotoUpload = async (e) => {
     const image = e.target.files[0];
 
@@ -101,6 +103,7 @@ const ManageMedicine = () => {
               <tr className="text-2xl">
                 <th>#</th>
                 <th>Name</th>
+                <th>Category</th>
                 <th>Generic</th>
                 <th>Company</th>
                 <th>Unit</th>
@@ -114,11 +117,12 @@ const ManageMedicine = () => {
                 <tr className="text-2xl" key={med._id}>
                   <td>{i + 1}</td>
                   <td>{med.name}</td>
+                  <td>{med.category}</td>
                   <td>{med.generic}</td>
                   <td>{med.company}</td>
                   <td>{med.unit}</td>
-                  <td>ট{med.price.toFixed(2)}</td>
-                  <td>{med.discount}%</td>
+                  <td>৳{med.price.toFixed(2)}</td>
+                  <td>{med.discount.toLocaleString()}%</td>
                   <td>
                     <img src={med.image} alt="med" className="w-12 h-12 rounded" />
                   </td>
@@ -179,8 +183,8 @@ const ManageMedicine = () => {
               <input name="discount" type="number" defaultValue={0} min="0" max="50" placeholder="Discount (%)" className="text-xl input input-bordered w-full text-black" />
 
               <div className="modal-action">
-                <button type="submit" className="btn bg-[#98A1BC] text-[#080c3b] text-xl hover:bg-gray-300">Add Medicine</button>
-                <button onClick={() => setShowModal(false)} type="button" className="btn bg-[#98A1BC] text-[#080c3b] text-xl hover:bg-gray-300">Close</button>
+                <button type="submit" className="btn bg-[#98A1BC] text-[#080c3b] text-xl hover:bg-gray-300 border-none">Add Medicine</button>
+                <button onClick={() => setShowModal(false)} type="button" className="btn bg-[#98A1BC] text-[#080c3b] text-xl hover:bg-gray-300 border-none">Close</button>
               </div>
             </form>
           </div>
