@@ -134,7 +134,7 @@ const CartPage = () => {
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="table w-full bg-white rounded-lg shadow">
+              <table className="table table-zebra w-full bg-white rounded-lg shadow">
                 <thead className="bg-[#DED3C4] text-[#080c3b] text-center text-2xl">
                   <tr>
                     <th>#</th>
@@ -194,9 +194,11 @@ const CartPage = () => {
                 >
                   Clear Cart
               </button>
-              <button className="btn text-[#080c3b] text-3xl font-bold bg-[#98A1BC] btn-lg hover:opacity-90">
-                Proceed to Checkout
-              </button>
+              <Link to="/payment">
+                <button className="btn text-[#080c3b] text-3xl font-bold bg-[#98A1BC] btn-lg hover:opacity-90">
+                  Proceed to Checkout
+                </button>
+              </Link>
             </div>
           )}
             </div>

@@ -11,6 +11,7 @@ import ManageMedicine from "../Pages/SellerPages/ManageMedicine/ManageMedicine";
 import PaymentHistory from "../Pages/SellerPages/PaymentHistory/PaymentHistory";
 import AskForAd from "../Pages/SellerPages/AskForAd/AskForAd";
 import CategoryDetails from "../CategoryDetails/CategoryDetails";
+import PaymentCheckForm from "../Pages/PaymentGateway/PaymentCheckForm";
 
 
 
@@ -30,20 +31,24 @@ export const routers = createBrowserRouter([
                 Component: Shop
             },
             {
-                path: "/category/:categoryName",
-                element: <PrivateRoute> <CategoryDetails></CategoryDetails> </PrivateRoute>
-            },
-            {
                 path: "/register",
                 Component: JoinUs
+            },
+            {
+                path: "/login",
+                Component: Login
+            },
+            {
+                path: "/category/:categoryName",
+                element: <PrivateRoute> <CategoryDetails></CategoryDetails> </PrivateRoute>
             },
             {
                 path: "/myCart",
                 element: <PrivateRoute> <MyCart></MyCart> </PrivateRoute>
             },
             {
-                path: "/login",
-                Component: Login
+                path: "/payment",
+                element: <PrivateRoute> <PaymentCheckForm></PaymentCheckForm> </PrivateRoute>
             },
         ]
     },
