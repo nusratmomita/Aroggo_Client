@@ -3,7 +3,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import UseAxiosSecureAPI from "../../CustomHooks/UseAxiosSecureAPI";
 import { AuthContext } from "../../Authentication/AuthContext";
 import Swal from "sweetalert2";
-import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
+import { FaPlus, FaMinus, FaTrash, FaCartPlus } from "react-icons/fa";
+import { Link } from "react-router";
 
 const CartPage = () => {
   const { user } = useContext(AuthContext);
@@ -33,24 +34,24 @@ const CartPage = () => {
   });
 
   // to remove a single item form the cart
-  // const { mutateAsync: removeItem } = useMutation({
-  //   mutationFn: async (id) => {
-  //     return await axiosApi.delete(`/myCart/${id}`);
-  //   },
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries(["myCart", user?.email]);
-  //   },
-  // });
+  const { mutateAsync: removeItem } = useMutation({
+    mutationFn: async (id) => {
+      return await axiosApi.delete(`/myCart/singleItem/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["myCart", user?.email]);
+    },
+  });
 
-  // // to clear the whole cart
-  // const { mutateAsync: clearCart } = useMutation({
-  //   mutationFn: async () => {
-  //     return await axiosApi.delete(`/myCart/remove?email=${user.email}`);
-  //   },
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries(["myCart", user?.email]);
-  //   },
-  // });
+  // to clear the whole cart
+  const { mutateAsync: clearCart } = useMutation({
+    mutationFn: async () => {
+      return await axiosApi.delete(`/myCart/remove?email=${user?.email}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["myCart", user?.email]);
+    },
+  });
 
   const calculateTotal = () => {
     return cartItems.reduce(
@@ -123,7 +124,14 @@ const CartPage = () => {
         <div className="p-8">
           <h2 className="text-4xl font-bold text-[#080c3b] mb-6">Your Cart</h2>
           {cartItems.length === 0 ? (
-            <p className="text-gray-500">No items in cart</p>
+            <div className=" flex flex-col gap-5 items-center justify-center text-center">
+              <p className="text-[#080c3b] text-4xl">No items in cart</p>
+              <Link to="/shop">
+                <button className="btn text-[#080c3b] text-3xl font-bold bg-[#98A1BC] btn-lg hover:opacity-90">
+                    <FaCartPlus></FaCartPlus>Add Medicines to Cart
+                </button>
+              </Link>
+            </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="table w-full bg-white rounded-lg shadow">
