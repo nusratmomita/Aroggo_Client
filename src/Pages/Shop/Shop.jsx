@@ -40,6 +40,7 @@ const Shop = () => {
       company: medicine.company,
       price: medicine.price,
       quantity: 1,
+      payment_status: "Pending",
       email: user.email,
     };
 

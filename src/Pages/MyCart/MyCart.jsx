@@ -144,6 +144,7 @@ const CartPage = () => {
                     <th>Price (৳)</th>
                     <th>Quantity</th>
                     <th>Total (৳)</th>
+                    <th>Payment</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -173,6 +174,17 @@ const CartPage = () => {
                         </div>
                       </td>
                       <td>৳{item.quantity * item.price}</td>
+                      <td>
+                        <span
+                          className={`px-3 py-1 rounded-full text-2xl font-semibold 
+                            ${item.payment_status === 'paid' 
+                              ? 'bg-green-100 text-green-700 border border-green-400' 
+                              : 'bg-yellow-100 text-yellow-700 border border-yellow-400'}
+                          `}
+                        >
+                          {item.payment_status.charAt(0).toUpperCase() + item.payment_status.slice(1)}
+                        </span>
+                      </td>
                       <td>
                         <button className="btn text-[#080c3b] text-2xl font-bold bg-[#98A1BC] btn-lg" onClick={() => handleRemoveItem(item._id)}><FaTrash></FaTrash>Remove</button>
                       </td>
