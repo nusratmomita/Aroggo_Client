@@ -77,9 +77,9 @@ const PaymentCheckoutForm = ({ totalPrice, user, cartItems }) => {
             icon: 'success',
             title: 'Payment Successful!',
             html: `<strong>Transaction ID:</strong> <code>${result.paymentIntent.id}</code>`,
-            confirmButtonText: 'Go to My Cart',
+            confirmButtonText: 'Go to My Invoice Page',
         })
-        navigate("/myCart");
+        navigate("/invoicePage");
         }
         // Optionally redirect or update cart/payment status here
       }

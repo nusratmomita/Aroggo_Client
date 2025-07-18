@@ -13,6 +13,7 @@ import AskForAd from "../Pages/SellerPages/AskForAd/AskForAd";
 import CategoryDetails from "../CategoryDetails/CategoryDetails";
 import PaymentCheckForm from "../Pages/PaymentGateway/PaymentCheckForm";
 import PaymentIntegration from "../Pages/PaymentGateway/PaymentIntegration";
+import InvoicePage from "../Pages/InvoicePage/InvoicePage";
 
 
 
@@ -50,6 +51,10 @@ export const routers = createBrowserRouter([
             {
                 path: "/payment",
                 element: <PrivateRoute> <PaymentIntegration></PaymentIntegration> </PrivateRoute>
+            },
+            {
+                path: "/invoicePage",
+                element: <PrivateRoute> <InvoicePage></InvoicePage> </PrivateRoute>
             },
         ]
     },
