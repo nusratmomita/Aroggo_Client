@@ -113,6 +113,7 @@ const CartPage = () => {
     };
     return date.toLocaleString('en-US', options);
   };
+  console.log(cartItems)
 
   return (
     <div className="p-8">
@@ -177,7 +178,7 @@ const CartPage = () => {
                       <td>
                         <span
                           className={`px-3 py-1 rounded-full text-2xl font-semibold 
-                            ${item.payment_status === 'paid' 
+                            ${item.payment_status === 'Paid' 
                               ? 'bg-green-100 text-green-700 border border-green-400' 
                               : 'bg-yellow-100 text-yellow-700 border border-yellow-400'}
                           `}
@@ -206,11 +207,19 @@ const CartPage = () => {
                 >
                   Clear Cart
               </button>
-              <Link to="/payment">
-                <button className="btn text-[#080c3b] text-3xl font-bold bg-[#98A1BC] btn-lg hover:opacity-90">
-                  Proceed to Checkout
-                </button>
-              </Link>
+              {
+                cartItems.some(medicine => medicine.payment_status !== "Paid") ? (
+                  <Link to="/payment">
+                    <button className="btn text-[#080c3b] text-3xl font-bold bg-[#98A1BC] btn-lg hover:opacity-90">
+                      Proceed to Checkout
+                    </button>
+                  </Link>
+                ) : (
+                  <button className="btn text-[#080c3b] text-3xl font-bold bg-[#98A1BC] btn-lg hover:opacity-90">
+                    You already paid
+                  </button>
+                )
+              }
             </div>
           )}
             </div>

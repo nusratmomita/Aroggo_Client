@@ -12,6 +12,7 @@ import PaymentHistory from "../Pages/SellerPages/PaymentHistory/PaymentHistory";
 import AskForAd from "../Pages/SellerPages/AskForAd/AskForAd";
 import CategoryDetails from "../CategoryDetails/CategoryDetails";
 import PaymentCheckForm from "../Pages/PaymentGateway/PaymentCheckForm";
+import PaymentIntegration from "../Pages/PaymentGateway/PaymentIntegration";
 
 
 
@@ -48,7 +49,7 @@ export const routers = createBrowserRouter([
             },
             {
                 path: "/payment",
-                element: <PrivateRoute> <PaymentCheckForm></PaymentCheckForm> </PrivateRoute>
+                element: <PrivateRoute> <PaymentIntegration></PaymentIntegration> </PrivateRoute>
             },
         ]
     },
