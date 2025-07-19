@@ -23,6 +23,8 @@ const CartPage = () => {
     },
   });
 
+  console.log(cartItems)
+
   // to update the quantity
   const { mutateAsync: changeQuantity } = useMutation({
     mutationFn: async ({ id, change }) => {
@@ -59,7 +61,7 @@ const CartPage = () => {
       0
     );
   };
-
+  
 
   // to handle removing an item
   const handleRemoveItem = (id) => {
@@ -183,7 +185,7 @@ const CartPage = () => {
                               : 'bg-yellow-100 text-yellow-700 border border-yellow-400'}
                           `}
                         >
-                          {item.payment_status.charAt(0).toUpperCase() + item.payment_status.slice(1)}
+                          {item.payment_status}
                         </span>
                       </td>
                       <td>

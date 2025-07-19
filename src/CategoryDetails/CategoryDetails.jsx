@@ -34,6 +34,7 @@ const CategoryDetails = () => {
         name: medicine.name,
         company: medicine.company,
         price: medicine.price,
+        payment_status: "Pending",
         quantity: 1
       };
 
