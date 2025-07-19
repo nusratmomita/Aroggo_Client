@@ -153,7 +153,7 @@ const CartPage = () => {
                 </thead>
                 <tbody>
                   {cartItems.map((item, index) => (
-                    <tr key={item._id} className="text-center text-2xl">
+                    <tr key={item._id} className="text-[#080c3b] text-center text-2xl">
                       <td>{index + 1}</td>
                       <td>{item.name}</td>
                       <td>{item.company}</td>
@@ -179,13 +179,13 @@ const CartPage = () => {
                       <td>৳{item.quantity * item.price}</td>
                       <td>
                         <span
-                          className={`px-3 py-1 rounded-full text-2xl font-semibold 
+                          className={`px-10 py-1 rounded-full text-2xl font-semibold 
                             ${item.payment_status === 'Paid' 
                               ? 'bg-green-100 text-green-700 border border-green-400' 
                               : 'bg-yellow-100 text-yellow-700 border border-yellow-400'}
                           `}
                         >
-                          {item.payment_status}
+                          {item.payment_status.charAt(0).toUpperCase() + item.payment_status.slice(1)}
                         </span>
                       </td>
                       <td>

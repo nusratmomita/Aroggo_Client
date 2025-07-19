@@ -75,6 +75,16 @@ const DashboardRoot = () => {
                         </NavLink>
                         </li>
                     </div>
+
+                    {/* sidebar for Admin */}
+                    <div>
+                        <li className='navLink'>
+                        <NavLink to="/dashboard/manageUsers">
+                            <FaBullhorn className="inline-block mr-2" />
+                            Manager Users
+                        </NavLink>
+                        </li>
+                    </div>
                 </div>
 
                 <div className='-ml-15 flex justify-center items-center gap-2'>
