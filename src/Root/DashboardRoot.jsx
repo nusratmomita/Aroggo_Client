@@ -1,7 +1,7 @@
 import React from 'react';
 import {  NavLink, Outlet } from 'react-router';
 import siteLogo from ".././assets/siteLogo.png";
-import { FaHome, FaCapsules, FaCreditCard, FaBullhorn } from 'react-icons/fa';
+import { FaHome, FaCapsules, FaCreditCard, FaBullhorn, FaThList } from 'react-icons/fa';
 // import UseRoleQuery from '../CustomHooks/UseRoleQuery';
 import './DashboardRoot.css';
 import { FaPeopleGroup } from "react-icons/fa6";
@@ -80,10 +80,16 @@ const DashboardRoot = () => {
                     {/* sidebar for Admin */}
                     <div>
                         <li className='navLink'>
-                        <NavLink to="/dashboard/manageUsers">
-                            <FaPeopleGroup className="inline-block mr-2" />
-                            Manager Users
-                        </NavLink>
+                            <NavLink to="/dashboard/manageUsers">
+                                <FaPeopleGroup className="inline-block mr-2" />
+                                Manager Users
+                            </NavLink>
+                        </li>
+                        <li className='navLink'>
+                            <NavLink to="/dashboard/manageCategories">
+                                <FaThList className="inline-block mr-2" />
+                                Manage Category
+                            </NavLink>
                         </li>
                     </div>
                 </div>

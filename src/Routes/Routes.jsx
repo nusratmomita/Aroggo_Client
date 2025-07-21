@@ -14,7 +14,8 @@ import CategoryDetails from "../CategoryDetails/CategoryDetails";
 import PaymentCheckForm from "../Pages/PaymentGateway/PaymentCheckForm";
 import PaymentIntegration from "../Pages/PaymentGateway/PaymentIntegration";
 import InvoicePage from "../Pages/InvoicePage/InvoicePage";
-import ManagerUsers from "../Pages/SellerPages/ManagerUsers/ManagerUsers";
+import ManagerUsers from "../Pages/PagesForAdmin/ManagerUsers/ManageUsers";
+import ManagerCategories from "../Pages/PagesForAdmin/ManagerCategories/ManagerCategories";
 
 
 
@@ -72,8 +73,16 @@ export const routers = createBrowserRouter([
                 Component: PaymentHistory
             },
             {
+                path: "/dashboard/askForAd",
+                Component: AskForAd
+            },
+            {
                 path: "/dashboard/manageUsers",
                 Component: ManagerUsers
+            },
+            {
+                path: "/dashboard/manageCategories",
+                Component: ManagerCategories
             }
         ]
     }

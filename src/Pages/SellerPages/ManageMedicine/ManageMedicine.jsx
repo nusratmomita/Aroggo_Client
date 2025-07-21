@@ -99,7 +99,7 @@ const ManageMedicine = () => {
       ) : (
         <div className="overflow-x-auto mt-20">
           <table className="table table-zebra w-full border  text-center">
-            <thead className="bg-gray-100 text-[#080c3b]">
+            <thead className="bg-[#DED3C4] text-[#080c3b]">
               <tr className="text-2xl">
                 <th>#</th>
                 <th>Name</th>
