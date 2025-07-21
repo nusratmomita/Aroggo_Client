@@ -105,8 +105,8 @@ const DiscountOffers = () => {
               />
               <div>
                 <h3 className="text-xl font-semibold text-[#080c3b]">{product.name}</h3>
-                <p className="text-xl text-gray-500 line-through">${product.originalPrice.toFixed(2)}</p>
-                <p className="text-[#080c3b] font-bold text-2xl">${product.discountedPrice.toFixed(2)}</p>
+                <p className="text-xl text-gray-500 line-through">৳{product.originalPrice.toFixed(2)}</p>
+                <p className="text-[#080c3b] font-bold text-2xl">৳{product.discountedPrice.toFixed(2)}</p>
                 <p className="text-xl text-[red-500]">{product.discountPercent}% Off</p>
               </div>
               <Link to="/shop">

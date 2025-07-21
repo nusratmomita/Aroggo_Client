@@ -3,7 +3,8 @@ import {  NavLink, Outlet } from 'react-router';
 import siteLogo from ".././assets/siteLogo.png";
 import { FaHome, FaCapsules, FaCreditCard, FaBullhorn } from 'react-icons/fa';
 // import UseRoleQuery from '../CustomHooks/UseRoleQuery';
-import './DashboardRoot.css'
+import './DashboardRoot.css';
+import { FaPeopleGroup } from "react-icons/fa6";
 
 
 const DashboardRoot = () => {
@@ -80,7 +81,7 @@ const DashboardRoot = () => {
                     <div>
                         <li className='navLink'>
                         <NavLink to="/dashboard/manageUsers">
-                            <FaBullhorn className="inline-block mr-2" />
+                            <FaPeopleGroup className="inline-block mr-2" />
                             Manager Users
                         </NavLink>
                         </li>
