@@ -3,7 +3,7 @@ import React from "react";
 import UseAxiosSecureAPI from "../../../CustomHooks/UseAxiosSecureAPI";
 import Swal from "sweetalert2";
 
-const ManagerUsers = () => {
+const ManageUsers = () => {
   const axiosApi = UseAxiosSecureAPI();
 
   const {
@@ -134,4 +134,4 @@ const ManagerUsers = () => {
   );
 };
 
-export default ManagerUsers;
+export default ManageUsers;

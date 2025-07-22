@@ -11,11 +11,11 @@ import ManageMedicine from "../Pages/SellerPages/ManageMedicine/ManageMedicine";
 import PaymentHistory from "../Pages/SellerPages/PaymentHistory/PaymentHistory";
 import AskForAd from "../Pages/SellerPages/AskForAd/AskForAd";
 import CategoryDetails from "../CategoryDetails/CategoryDetails";
-import PaymentCheckForm from "../Pages/PaymentGateway/PaymentCheckForm";
 import PaymentIntegration from "../Pages/PaymentGateway/PaymentIntegration";
 import InvoicePage from "../Pages/InvoicePage/InvoicePage";
-import ManagerUsers from "../Pages/PagesForAdmin/ManagerUsers/ManageUsers";
-import ManagerCategories from "../Pages/PagesForAdmin/ManagerCategories/ManagerCategories";
+import ManagePayment from "../Pages/PagesForAdmin/ManagePayment/ManagePayment";
+import ManageUsers from "../Pages/PagesForAdmin/ManageUsers/ManageUsers";
+import ManageCategories from "../Pages/PagesForAdmin/ManageCategories/ManageCategories";
 
 
 
@@ -78,11 +78,15 @@ export const routers = createBrowserRouter([
             },
             {
                 path: "/dashboard/manageUsers",
-                Component: ManagerUsers
+                Component: ManageUsers
             },
             {
                 path: "/dashboard/manageCategories",
-                Component: ManagerCategories
+                Component: ManageCategories
+            },
+            {
+                path: "/dashboard/managePayments",
+                Component: ManagePayment
             }
         ]
     }

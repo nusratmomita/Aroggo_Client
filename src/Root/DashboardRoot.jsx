@@ -82,13 +82,19 @@ const DashboardRoot = () => {
                         <li className='navLink'>
                             <NavLink to="/dashboard/manageUsers">
                                 <FaPeopleGroup className="inline-block mr-2" />
-                                Manager Users
+                                Manage Users
                             </NavLink>
                         </li>
                         <li className='navLink'>
                             <NavLink to="/dashboard/manageCategories">
                                 <FaThList className="inline-block mr-2" />
                                 Manage Category
+                            </NavLink>
+                        </li>
+                        <li className='navLink'>
+                            <NavLink to="/dashboard/managePayments">
+                                <FaCreditCard className="inline-block mr-2" />
+                                Manage Payment
                             </NavLink>
                         </li>
                     </div>
