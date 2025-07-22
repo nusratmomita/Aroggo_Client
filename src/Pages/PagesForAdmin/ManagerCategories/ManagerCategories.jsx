@@ -16,7 +16,7 @@ const ManageCategories = () => {
   const axiosApi = UseAxiosSecureAPI();
   const queryClient = useQueryClient();
 
-  // Fetch categories
+  // to get all categories
   const { data: categories = [],refetch } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
@@ -26,7 +26,7 @@ const ManageCategories = () => {
     },
   });
 
-  // Mutation to add category
+  // to a new add category
   const addCategory = useMutation({
     mutationFn: async (newCategory) => {
       const res = await axiosApi.post("/categories", newCategory);
@@ -84,6 +84,55 @@ const ManageCategories = () => {
     addCategory.mutate(categoryInfo);
   }
   };
+
+  // to delete a category
+  const handleDelete = async (id) => {
+    const result = await Swal.fire({
+      title: "Are you sure you want to delete",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#98A1BC",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if(result.isConfirmed){
+      try{
+        const res = await axiosApi.delete(`/categories/${id}`);
+        console.log(res.data)
+        if(res.data?.deletedCount > 0){
+          toast.success("Category deleted successfully!");
+          refetch();
+        } 
+        else {
+          toast.error("Failed to delete category.");
+          }
+      }
+      catch(error) {
+        console.error("Delete error:", error);
+        toast.error("An error occurred while deleting.");
+      }
+    }
+  };
+
+
+  // to formate date
+  const formatDate = (isoString) => {
+    const date = new Date(isoString);
+
+    const options = {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+    };
+    return date.toLocaleString('en-US', options);
+  };
+
+
   return (
     <div className="p-6 mt-10">
       <div className="flex justify-between items-center mb-6">
@@ -118,7 +167,7 @@ const ManageCategories = () => {
                 <td>
                   <img src={cat.categoryImage} alt={cat.category_name} className="w-12 h-12 rounded" />
                 </td>
-                <td>{new Date(cat.added_at).toLocaleDateString()}</td>
+                <td>{formatDate(cat.added_at)}</td>
                 <td className="flex justify-center items-center mt-5 px-4 py-2 text-center space-x-2">
                     <button
                         className="cursor-pointer text-[#DED3C4] bg-[#555879] flex justify-center items-center gap-2 rounded-2xl p-2 transition"
@@ -135,7 +184,7 @@ const ManageCategories = () => {
 
                     <button
                         className="cursor-pointer  text-[#DED3C4] bg-[#555879] flex justify-center items-center gap-2 rounded-2xl p-2 transition"
-                        // onClick={() => handleDelete(category._id)}
+                        onClick={() => handleDelete(cat._id)}
                         title="Delete"
                     >
                         <FaTrash /> Delete
