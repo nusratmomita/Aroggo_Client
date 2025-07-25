@@ -97,6 +97,12 @@ const DashboardRoot = () => {
                                 Manage Payment
                             </NavLink>
                         </li>
+                        <li className='navLink'>
+                            <NavLink to="/dashboard/salesReport">
+                                <FaCreditCard className="inline-block mr-2" />
+                                Sales Report
+                            </NavLink>
+                        </li>
                     </div>
                 </div>
 

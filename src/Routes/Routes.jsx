@@ -16,6 +16,7 @@ import InvoicePage from "../Pages/InvoicePage/InvoicePage";
 import ManagePayment from "../Pages/PagesForAdmin/ManagePayment/ManagePayment";
 import ManageUsers from "../Pages/PagesForAdmin/ManageUsers/ManageUsers";
 import ManageCategories from "../Pages/PagesForAdmin/ManageCategories/ManageCategories";
+import SalesReport from "../Pages/PagesForAdmin/SalesReport/SalesReport";
 
 
 
@@ -87,6 +88,10 @@ export const routers = createBrowserRouter([
             {
                 path: "/dashboard/managePayments",
                 Component: ManagePayment
+            },
+            {
+                path: "/dashboard/salesReport",
+                Component: SalesReport
             }
         ]
     }
