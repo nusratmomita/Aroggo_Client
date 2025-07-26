@@ -1,13 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import UseAxiosSecureAPI from "../../../CustomHooks/UseAxiosSecureAPI";
-// import axios from "axios";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 const SalesReport = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
   const axiosApi = UseAxiosSecureAPI();
+
+  // autoTable(jsPDF);
 
   const {
     data: sales = [],
@@ -17,10 +20,8 @@ const SalesReport = () => {
     queryKey: ["salesReport", startDate, endDate],
     queryFn: async () => {
       const params = {};
-      if (startDate) 
-        params.startDate = startDate;
-      if (endDate) 
-        params.endDate = endDate;
+      if (startDate) params.startDate = startDate;
+      if (endDate) params.endDate = endDate;
 
       const res = await axiosApi.get("/salesReport", {
         params,
@@ -38,17 +39,48 @@ const SalesReport = () => {
     const date = new Date(isoString);
 
     const options = {
-        timeZone: "UTC",
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
+      timeZone: "UTC",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
     };
-    return date.toLocaleString('en-US', options);
+    return date.toLocaleString("en-US", options);
   };
-  console.log(sales)
+
+  const downloadAsPDF = () => {
+    const doc = new jsPDF();
+    const tableRows = [];
+
+    sales.forEach((sale, index) => {
+      tableRows.push([
+        index + 1,
+        new Date(sale.date).toLocaleDateString(),
+        sale.buyerEmail,
+        sale.sellerEmails,
+        sale.medicineNames,
+        (sale.totalPrice / 100).toFixed(2),
+      ]);
+    });
+
+    doc.text("Sales Report", 14, 15);
+
+    doc.autoTable({
+      head: [["#", "Date", "Buyer", "Seller", "Medicines", "Price"]],
+      body: tableRows, // Build this above as you're doing now
+      startY: 20,
+      styles: { fontSize: 8 },
+      headStyles: { fillColor: [8, 12, 59] },
+    });
+
+    doc.save("SalesReport.pdf");
+    // console.log("autoTable:", typeof doc.autoTable);
+  };
+
+  
+  console.log(sales);
 
   return (
     <div className="p-6 mt-10">
@@ -77,10 +109,19 @@ const SalesReport = () => {
             className="input input-bordered text-2xl"
           />
         </div>
-        <button type="submit" className="btn  bg-[#98A1BC] text-[#080c3b] text-2xl hover:bg-[#7f89a4]  mt-6">
+        <button
+          type="submit"
+          className="btn  bg-[#98A1BC] text-[#080c3b] text-2xl hover:bg-[#7f89a4]  mt-6"
+        >
           Filter
         </button>
       </form>
+      <button
+        onClick={downloadAsPDF}
+        className="btn btn-sm bg-[#080c3b] text-white mb-4"
+      >
+        Download as PDF
+      </button>
 
       {/* Table */}
       <div className="overflow-x-auto">
@@ -102,13 +143,16 @@ const SalesReport = () => {
             </thead>
             <tbody>
               {sales.map((sale, index) => (
-                <tr key={index} className="hover text-2xl text-center text-[#080c3b]">
+                <tr
+                  key={index}
+                  className="hover text-2xl text-center text-[#080c3b]"
+                >
                   <th>{index + 1}</th>
                   <td className="whitespace-nowrap">{formatDate(sale.date)}</td>
                   <td>{sale.buyerEmail}</td>
                   <td>{sale.sellerEmails}</td>
                   <td>{sale.medicineNames}</td>
-                  <td>{sale.totalPrice/100}</td>
+                  <td>{sale.totalPrice / 100}</td>
                 </tr>
               ))}
             </tbody>

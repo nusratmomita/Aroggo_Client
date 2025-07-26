@@ -1,10 +1,11 @@
 import React from 'react';
 import {  NavLink, Outlet } from 'react-router';
 import siteLogo from ".././assets/siteLogo.png";
-import { FaHome, FaCapsules, FaCreditCard, FaBullhorn, FaThList } from 'react-icons/fa';
+import { FaHome, FaCapsules, FaCreditCard, FaBullhorn, FaThList, FaChartLine } from 'react-icons/fa';
 // import UseRoleQuery from '../CustomHooks/UseRoleQuery';
 import './DashboardRoot.css';
-import { FaPeopleGroup } from "react-icons/fa6";
+import { FaPeopleGroup , FaCheckToSlot } from "react-icons/fa6";
+
 
 
 const DashboardRoot = () => {
@@ -99,8 +100,14 @@ const DashboardRoot = () => {
                         </li>
                         <li className='navLink'>
                             <NavLink to="/dashboard/salesReport">
-                                <FaCreditCard className="inline-block mr-2" />
+                                <FaChartLine  className="inline-block mr-2" />
                                 Sales Report
+                            </NavLink>
+                        </li>
+                        <li className='navLink'>
+                            <NavLink to="/dashboard/approveAds">
+                                <FaCheckToSlot  className="inline-block mr-2" />
+                                Approve Ads
                             </NavLink>
                         </li>
                     </div>

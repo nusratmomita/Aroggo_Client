@@ -6,6 +6,8 @@ import { routers } from './Routes/Routes.jsx'
 import AuthProvider from './Authentication/AuthProvider.jsx'
 import { ToastContainer } from 'react-toastify'
 import { QueryClient, QueryClientProvider} from '@tanstack/react-query'
+import "swiper/css";
+import "swiper/css/pagination";
 
 const queryClient = new QueryClient();
 
