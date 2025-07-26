@@ -20,8 +20,8 @@ const Categories = () => {
   if (error) return <p className="text-center text-red-500">Failed to load categories.</p>;
 
   return (
-      <div className="p-6">
-        <h1 className="text-4xl font-bold text-[#080c3b] mb-10 text-center">Top Medicine Categories</h1>
+      <div className="p-6 mt-10">
+        <h1 className="text-5xl font-bold text-[#080c3b] mb-10 text-center">Top Medicine Categories</h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {categories.map((cat, index) => (
             <Link key={index} to={`/category/${cat.categoryName}`}>

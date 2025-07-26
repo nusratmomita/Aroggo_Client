@@ -122,6 +122,7 @@ const ManageCategories = () => {
     const date = new Date(isoString);
 
     const options = {
+        timeZone: "UTC",
         day: 'numeric',
         month: 'long',
         year: 'numeric',

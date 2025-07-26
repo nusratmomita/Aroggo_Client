@@ -38,6 +38,7 @@ const ApproveAds = () => {
   const formatDate = (isoString) => {
     const date = new Date(isoString);
     return date.toLocaleString("en-US", {
+      timeZone: "UTC",
       day: "numeric",
       month: "long",
       year: "numeric",

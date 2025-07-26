@@ -50,13 +50,17 @@ const DashboardRoot = () => {
                 <ul className="menu bg-base-200 text-2xl min-h-full w-80 p-4 flex flex-col justify-between"> 
                 {/* Sidebar content */}
                 <div className='mt-10'>
+                    <NavLink to="/">
+                        <FaHome className="inline-block mr-4" />
+                        Home
+                    </NavLink>
                     {/* sidebar for seller */}
                     <div>
                         <li className='navLink'>
-                        <NavLink to="/">
+                        {/* <NavLink to="/">
                             <FaHome className="inline-block mr-2" />
-                            Home
-                        </NavLink>
+                            Seller's Home
+                        </NavLink> */}
                         </li>
                         <li className='navLink'>
                         <NavLink to="/dashboard/manageMedicine">
@@ -80,6 +84,10 @@ const DashboardRoot = () => {
 
                     {/* sidebar for Admin */}
                     <div>
+                        <NavLink to="/dashboard/adminHome">
+                            <FaHome className="inline-block mr-2" />
+                            Home
+                        </NavLink>
                         <li className='navLink'>
                             <NavLink to="/dashboard/manageUsers">
                                 <FaPeopleGroup className="inline-block mr-2" />

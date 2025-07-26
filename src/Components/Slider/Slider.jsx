@@ -21,7 +21,7 @@ const Slider = () => {
   if (isLoading) return <div className="text-2xl text-center font-bold">Loading slider ads...</div>;
 
   return (
-    <div className="w-full max-w-6xl mx-auto my-10 px-4">
+    <div className="w-full mx-auto my-10 px-4">
       <Swiper
        modules={[Pagination, Autoplay]}
         pagination={{ clickable: true }}
@@ -32,7 +32,7 @@ const Slider = () => {
       >
         {sliderAds.map((ad) => (
           <SwiperSlide key={ad._id}>
-            <div className="relative w-full h-[420px] bg-opacity-80  rounded-xl overflow-hidden shadow-lg bg-white animate-fade-in">
+            <div className="relative w-full h-[520px] bg-opacity-80  rounded-xl overflow-hidden shadow-lg bg-white animate-fade-in">
               {/* Medicine image */}
               <img
                 src={ad.image}

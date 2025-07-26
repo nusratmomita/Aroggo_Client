@@ -18,6 +18,7 @@ import ManageUsers from "../Pages/PagesForAdmin/ManageUsers/ManageUsers";
 import ManageCategories from "../Pages/PagesForAdmin/ManageCategories/ManageCategories";
 import SalesReport from "../Pages/PagesForAdmin/SalesReport/SalesReport";
 import ApproveAds from "../Pages/PagesForAdmin/ApproveAds/ApproveAds";
+import AdminHome from "../Pages/PagesForAdmin/AdminHome/AdminHome";
 
 
 
@@ -97,6 +98,10 @@ export const routers = createBrowserRouter([
             {
                 path: "/dashboard/approveAds",
                 Component: ApproveAds
+            },
+            {
+                path: "/dashboard/adminHome",
+                Component: AdminHome
             }
         ]
     }
