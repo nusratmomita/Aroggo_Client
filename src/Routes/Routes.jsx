@@ -19,6 +19,10 @@ import ManageCategories from "../Pages/PagesForAdmin/ManageCategories/ManageCate
 import SalesReport from "../Pages/PagesForAdmin/SalesReport/SalesReport";
 import ApproveAds from "../Pages/PagesForAdmin/ApproveAds/ApproveAds";
 import AdminHome from "../Pages/PagesForAdmin/AdminHome/AdminHome";
+import SellerHome from "../Pages/SellerPages/SellerHome/SellerHome";
+import AdminPrivateRoute from "../Pages/PrivateRoute/AdminPrivateRoute";
+import SellerPrivateRoute from "../Pages/PrivateRoute/SellerPrivateRoute";
+import ForbiddenRoute from "../Pages/ForbiddenRoute/ForbiddenRoute";
 
 
 
@@ -61,6 +65,10 @@ export const routers = createBrowserRouter([
                 path: "/invoicePage",
                 element: <PrivateRoute> <InvoicePage></InvoicePage> </PrivateRoute>
             },
+            {
+                path: "/forbiddenRoute",
+                Component: ForbiddenRoute
+            },
         ]
     },
     {
@@ -69,39 +77,44 @@ export const routers = createBrowserRouter([
         children: [
             {
                 path: "/dashboard/manageMedicine",
-                Component: ManageMedicine
+                element: <SellerPrivateRoute> <ManageMedicine></ManageMedicine> </SellerPrivateRoute>
             },
             {
                 path: "/dashboard/paymentHistory",
-                Component: PaymentHistory
+                element : <SellerPrivateRoute> <PaymentHistory></PaymentHistory> </SellerPrivateRoute>
             },
             {
                 path: "/dashboard/askForAd",
-                Component: AskForAd
+                element : <SellerPrivateRoute> <AskForAd></AskForAd> </SellerPrivateRoute>
+
             },
             {
                 path: "/dashboard/manageUsers",
-                Component: ManageUsers
+                element: <AdminPrivateRoute> <ManageUsers></ManageUsers> </AdminPrivateRoute>
             },
             {
                 path: "/dashboard/manageCategories",
-                Component: ManageCategories
+                element: <AdminPrivateRoute> <ManageCategories></ManageCategories> </AdminPrivateRoute>
             },
             {
                 path: "/dashboard/managePayments",
-                Component: ManagePayment
+                element: <AdminPrivateRoute> <ManagePayment></ManagePayment> </AdminPrivateRoute>
             },
             {
                 path: "/dashboard/salesReport",
-                Component: SalesReport
+                element: <AdminPrivateRoute> <SalesReport></SalesReport> </AdminPrivateRoute>
             },
             {
                 path: "/dashboard/approveAds",
-                Component: ApproveAds
+                element: <AdminPrivateRoute> <ApproveAds></ApproveAds> </AdminPrivateRoute>
             },
             {
                 path: "/dashboard/adminHome",
-                Component: AdminHome
+                element: <AdminPrivateRoute> <AdminHome></AdminHome> </AdminPrivateRoute>
+            },
+            {
+                path: "/dashboard/sellerHome",
+                element: <SellerPrivateRoute> <SellerHome></SellerHome> </SellerPrivateRoute>
             }
         ]
     }

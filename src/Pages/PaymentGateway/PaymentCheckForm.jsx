@@ -61,7 +61,7 @@ const PaymentCheckoutForm = ({ totalPrice, user, cartItems }) => {
         const cartItemIds = cartItems.map(item => item._id);
 
         const paymentData = {
-            email: user?.email,
+            email: user?.email,// buyer email
             amount: totalInCents,
             cartItemIds: cartItemIds,
             transactionId: result.paymentIntent.id,

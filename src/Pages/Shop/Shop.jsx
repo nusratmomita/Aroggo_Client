@@ -24,6 +24,7 @@ const Shop = () => {
       return res.data;
     },
   });
+  console.log(allMedicines)
 
   const handleAddToCart = async (medicine) => {
     if (!user?.email) {
@@ -42,10 +43,12 @@ const Shop = () => {
       quantity: 1,
       payment_status: "Pending",
       email: user.email,
+    //  sellerEmail: medicine.sellerEmail,
     };
 
     try {
       const res = await axiosApi.post("/myCart", cartItem);
+      console.log(res.data)
       if (res.data.insertedId) {
         Swal.fire("Added!", "Medicine added to cart", "success");
       }
@@ -93,6 +96,7 @@ const Shop = () => {
           <thead className="bg-[#F4EBD3] text-[#080c3b] ">
             <tr className="text-2xl">
               <th>#</th>
+              <th>Seller Email</th>
               <th>Medicine Name</th>
               <th>Company</th>
               <th>Added On</th>
@@ -104,6 +108,7 @@ const Shop = () => {
             {allMedicines.map((medicine, index) => (
               <tr key={medicine._id} className="hover">
                 <td>{index + 1}</td>
+                <td>{medicine.sellerEmail}</td>
                 <td>{medicine.name}</td>
                 <td>{medicine.company}</td>
                 <td>{formatDate(medicine.added_at)}</td>

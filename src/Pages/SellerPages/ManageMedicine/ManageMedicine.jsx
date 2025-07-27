@@ -120,6 +120,7 @@ const ManageMedicine = () => {
             <thead className="bg-[#DED3C4] text-[#080c3b]">
               <tr className="text-2xl">
                 <th>#</th>
+                {/* <th>Seller email</th> */}
                 <th>Name</th>
                 <th>Category</th>
                 <th>Generic</th>
@@ -134,6 +135,7 @@ const ManageMedicine = () => {
               {medicines.map((med, i) => (
                 <tr className="text-2xl" key={med._id}>
                   <td>{i + 1}</td>
+                  {/* <td>{med.seller_email}</td> */}
                   <td>{med.name}</td>
                   <td>{med.category}</td>
                   <td>{med.generic}</td>

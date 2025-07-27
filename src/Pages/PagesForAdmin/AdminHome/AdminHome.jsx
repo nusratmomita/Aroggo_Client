@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from "recharts";
 import UseAxiosSecureAPI from "../../../CustomHooks/UseAxiosSecureAPI";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
 const AdminHome = () => {

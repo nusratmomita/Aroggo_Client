@@ -2,16 +2,16 @@ import React from 'react';
 import {  NavLink, Outlet } from 'react-router';
 import siteLogo from ".././assets/siteLogo.png";
 import { FaHome, FaCapsules, FaCreditCard, FaBullhorn, FaThList, FaChartLine } from 'react-icons/fa';
-// import UseRoleQuery from '../CustomHooks/UseRoleQuery';
 import './DashboardRoot.css';
 import { FaPeopleGroup , FaCheckToSlot } from "react-icons/fa6";
+import UseRoleQuery from '../CustomHooks/UseRoleQuery';
 
 
 
 const DashboardRoot = () => {
 
-    // const {role , roleLoading} = UseRoleQuery();
-    // console.log(role , roleLoading)
+    const {role , roleLoading} = UseRoleQuery();
+    console.log(role , roleLoading)
 
     return (
         <div className="drawer lg:drawer-open">
@@ -54,71 +54,78 @@ const DashboardRoot = () => {
                         <FaHome className="inline-block mr-4" />
                         Home
                     </NavLink>
+
                     {/* sidebar for seller */}
-                    <div>
-                        <li className='navLink'>
-                        {/* <NavLink to="/">
-                            <FaHome className="inline-block mr-2" />
-                            Seller's Home
-                        </NavLink> */}
-                        </li>
-                        <li className='navLink'>
-                        <NavLink to="/dashboard/manageMedicine">
-                            <FaCapsules className="inline-block mr-2" />
-                            Manage Medicines
-                        </NavLink>
-                        </li>
-                        <li className='navLink'>
-                        <NavLink to="/dashboard/paymentHistory">
-                            <FaCreditCard className="inline-block mr-2" />
-                            Payment History
-                        </NavLink>
-                        </li>
-                        <li className='navLink'>
-                        <NavLink to="/dashboard/askForAd">
-                            <FaBullhorn className="inline-block mr-2" />
-                            Ask For Advertisement
-                        </NavLink>
-                        </li>
-                    </div>
+                    {
+                        !roleLoading && role === "seller" && 
+                        <div>
+                            <li className='navLink'>
+                            <NavLink to="/dashboard/sellerHome">
+                                <FaHome className="inline-block mr-2" />
+                                Seller's Home
+                            </NavLink>
+                            </li>
+                            <li className='navLink'>
+                            <NavLink to="/dashboard/manageMedicine">
+                                <FaCapsules className="inline-block mr-2" />
+                                Manage Medicines
+                            </NavLink>
+                            </li>
+                            <li className='navLink'>
+                            <NavLink to="/dashboard/paymentHistory">
+                                <FaCreditCard className="inline-block mr-2" />
+                                Payment History(seller)
+                            </NavLink>
+                            </li>
+                            <li className='navLink'>
+                            <NavLink to="/dashboard/askForAd">
+                                <FaBullhorn className="inline-block mr-2" />
+                                Ask For Advertisement
+                            </NavLink>
+                            </li>
+                        </div>
+                    }
 
                     {/* sidebar for Admin */}
-                    <div>
-                        <NavLink to="/dashboard/adminHome">
-                            <FaHome className="inline-block mr-2" />
-                            Home
-                        </NavLink>
-                        <li className='navLink'>
-                            <NavLink to="/dashboard/manageUsers">
-                                <FaPeopleGroup className="inline-block mr-2" />
-                                Manage Users
+                    {
+                        !roleLoading && role === "admin" && 
+                        <div>
+                            <NavLink to="/dashboard/adminHome">
+                                <FaHome className="inline-block mr-2" />
+                                Home
                             </NavLink>
-                        </li>
-                        <li className='navLink'>
-                            <NavLink to="/dashboard/manageCategories">
-                                <FaThList className="inline-block mr-2" />
-                                Manage Category
-                            </NavLink>
-                        </li>
-                        <li className='navLink'>
-                            <NavLink to="/dashboard/managePayments">
-                                <FaCreditCard className="inline-block mr-2" />
-                                Manage Payment
-                            </NavLink>
-                        </li>
-                        <li className='navLink'>
-                            <NavLink to="/dashboard/salesReport">
-                                <FaChartLine  className="inline-block mr-2" />
-                                Sales Report
-                            </NavLink>
-                        </li>
-                        <li className='navLink'>
-                            <NavLink to="/dashboard/approveAds">
-                                <FaCheckToSlot  className="inline-block mr-2" />
-                                Approve Ads
-                            </NavLink>
-                        </li>
-                    </div>
+                            <li className='navLink'>
+                                <NavLink to="/dashboard/manageUsers">
+                                    <FaPeopleGroup className="inline-block mr-2" />
+                                    Manage Users
+                                </NavLink>
+                            </li>
+                            <li className='navLink'>
+                                <NavLink to="/dashboard/manageCategories">
+                                    <FaThList className="inline-block mr-2" />
+                                    Manage Category
+                                </NavLink>
+                            </li>
+                            <li className='navLink'>
+                                <NavLink to="/dashboard/managePayments">
+                                    <FaCreditCard className="inline-block mr-2" />
+                                    Manage Payment
+                                </NavLink>
+                            </li>
+                            <li className='navLink'>
+                                <NavLink to="/dashboard/salesReport">
+                                    <FaChartLine  className="inline-block mr-2" />
+                                    Sales Report
+                                </NavLink>
+                            </li>
+                            <li className='navLink'>
+                                <NavLink to="/dashboard/approveAds">
+                                    <FaCheckToSlot  className="inline-block mr-2" />
+                                    Approve Ads
+                                </NavLink>
+                            </li>
+                        </div>
+                    }
                 </div>
 
                 <div className='-ml-15 flex justify-center items-center gap-2'>
