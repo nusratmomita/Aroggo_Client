@@ -14,7 +14,7 @@ const Categories = () => {
       return res.data;
     }
   });
-  console.log(categories)
+  // console.log(categories)
 
   if (isLoading) return <p className="text-center text-2xl">Loading Categories...</p>;
   if (error) return <p className="text-center text-red-500">Failed to load categories.</p>;

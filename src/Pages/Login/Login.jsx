@@ -11,12 +11,19 @@ const Login = () => {
     const { register , handleSubmit , formState:{errors} } = useForm();
 
     const {handleLogin , handleGoogleAuth} = useContext(AuthContext);
+    // console.log(user)
 
+    // if(user){
+    //     user.getIdToken().then((token)=>{
+    //         localStorage.setItem("AccessToken" , token)
+    //     })
+    // }
+    // console.log(token)
 
     const navigate = useNavigate();
 
     const handleLoginForm = (data) => {
-        console.log(data)
+        // console.log(data)
         const email = data.email;
         const password = data.password;
 

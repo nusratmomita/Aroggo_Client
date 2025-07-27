@@ -15,8 +15,8 @@ const Slider = () => {
       return res.data;
     },
   });
-  console.log(sliderAds)
-  console.log("Slider ad image URLs:", sliderAds.map(ad => ad.image));
+  // console.log(sliderAds)
+  // console.log("Slider ad image URLs:", sliderAds.map(ad => ad.image));
 
   if (isLoading) return <div className="text-2xl text-center font-bold">Loading slider ads...</div>;
 

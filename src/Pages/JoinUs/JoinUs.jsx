@@ -12,13 +12,21 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const {handleRegister , handleGoogleAuth , handleUpdateProfile } = useContext(AuthContext);
+  const {handleRegister , handleGoogleAuth , handleUpdateProfile , user } = useContext(AuthContext);
 
   const axiosApi = UseCommonAxiosSecureAPI();
 
   const navigate = useNavigate();
 
   const [profileImage , setProfileImage] = useState('');
+
+  console.log(user)
+
+    if(user){
+        user.getIdToken().then((token)=>{
+            localStorage.setItem("AccessToken" , token)
+        })
+    }
 
 
   const handleRegisterForm = (data) => {
