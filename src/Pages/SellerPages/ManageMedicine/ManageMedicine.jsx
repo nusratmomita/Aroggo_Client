@@ -19,6 +19,12 @@ const ManageMedicine = () => {
 
   const axiosApi = UseAxiosSecureAPI();
 
+  const [sortBy, setSortBy] = useState("name");
+  const [sortOrder, setSortOrder] = useState("asc"); // or "desc"
+
+  const [searchText , setSearchText] = useState("");
+  const [searchTrigger, setSearchTrigger] = useState("");
+
   const handlePhotoUpload = async (e) => {
     const image = e.target.files[0];
 
@@ -71,15 +77,15 @@ const ManageMedicine = () => {
 
   // to load data per email
   const { data, isLoading } = useQuery({
-    queryKey: ["myMedicines", user?.email, currentPage, itemsPerPage],
-    enabled: !!user?.email,
-    queryFn: async () => {
-      const res = await axiosApi.get(
-        `/medicines/emailPagination?email=${user?.email}&page=${currentPage}&items=${itemsPerPage}`
-      );
-      return res.data;
-    },
-  });
+  queryKey: ["myMedicines", user?.email, currentPage, itemsPerPage, sortBy, sortOrder , searchTrigger],
+  enabled: !!user?.email,
+  queryFn: async () => {
+    const res = await axiosApi.get(
+      `/medicines/emailPagination?email=${user?.email}&page=${currentPage}&items=${itemsPerPage}&sortBy=${sortBy}&order=${sortOrder}&search=${searchTrigger}`
+    );
+    return res.data;
+  },
+});
 
   // to get all categories
   const { data: categories = [] } = useQuery({
@@ -119,12 +125,68 @@ const ManageMedicine = () => {
         </button>
       </div>
 
-      {medicines.length === 0 ? (
-        <p className="text-xl text-gray-600">
-          You haven't added any medicines yet. Click “Add Medicine” to get
-          started.
+      <div className="flex gap-4 items-center mb-6">
+        <label className="text-2xl text-[#080c3b]">Sort by:</label>
+        <select
+          value={sortBy}
+          onChange={(e) => {
+            setSortBy(e.target.value);
+            setCurrentPage(0); // reset pagination
+          }}
+          className="select border text-xl"
+        >
+          <option value="name">Name</option>
+          <option value="price">Price</option>
+          <option value="discount">Discount</option>
+          <option value="added_at">Date Added</option>
+        </select>
+
+        <select
+          value={sortOrder}
+          onChange={(e) => {
+            setSortOrder(e.target.value);
+            setCurrentPage(0);
+          }}
+          className="select border text-xl"
+        >
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+      </div>
+
+      <div className="flex gap-3 mb-4 items-center">
+        <label className="text-2xl text-[#080c3b]">Search Medicine:</label>
+        <input
+          type="text"
+          placeholder="Search by name..."
+          value={searchText}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+            setCurrentPage(0);
+          }}
+          className="input text-2xl input-bordered w-full max-w-xs"
+        />
+
+        <button
+          className="btn text-2xl font-bold bg-[#DED3C4] hover:bg-[#c7bbaf]"
+          onClick={() => {
+            setSearchTrigger(searchText); // triggers search
+            setCurrentPage(0); // reset to first page
+          }}
+        >
+          Search
+        </button>
+      </div>
+
+
+      {
+      isLoading ? (
+        <p className="text-center text-gray-500">Loading...</p>
+      ) : data?.result?.length === 0 ? (
+        <p className="mt-20 mb-20 text-center text-[#080c3b] text-3xl font-semibold">
+          No medicines found with the name "{searchTrigger}"
         </p>
-      ) : (
+      )  : (
         <div className="overflow-x-auto mt-20">
           <table className="table table-zebra w-full border  text-center">
             <thead className="bg-[#DED3C4] text-[#080c3b]">
@@ -204,7 +266,7 @@ const ManageMedicine = () => {
             setItemsPerPage(parseInt(e.target.value));
             setCurrentPage(0); // reset page
           }}
-          className="select ml-4 border"
+          className="select ml-4 border w-1/4 lg:w-1/15"
         >
           {[5, 10, 20, 50].map((size) => (
             <option key={size} value={size}>
