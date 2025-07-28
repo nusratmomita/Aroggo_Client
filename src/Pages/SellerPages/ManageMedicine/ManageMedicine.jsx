@@ -178,7 +178,6 @@ const ManageMedicine = () => {
         </button>
       </div>
 
-
       {
       isLoading ? (
         <p className="text-center text-gray-500">Loading...</p>

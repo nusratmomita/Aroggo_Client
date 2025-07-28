@@ -5,7 +5,6 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../../Authentication/AuthContext";
 import { FaEye, FaCartPlus } from "react-icons/fa";
 import { BsFillCartCheckFill } from "react-icons/bs";
-import { useLoaderData } from "react-router";
 import "./Shop.css";
 
 const Shop = () => {
@@ -19,15 +18,21 @@ const Shop = () => {
 
   const [currentPage, setCurrentPage] = useState(0);
 
+  const [sortBy, setSortBy] = useState("name");
+  const [sortOrder, setSortOrder] = useState("asc"); // or "desc"
+
+  const [searchText , setSearchText] = useState("");
+  const [searchTrigger, setSearchTrigger] = useState("");
+
   const {
-    data: allMedicines = [],
+    data,
     isLoading,
     isError: error,
   } = useQuery({
-    queryKey: ["allMedicines", currentPage, itemsPerPage],
+    queryKey: ["allMedicines", currentPage, itemsPerPage, sortBy, sortOrder , searchTrigger],
     queryFn: async () => {
       const res = await axiosApi.get(
-        `/medicinePagination?page=${currentPage}&items=${itemsPerPage}`
+        `/medicinePagination?page=${currentPage}&items=${itemsPerPage}&sortBy=${sortBy}&order=${sortOrder}&search=${searchTrigger}`
       );
       return res.data;
     },
@@ -88,13 +93,11 @@ const Shop = () => {
     return date.toLocaleString("en-US", options);
   };
 
-  const { count } = useLoaderData();
-  // console.log(count);
+  const allMedicines = data?.result || [];
+  const total = data?.total || 0;
 
-  const numberOfPages = Math.ceil(count / itemsPerPage);
-
+  const numberOfPages = Math.ceil(total / itemsPerPage);
   const pages = [...Array(numberOfPages).keys()];
-  console.log(pages);
 
   const handleItemsPerPage = (e) => {
     setItemsPerPage(parseInt(e.target.value));
@@ -124,47 +127,110 @@ const Shop = () => {
         Available Medicine(s): {allMedicines.length}
       </h2>
 
-      <div className="mt-20 overflow-x-auto">
-        <table className="table table-zebra w-full border text-2xl text-center">
-          <thead className="bg-[#F4EBD3] text-[#080c3b] ">
-            <tr className="text-2xl">
-              <th>#</th>
-              <th>Seller Email</th>
-              <th>Medicine Name</th>
-              <th>Company</th>
-              <th>Added On</th>
-              <th>Price</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allMedicines.map((medicine, index) => (
-              <tr key={medicine._id} className="hover">
-                <td>{currentPage * itemsPerPage + index + 1}</td>
-                <td>{medicine.sellerEmail}</td>
-                <td>{medicine.name}</td>
-                <td>{medicine.company}</td>
-                <td>{formatDate(medicine.added_at)}</td>
-                <td>৳{medicine.price}</td>
-                <td className="flex gap-3 justify-center items-center">
-                  <button
-                    onClick={() => setSelectedMedicine(medicine)}
-                    className="btn btn-sm text-xl bg-[#98A1BC] hover:bg-[#7f89a4]"
-                  >
-                    <FaEye /> View
-                  </button>
-                  <button
-                    onClick={() => handleAddToCart(medicine)}
-                    className="btn btn-sm text-xl bg-[#98A1BC] hover:bg-[#7f89a4]"
-                  >
-                    <BsFillCartCheckFill></BsFillCartCheckFill>Add to Cart
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+       <div className="flex gap-4 items-center mb-6">
+        <label className="text-2xl text-[#080c3b]">Sort by:</label>
+        <select
+          value={sortBy}
+          onChange={(e) => {
+            setSortBy(e.target.value);
+            setCurrentPage(0); // reset pagination
+          }}
+          className="select border text-xl"
+        >
+          <option value="name">Name</option>
+          <option value="price">Price</option>
+          <option value="discount">Discount</option>
+          <option value="added_at">Date Added</option>
+        </select>
+
+        <select
+          value={sortOrder}
+          onChange={(e) => {
+            setSortOrder(e.target.value);
+            setCurrentPage(0);
+          }}
+          className="select border text-xl"
+        >
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
       </div>
+
+      <div className="flex gap-3 mb-4 items-center">
+        <label className="text-2xl text-[#080c3b]">Search Medicine:</label>
+        <input
+          type="text"
+          placeholder="Search by name..."
+          value={searchText}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+            setCurrentPage(0);
+          }}
+          className="input text-2xl input-bordered w-full max-w-xs"
+        />
+
+        <button
+          className="btn text-2xl font-bold bg-[#DED3C4] hover:bg-[#c7bbaf]"
+          onClick={() => {
+            setSearchTrigger(searchText); // triggers search
+            setCurrentPage(0); // reset to first page
+          }}
+        >
+          Search
+        </button>
+      </div>
+
+      {
+        isLoading ? (
+          <p className="text-center text-gray-500">Loading...</p>
+        ) : data?.result?.length === 0 ? (
+          <p className="mt-20 mb-20 text-center text-[#080c3b] text-3xl font-semibold">
+            No medicines found with the name "{searchTrigger}"
+          </p>
+        ) :
+
+        <div className="mt-20 overflow-x-auto">
+          <table className="table table-zebra w-full border text-2xl text-center">
+            <thead className="bg-[#F4EBD3] text-[#080c3b] ">
+              <tr className="text-2xl">
+                <th>#</th>
+                <th>Seller Email</th>
+                <th>Medicine Name</th>
+                <th>Company</th>
+                <th>Added On</th>
+                <th>Price</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {allMedicines.map((medicine, index) => (
+                <tr key={medicine._id} className="hover">
+                  <td>{currentPage * itemsPerPage + index + 1}</td>
+                  <td>{medicine.sellerEmail}</td>
+                  <td>{medicine.name}</td>
+                  <td>{medicine.company}</td>
+                  <td>{formatDate(medicine.added_at)}</td>
+                  <td>৳{medicine.price}</td>
+                  <td className="flex gap-3 justify-center items-center">
+                    <button
+                      onClick={() => setSelectedMedicine(medicine)}
+                      className="btn btn-sm text-xl bg-[#98A1BC] hover:bg-[#7f89a4]"
+                    >
+                      <FaEye /> View
+                    </button>
+                    <button
+                      onClick={() => handleAddToCart(medicine)}
+                      className="btn btn-sm text-xl bg-[#98A1BC] hover:bg-[#7f89a4]"
+                    >
+                      <BsFillCartCheckFill></BsFillCartCheckFill>Add to Cart
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      }
 
       <div>
         <div className="pagination">
@@ -193,6 +259,7 @@ const Shop = () => {
           </select>
         </div>
       </div>
+
 
       {/* Modal */}
       {selectedMedicine && (
