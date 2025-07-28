@@ -70,9 +70,9 @@ const Header = () => {
                     </button>
 
                     <ul className="dropdown menu w-52 rounded-box bg-base-100 shadow-sm"
-                    popover="auto" id="popover-1" style={{ positionAnchor: "--anchor-1" } /* as React.CSSProperties */ }>
-                    <li><a>Bangla</a></li>
-                    <li><a>English</a></li>
+                        popover="auto" id="popover-1" style={{ positionAnchor: "--anchor-1" } /* as React.CSSProperties */ }>
+                        <li><a>Bangla</a></li>
+                        <li><a>English</a></li>
                     </ul>
                     <div className='flex gap-2 lg:gap-4 justify-center items-center'>
                     <div className="relative">
@@ -82,6 +82,7 @@ const Header = () => {
                                 className="flex items-center gap-3 cursor-pointer"
                                 onClick={() => setShowDropdown(!showDropdown)}
                             >
+                                <h1 className='text-2xl'>{user?.email}</h1>
                                 <img
                                 className="w-15 h-15 bg-white p-1 rounded-full"
                                 src={user?.photoURL}

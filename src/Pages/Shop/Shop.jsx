@@ -6,7 +6,7 @@ import { AuthContext } from "../../Authentication/AuthContext";
 import { FaEye, FaCartPlus } from "react-icons/fa";
 import { BsFillCartCheckFill } from "react-icons/bs";
 import { useLoaderData } from "react-router";
-import "./Shop.css"
+import "./Shop.css";
 
 const Shop = () => {
   const axiosApi = UseAxiosSecureAPI();
@@ -15,22 +15,24 @@ const Shop = () => {
 
   const [selectedMedicine, setSelectedMedicine] = useState(null);
 
-  const [itemsPerPage , setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
 
-  const [currentPage , setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const {
-  data: allMedicines = [],
-  isLoading,
-  isError: error,
-} = useQuery({
-  queryKey: ["allMedicines", currentPage, itemsPerPage],
-  queryFn: async () => {
-    const res = await axiosApi.get(`/medicinePagination?page=${currentPage}&items=${itemsPerPage}`);
-    return res.data;
-  },
-});
-  console.log(allMedicines)
+    data: allMedicines = [],
+    isLoading,
+    isError: error,
+  } = useQuery({
+    queryKey: ["allMedicines", currentPage, itemsPerPage],
+    queryFn: async () => {
+      const res = await axiosApi.get(
+        `/medicinePagination?page=${currentPage}&items=${itemsPerPage}`
+      );
+      return res.data;
+    },
+  });
+  // console.log(allMedicines);
 
   const handleAddToCart = async (medicine) => {
     if (!user?.email) {
@@ -49,12 +51,12 @@ const Shop = () => {
       quantity: 1,
       payment_status: "Pending",
       email: user.email,
-    //  sellerEmail: medicine.sellerEmail,
+      //  sellerEmail: medicine.sellerEmail,
     };
 
     try {
       const res = await axiosApi.post("/myCart", cartItem);
-      console.log(res.data)
+      console.log(res.data);
       if (res.data.insertedId) {
         Swal.fire("Added!", "Medicine added to cart", "success");
       }
@@ -75,21 +77,21 @@ const Shop = () => {
   const formatDate = (isoString) => {
     const date = new Date(isoString);
     const options = {
-        timeZone: "UTC",
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
+      timeZone: "UTC",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
     };
-    return date.toLocaleString('en-US', options);
+    return date.toLocaleString("en-US", options);
   };
 
-  const {count} = useLoaderData();
+  const { count } = useLoaderData();
   // console.log(count);
 
-  const numberOfPages = Math.ceil(count/itemsPerPage);
+  const numberOfPages = Math.ceil(count / itemsPerPage);
 
   const pages = [...Array(numberOfPages).keys()];
   console.log(pages);
@@ -97,19 +99,19 @@ const Shop = () => {
   const handleItemsPerPage = (e) => {
     setItemsPerPage(parseInt(e.target.value));
     setCurrentPage(0);
-  }
+  };
 
   const handlePrevPage = () => {
-    if(currentPage > 0) {
+    if (currentPage > 0) {
       setCurrentPage(currentPage - 1);
     }
-  }
+  };
 
   const handleNextPage = () => {
-    if(currentPage < pages.length - 1){
+    if (currentPage < pages.length - 1) {
       setCurrentPage(currentPage + 1);
     }
-  }
+  };
 
   if (isLoading) return <p className="text-center py-10">Loading...</p>;
   if (error)
@@ -164,28 +166,31 @@ const Shop = () => {
         </table>
       </div>
 
-
       <div>
-        <div className='pagination'>
-            <h4 className="text-2xl">Current Page : {currentPage}</h4>
-            <button onClick={handlePrevPage}>Prev</button>
-            {
-                pages.map((page)=> 
-                <button 
-                    key={page} 
-                    onClick={()=>setCurrentPage(page)} 
-                    className={currentPage===page ? 'selected' : ""}> 
-                    {page} 
-                </button>)
-            }
-            <button onClick={handleNextPage}>Next</button>
-            <select value={itemsPerPage} name="" id="dropDown" onChange={handleItemsPerPage}>
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="50">50</option>
-
-            </select>
+        <div className="pagination">
+          {/* <h4 className="text-2xl">Current Page : {currentPage}</h4> */}
+          <button onClick={handlePrevPage}>Prev</button>
+          {pages.map((page) => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={currentPage === page ? "selected" : ""}
+            >
+              {page}
+            </button>
+          ))}
+          <button onClick={handleNextPage}>Next</button>
+          <select
+            value={itemsPerPage}
+            name=""
+            id="dropDown"
+            onChange={handleItemsPerPage}
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+          </select>
         </div>
       </div>
 

@@ -12,17 +12,23 @@ const CategoryDetails = () => {
   const axiosApi = UseAxiosSecureAPI();
   const [selectedMedicine, setSelectedMedicine] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  
+  const [itemsPerPage , setItemsPerPage] = useState(5);
+
+  const [currentPage , setCurrentPage] = useState(0);
 
   const {user} = useContext(AuthContext);
 
-  const { data: medicines = [], isLoading } = useQuery({
-    queryKey: ["categoryMedicines", categoryName],
-    queryFn: async () => {
-      const res = await axiosApi.get(`/category/medicines?category=${categoryName}`);
-      return res.data;
-    },
-    enabled: !!categoryName,
-  });
+ const { data: medicines = [], isLoading } = useQuery({
+  queryKey: ["categoryMedicines", categoryName, currentPage, itemsPerPage],
+  queryFn: async () => {
+    const res = await axiosApi.get(
+      `/category/medicines?category=${categoryName}&page=${currentPage}&items=${itemsPerPage}`
+    );
+    return res.data;
+  },
+  enabled: !!categoryName,
+});
 
   const queryClient = useQueryClient();
 
@@ -55,6 +61,37 @@ const CategoryDetails = () => {
     }
   });
 
+  const { data: totalCount = 0 } = useQuery({
+  queryKey: ["categoryCount", categoryName],
+  queryFn: async () => {
+    const res = await axiosApi.get(`/category/medicines/count?category=${categoryName}`);
+    return res.data.count;
+  },
+  enabled: !!categoryName,
+});
+  // console.log(count);
+
+  const numberOfPages = Math.ceil(totalCount / itemsPerPage);
+const pages = [...Array(numberOfPages).keys()];
+  console.log(pages);
+
+  const handleItemsPerPage = (e) => {
+    setItemsPerPage(parseInt(e.target.value));
+    setCurrentPage(0);
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < pages.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
 
   return (
     <div className="p-6 mt-10">
@@ -84,7 +121,7 @@ const CategoryDetails = () => {
             <tbody>
               {medicines.map((med, i) => (
                 <tr key={med._id} className="text-2xl text-center">
-                  <td>{i + 1}</td>
+                  <td>{currentPage * itemsPerPage + i + 1}</td>
                   <td>
                     <img src={med.image} alt="med" className="w-12 h-12 rounded" />
                   </td>
@@ -117,6 +154,34 @@ const CategoryDetails = () => {
           </table>
         </div>
       )}
+
+      <div>
+        <div className="pagination">
+          {/* <h4 className="text-2xl">Current Page : {currentPage}</h4> */}
+          <button onClick={handlePrevPage}>Prev</button>
+          {pages.map((page) => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={currentPage === page ? "selected" : ""}
+            >
+              {page}
+            </button>
+          ))}
+          <button onClick={handleNextPage}>Next</button>
+          <select
+            value={itemsPerPage}
+            name=""
+            id="dropDown"
+            onChange={handleItemsPerPage}
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+          </select>
+        </div>
+      </div>
 
       {/* DaisyUI Modal */}
       {showModal && selectedMedicine && (
