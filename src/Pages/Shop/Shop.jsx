@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../../Authentication/AuthContext";
 import { FaEye, FaCartPlus } from "react-icons/fa";
 import { BsFillCartCheckFill } from "react-icons/bs";
+import { useLoaderData } from "react-router";
+import "./Shop.css"
 
 const Shop = () => {
   const axiosApi = UseAxiosSecureAPI();
@@ -13,17 +15,21 @@ const Shop = () => {
 
   const [selectedMedicine, setSelectedMedicine] = useState(null);
 
+  const [itemsPerPage , setItemsPerPage] = useState(5);
+
+  const [currentPage , setCurrentPage] = useState(0);
+
   const {
-    data: allMedicines = [],
-    isLoading,
-    isError: error,
-  } = useQuery({
-    queryKey: ["allMedicines"],
-    queryFn: async () => {
-      const res = await axiosApi.get("/medicines");
-      return res.data;
-    },
-  });
+  data: allMedicines = [],
+  isLoading,
+  isError: error,
+} = useQuery({
+  queryKey: ["allMedicines", currentPage, itemsPerPage],
+  queryFn: async () => {
+    const res = await axiosApi.get(`/medicinePagination?page=${currentPage}&items=${itemsPerPage}`);
+    return res.data;
+  },
+});
   console.log(allMedicines)
 
   const handleAddToCart = async (medicine) => {
@@ -80,6 +86,31 @@ const Shop = () => {
     return date.toLocaleString('en-US', options);
   };
 
+  const {count} = useLoaderData();
+  // console.log(count);
+
+  const numberOfPages = Math.ceil(count/itemsPerPage);
+
+  const pages = [...Array(numberOfPages).keys()];
+  console.log(pages);
+
+  const handleItemsPerPage = (e) => {
+    setItemsPerPage(parseInt(e.target.value));
+    setCurrentPage(0);
+  }
+
+  const handlePrevPage = () => {
+    if(currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+
+  const handleNextPage = () => {
+    if(currentPage < pages.length - 1){
+      setCurrentPage(currentPage + 1);
+    }
+  }
+
   if (isLoading) return <p className="text-center py-10">Loading...</p>;
   if (error)
     return (
@@ -107,7 +138,7 @@ const Shop = () => {
           <tbody>
             {allMedicines.map((medicine, index) => (
               <tr key={medicine._id} className="hover">
-                <td>{index + 1}</td>
+                <td>{currentPage * itemsPerPage + index + 1}</td>
                 <td>{medicine.sellerEmail}</td>
                 <td>{medicine.name}</td>
                 <td>{medicine.company}</td>
@@ -131,6 +162,31 @@ const Shop = () => {
             ))}
           </tbody>
         </table>
+      </div>
+
+
+      <div>
+        <div className='pagination'>
+            <h4 className="text-2xl">Current Page : {currentPage}</h4>
+            <button onClick={handlePrevPage}>Prev</button>
+            {
+                pages.map((page)=> 
+                <button 
+                    key={page} 
+                    onClick={()=>setCurrentPage(page)} 
+                    className={currentPage===page ? 'selected' : ""}> 
+                    {page} 
+                </button>)
+            }
+            <button onClick={handleNextPage}>Next</button>
+            <select value={itemsPerPage} name="" id="dropDown" onChange={handleItemsPerPage}>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+
+            </select>
+        </div>
       </div>
 
       {/* Modal */}

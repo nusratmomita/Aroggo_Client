@@ -39,6 +39,7 @@ export const routers = createBrowserRouter([
             },
             {
                 path: "/shop",
+                loader: () => fetch("http://localhost:3000/medicineCount"), 
                 Component: Shop
             },
             {
