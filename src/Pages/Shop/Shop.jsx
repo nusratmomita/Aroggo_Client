@@ -176,7 +176,7 @@ const Shop = () => {
               onClick={() => setCurrentPage(page)}
               className={currentPage === page ? "selected" : ""}
             >
-              {page}
+              {page+1}
             </button>
           ))}
           <button onClick={handleNextPage}>Next</button>

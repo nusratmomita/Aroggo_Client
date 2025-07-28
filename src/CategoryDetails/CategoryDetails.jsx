@@ -6,6 +6,7 @@ import UseAxiosSecureAPI from "../CustomHooks/UseAxiosSecureAPI";
 import { toast } from "react-toastify";
 import { AuthContext } from "../Authentication/AuthContext";
 import { BsFillCartCheckFill } from "react-icons/bs";
+import '../Pages/Shop/Shop.css'
 
 const CategoryDetails = () => {
   const { categoryName } = useParams();
@@ -165,7 +166,7 @@ const pages = [...Array(numberOfPages).keys()];
               onClick={() => setCurrentPage(page)}
               className={currentPage === page ? "selected" : ""}
             >
-              {page}
+              {page+1}
             </button>
           ))}
           <button onClick={handleNextPage}>Next</button>

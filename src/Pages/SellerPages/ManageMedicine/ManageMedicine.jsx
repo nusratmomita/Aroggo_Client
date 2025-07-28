@@ -13,6 +13,10 @@ const ManageMedicine = () => {
   const [showModal, setShowModal] = useState(false);
   const [medicineImage, setMedicineImage] = useState("");
 
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  
+  const [currentPage, setCurrentPage] = useState(0);
+
   const axiosApi = UseAxiosSecureAPI();
 
   const handlePhotoUpload = async (e) => {
@@ -66,11 +70,13 @@ const ManageMedicine = () => {
   };
 
   // to load data per email
-  const { data: medicines = [], isLoading } = useQuery({
-    queryKey: ["myMedicines", user?.email],
+  const { data, isLoading } = useQuery({
+    queryKey: ["myMedicines", user?.email, currentPage, itemsPerPage],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosApi.get(`/medicines/email?email=${user?.email}`);
+      const res = await axiosApi.get(
+        `/medicines/emailPagination?email=${user?.email}&page=${currentPage}&items=${itemsPerPage}`
+      );
       return res.data;
     },
   });
@@ -85,7 +91,11 @@ const ManageMedicine = () => {
     },
   });
 
-  console.log(categories);
+  // console.log(categories);
+
+  const medicines = data?.result || [];
+  const total = data?.total || 0;
+  const numberOfPages = Math.ceil(total / itemsPerPage);
 
   if (isLoading) {
     return (
@@ -156,6 +166,54 @@ const ManageMedicine = () => {
           </table>
         </div>
       )}
+
+      <div className="pagination text-center mt-8">
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+          className="btn mx-1 cursor-pointer"
+          disabled={currentPage === 0}
+        >
+          Prev
+        </button>
+
+        {[...Array(numberOfPages).keys()].map((page) => (
+          <button
+            key={page}
+            onClick={() => setCurrentPage(page)}
+            className={`btn mx-1 ${currentPage === page ? "bg-[#DED3C4]" : ""}`}
+          >
+            {page + 1}
+          </button>
+        ))}
+
+        <button
+          onClick={() =>
+            setCurrentPage((prev) =>
+              prev + 1 < numberOfPages ? prev + 1 : prev
+            )
+          }
+          className="btn mx-1 cursor-pointer"
+          disabled={currentPage >= numberOfPages - 1}
+        >
+          Next
+        </button>
+
+        <select
+          value={itemsPerPage}
+          onChange={(e) => {
+            setItemsPerPage(parseInt(e.target.value));
+            setCurrentPage(0); // reset page
+          }}
+          className="select ml-4 border"
+        >
+          {[5, 10, 20, 50].map((size) => (
+            <option key={size} value={size}>
+              {size}
+            </option>
+          ))}
+        </select>
+      </div>
+
 
       {/* Modal */}
       {showModal && (
@@ -281,8 +339,3 @@ const ManageMedicine = () => {
 
 export default ManageMedicine;
 
-// {
-//                   categories.map((cat,index)=>{
-//                     <option key={index}>{cat.categoryName}</option>
-//                   })
-//                 }
