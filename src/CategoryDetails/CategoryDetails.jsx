@@ -18,19 +18,24 @@ const CategoryDetails = () => {
 
   const [currentPage , setCurrentPage] = useState(0);
 
+  const [sortBy, setSortBy] = useState("name");
+  const [sortOrder, setSortOrder] = useState("asc"); // or "desc"
+
+  const [searchText , setSearchText] = useState("");
+  const [searchTrigger, setSearchTrigger] = useState("");
+
   const {user} = useContext(AuthContext);
 
- const { data: medicines = [], isLoading } = useQuery({
-  queryKey: ["categoryMedicines", categoryName, currentPage, itemsPerPage],
-  queryFn: async () => {
-    const res = await axiosApi.get(
-      `/category/medicines?category=${categoryName}&page=${currentPage}&items=${itemsPerPage}`
-    );
-    return res.data;
-  },
-  enabled: !!categoryName,
-});
-
+  const { data, isLoading } = useQuery({
+    queryKey: ["categoryMedicines", categoryName, currentPage, itemsPerPage, sortBy, sortOrder, searchTrigger ],
+    queryFn: async () => {
+      const res = await axiosApi.get(
+        `/categoryPagination?category=${categoryName}&page=${currentPage}&items=${itemsPerPage}&sortBy=${sortBy}&order=${sortOrder}&search=${searchTrigger}`
+      );
+      return res.data;
+    },
+    enabled: !!categoryName,
+  });
   const queryClient = useQueryClient();
 
   const addToCartMutation = useMutation({
@@ -62,18 +67,20 @@ const CategoryDetails = () => {
     }
   });
 
-  const { data: totalCount = 0 } = useQuery({
-  queryKey: ["categoryCount", categoryName],
-  queryFn: async () => {
-    const res = await axiosApi.get(`/category/medicines/count?category=${categoryName}`);
-    return res.data.count;
-  },
-  enabled: !!categoryName,
-});
-  // console.log(count);
+  // const { data: totalCount = 0 } = useQuery({
+  //   queryKey: ["categoryCount", categoryName, searchTrigger],
+  //   queryFn: async () => {
+  //     const res = await axiosApi.get(`/categoryPagination?category=${categoryName}&search=${searchTrigger}`);
+  //     return res.data.total; // not .count
+  //   },
+  // });
+  // // console.log(count);
+
+  const medicines = data?.result || [];
+  const totalCount = data?.total || [];
 
   const numberOfPages = Math.ceil(totalCount / itemsPerPage);
-const pages = [...Array(numberOfPages).keys()];
+  const pages = [...Array(numberOfPages).keys()];
   console.log(pages);
 
   const handleItemsPerPage = (e) => {
@@ -99,6 +106,61 @@ const pages = [...Array(numberOfPages).keys()];
       <h1 className="mb-20 text-4xl font-bold text-[#080c3b]">
         Medicines in "{decodeURIComponent(categoryName)}"
       </h1>
+
+      <div className="flex justify-between items-center mx-20">
+        <div className="mt-10 flex gap-4 items-center mb-6">
+          <label className="text-2xl text-[#080c3b] whitespace-nowrap">Sort by:</label>
+          <select
+            value={sortBy}
+            onChange={(e) => {
+              setSortBy(e.target.value);
+              setCurrentPage(0); // reset pagination
+            }}
+            className="select border text-xl"
+          >
+            <option value="name">Name</option>
+            <option value="price">Price</option>
+            <option value="unit">Unit</option>
+            <option value="added_at">Date Added</option>
+          </select>
+
+          <select
+            value={sortOrder}
+            onChange={(e) => {
+              setSortOrder(e.target.value);
+              setCurrentPage(0);
+            }}
+            className="select border text-xl"
+          >
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
+        </div>
+
+        <div className="mt-10 flex gap-3 mb-4 items-center">
+          <label className="text-2xl text-[#080c3b] whitespace-nowrap">Search Medicine:</label>
+          <input
+            type="text"
+            placeholder="Search by name..."
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+              setCurrentPage(0);
+            }}
+            className="input text-2xl input-bordered w-full max-w-xs"
+          />
+
+          <button
+            className="btn text-2xl font-bold bg-[#DED3C4] hover:bg-[#c7bbaf]"
+            onClick={() => {
+              setSearchTrigger(searchText); // triggers search
+              setCurrentPage(0); // reset to first page
+            }}
+          >
+            Search
+          </button>
+        </div>
+      </div>
 
       {isLoading ? (
         <p>Loading...</p>
