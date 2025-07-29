@@ -4,6 +4,8 @@ import { AuthContext } from "../../../Authentication/AuthContext";
 import UseAxiosSecureAPI from "../../../CustomHooks/UseAxiosSecureAPI";
 import { toast } from "react-toastify";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { ReTitleProvider } from 're-title';
+
 
 const ManageMedicine = () => {
   const { user } = useContext(AuthContext);
@@ -112,289 +114,291 @@ const ManageMedicine = () => {
   }
 
   return (
-    <div className="p-6 mt-10">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-4xl font-bold text-[#080c3b]">
-          Manage Your Medicines
-        </h1>
-        <button
-          onClick={() => setShowModal(true)}
-          className="btn bg-[#98A1BC] text-[#080c3b] text-2xl hover:bg-[#7f89a4]"
-        >
-          <FaPlus /> Add Medicine
-        </button>
-      </div>
-
-      <div className="flex gap-4 items-center mb-6">
-        <label className="text-2xl text-[#080c3b]">Sort by:</label>
-        <select
-          value={sortBy}
-          onChange={(e) => {
-            setSortBy(e.target.value);
-            setCurrentPage(0); // reset pagination
-          }}
-          className="select border text-xl"
-        >
-          <option value="name">Name</option>
-          <option value="price">Price</option>
-          <option value="discount">Discount</option>
-          <option value="added_at">Date Added</option>
-        </select>
-
-        <select
-          value={sortOrder}
-          onChange={(e) => {
-            setSortOrder(e.target.value);
-            setCurrentPage(0);
-          }}
-          className="select border text-xl"
-        >
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
-      </div>
-
-      <div className="flex gap-3 mb-4 items-center">
-        <label className="text-2xl text-[#080c3b]">Search Medicine:</label>
-        <input
-          type="text"
-          placeholder="Search by name..."
-          value={searchText}
-          onChange={(e) => {
-            setSearchText(e.target.value);
-            setCurrentPage(0);
-          }}
-          className="input text-2xl input-bordered w-full max-w-xs"
-        />
-
-        <button
-          className="btn text-2xl font-bold bg-[#DED3C4] hover:bg-[#c7bbaf]"
-          onClick={() => {
-            setSearchTrigger(searchText); // triggers search
-            setCurrentPage(0); // reset to first page
-          }}
-        >
-          Search
-        </button>
-      </div>
-
-      {
-      isLoading ? (
-        <p className="text-center text-gray-500">Loading...</p>
-      ) : data?.result?.length === 0 ? (
-        <p className="mt-20 mb-20 text-center text-[#080c3b] text-3xl font-semibold">
-          No medicines found with the name "{searchTrigger}"
-        </p>
-      )  : (
-        <div className="overflow-x-auto mt-20">
-          <table className="table table-zebra w-full border  text-center">
-            <thead className="bg-[#DED3C4] text-[#080c3b]">
-              <tr className="text-2xl">
-                <th>#</th>
-                {/* <th>Seller email</th> */}
-                <th>Name</th>
-                <th>Category</th>
-                <th>Generic</th>
-                <th>Company</th>
-                <th>Unit</th>
-                <th>Price</th>
-                <th>Discount</th>
-                <th>Image</th>
-              </tr>
-            </thead>
-            <tbody>
-              {medicines.map((med, i) => (
-                <tr className="text-2xl" key={med._id}>
-                  <td>{i + 1}</td>
-                  {/* <td>{med.seller_email}</td> */}
-                  <td>{med.name}</td>
-                  <td>{med.category}</td>
-                  <td>{med.generic}</td>
-                  <td>{med.company}</td>
-                  <td>{med.unit}</td>
-                  <td>৳{med.price.toFixed(2)}</td>
-                  <td>{med.discount.toLocaleString()}%</td>
-                  <td>
-                    <img
-                      src={med.image}
-                      alt="med"
-                      className="w-12 h-12 rounded"
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-
-      <div className="pagination text-center mt-8">
-        <button
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-          className="btn mx-1 cursor-pointer"
-          disabled={currentPage === 0}
-        >
-          Prev
-        </button>
-
-        {[...Array(numberOfPages).keys()].map((page) => (
+    <ReTitleProvider defaultTitle="Manage Medicine">
+      <div className="p-6 mt-10">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-4xl font-bold text-[#080c3b]">
+            Manage Your Medicines
+          </h1>
           <button
-            key={page}
-            onClick={() => setCurrentPage(page)}
-            className={`btn mx-1 ${currentPage === page ? "bg-[#DED3C4]" : ""}`}
+            onClick={() => setShowModal(true)}
+            className="btn bg-[#98A1BC] text-[#080c3b] text-2xl hover:bg-[#7f89a4]"
           >
-            {page + 1}
+            <FaPlus /> Add Medicine
           </button>
-        ))}
+        </div>
 
-        <button
-          onClick={() =>
-            setCurrentPage((prev) =>
-              prev + 1 < numberOfPages ? prev + 1 : prev
-            )
-          }
-          className="btn mx-1 cursor-pointer"
-          disabled={currentPage >= numberOfPages - 1}
-        >
-          Next
-        </button>
+        <div className="flex gap-4 items-center mb-6">
+          <label className="text-2xl text-[#080c3b]">Sort by:</label>
+          <select
+            value={sortBy}
+            onChange={(e) => {
+              setSortBy(e.target.value);
+              setCurrentPage(0); // reset pagination
+            }}
+            className="select border text-xl"
+          >
+            <option value="name">Name</option>
+            <option value="price">Price</option>
+            <option value="discount">Discount</option>
+            <option value="added_at">Date Added</option>
+          </select>
 
-        <select
-          value={itemsPerPage}
-          onChange={(e) => {
-            setItemsPerPage(parseInt(e.target.value));
-            setCurrentPage(0); // reset page
-          }}
-          className="select ml-4 border w-1/4 lg:w-1/15"
-        >
-          {[5, 10, 20, 50].map((size) => (
-            <option key={size} value={size}>
-              {size}
-            </option>
-          ))}
-        </select>
-      </div>
+          <select
+            value={sortOrder}
+            onChange={(e) => {
+              setSortOrder(e.target.value);
+              setCurrentPage(0);
+            }}
+            className="select border text-xl"
+          >
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
+        </div>
 
+        <div className="flex gap-3 mb-4 items-center">
+          <label className="text-2xl text-[#080c3b]">Search Medicine:</label>
+          <input
+            type="text"
+            placeholder="Search by name..."
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+              setCurrentPage(0);
+            }}
+            className="input text-2xl input-bordered w-full max-w-xs"
+          />
 
-      {/* Modal */}
-      {showModal && (
-        <dialog id="add_medicine_modal" className="modal modal-open">
-          <div className="mt-10  modal-box bg-[#555879] text-[#F4EBD3] max-w-2xl">
-            <form onSubmit={handleAddMedicine} className="space-y-4 text-lg">
-              <h2 className="text-3xl font-semibold mb-4">Add New Medicine</h2>
-              <input
-                name="name"
-                required
-                placeholder="Medicine Name"
-                className="text-xl input input-bordered w-full text-black"
-              />
-              <textarea
-                name="description"
-                required
-                placeholder="Short Description"
-                className="text-xl textarea textarea-bordered w-full text-black"
-              />
-              <input
-                type="file"
-                required
-                className="text-black text-xl file-input file-input-bordered w-full"
-                onChange={handlePhotoUpload}
-              />
-              <select
-                name="category"
-                required
-                className="text-xl select select-bordered w-full text-black"
-              >
-                <option defaultValue={true}>Select Category</option>
-                {categories.map((cat, index) => 
-                  <option key={index}>{cat.categoryName}</option>
-                )}
-              </select>
-              <select
-                name="generic"
-                required
-                className="text-xl select select-bordered w-full text-black"
-              >
-                <option defaultValue={true}>Select Generic</option>
-                <option>Paracetamol</option>
-                <option>Ciprofloxacin</option>
-                <option>Azithromycin</option>
-                <option>Metronidazole</option>
-                <option>Esomeprazole</option>
-                <option>Montelukast</option>
-                <option>Amlodipine</option>
-              </select>
-              <select
-                name="company"
-                required
-                className="text-xl select select-bordered w-full text-black"
-              >
-                <option defaultValue={true}>Select Company</option>
-                <option>Square</option>
-                <option>Beximco</option>
-                <option>ACI</option>
-                <option>Opsonin Pharma Ltd</option>
-                <option>Beacon Pharmaceuticals Ltd</option>
-                <option>Renata Limited</option>
-                <option>Aristopharma Ltd</option>
-              </select>
+          <button
+            className="btn text-2xl font-bold bg-[#DED3C4] hover:bg-[#c7bbaf]"
+            onClick={() => {
+              setSearchTrigger(searchText); // triggers search
+              setCurrentPage(0); // reset to first page
+            }}
+          >
+            Search
+          </button>
+        </div>
 
-              <label htmlFor="unit" className="font-bold text-2xl">
-                Item Mass Unit
-              </label>
-              <input
-                name="unit"
-                type="number"
-                required
-                placeholder="Item Mass Unit(ML or MG)"
-                className="text-xl input input-bordered w-full text-black"
-              />
-
-              <label htmlFor="price" className="font-bold text-2xl">
-                Per Unit Price
-              </label>
-              <input
-                name="price"
-                type="number"
-                min="0"
-                required
-                placeholder="Per Unit Price"
-                className="text-xl input input-bordered w-full text-black"
-              />
-
-              <label htmlFor="discount" className="font-bold text-2xl">
-                Add Discount(if any)
-              </label>
-              <input
-                name="discount"
-                type="number"
-                defaultValue={0}
-                min="0"
-                max="50"
-                placeholder="Discount (%)"
-                className="text-xl input input-bordered w-full text-black"
-              />
-
-              <div className="modal-action">
-                <button
-                  type="submit"
-                  className="btn bg-[#98A1BC] text-[#080c3b] text-xl hover:bg-gray-300 border-none"
-                >
-                  Add Medicine
-                </button>
-                <button
-                  onClick={() => setShowModal(false)}
-                  type="button"
-                  className="btn bg-[#98A1BC] text-[#080c3b] text-xl hover:bg-gray-300 border-none"
-                >
-                  Close
-                </button>
-              </div>
-            </form>
+        {
+        isLoading ? (
+          <p className="text-center text-gray-500">Loading...</p>
+        ) : data?.result?.length === 0 ? (
+          <p className="mt-20 mb-20 text-center text-[#080c3b] text-3xl font-semibold">
+            No medicines found with the name "{searchTrigger}"
+          </p>
+        )  : (
+          <div className="overflow-x-auto mt-20">
+            <table className="table table-zebra w-full border  text-center">
+              <thead className="bg-[#DED3C4] text-[#080c3b]">
+                <tr className="text-2xl">
+                  <th>#</th>
+                  {/* <th>Seller email</th> */}
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>Generic</th>
+                  <th>Company</th>
+                  <th>Unit</th>
+                  <th>Price</th>
+                  <th>Discount</th>
+                  <th>Image</th>
+                </tr>
+              </thead>
+              <tbody>
+                {medicines.map((med, i) => (
+                  <tr className="text-2xl" key={med._id}>
+                    <td>{i + 1}</td>
+                    {/* <td>{med.seller_email}</td> */}
+                    <td>{med.name}</td>
+                    <td>{med.category}</td>
+                    <td>{med.generic}</td>
+                    <td>{med.company}</td>
+                    <td>{med.unit}</td>
+                    <td>৳{med.price.toFixed(2)}</td>
+                    <td>{med.discount.toLocaleString()}%</td>
+                    <td>
+                      <img
+                        src={med.image}
+                        alt="med"
+                        className="w-12 h-12 rounded"
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        </dialog>
-      )}
-    </div>
+        )}
+
+        <div className="pagination text-center mt-8">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+            className="btn mx-1 cursor-pointer"
+            disabled={currentPage === 0}
+          >
+            Prev
+          </button>
+
+          {[...Array(numberOfPages).keys()].map((page) => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={`btn mx-1 ${currentPage === page ? "bg-[#DED3C4]" : ""}`}
+            >
+              {page + 1}
+            </button>
+          ))}
+
+          <button
+            onClick={() =>
+              setCurrentPage((prev) =>
+                prev + 1 < numberOfPages ? prev + 1 : prev
+              )
+            }
+            className="btn mx-1 cursor-pointer"
+            disabled={currentPage >= numberOfPages - 1}
+          >
+            Next
+          </button>
+
+          <select
+            value={itemsPerPage}
+            onChange={(e) => {
+              setItemsPerPage(parseInt(e.target.value));
+              setCurrentPage(0); // reset page
+            }}
+            className="select ml-4 border w-1/4 lg:w-1/15"
+          >
+            {[5, 10, 20, 50].map((size) => (
+              <option key={size} value={size}>
+                {size}
+              </option>
+            ))}
+          </select>
+        </div>
+
+
+        {/* Modal */}
+        {showModal && (
+          <dialog id="add_medicine_modal" className="modal modal-open">
+            <div className="mt-10  modal-box bg-[#555879] text-[#F4EBD3] max-w-2xl">
+              <form onSubmit={handleAddMedicine} className="space-y-4 text-lg">
+                <h2 className="text-3xl font-semibold mb-4">Add New Medicine</h2>
+                <input
+                  name="name"
+                  required
+                  placeholder="Medicine Name"
+                  className="text-xl input input-bordered w-full text-black"
+                />
+                <textarea
+                  name="description"
+                  required
+                  placeholder="Short Description"
+                  className="text-xl textarea textarea-bordered w-full text-black"
+                />
+                <input
+                  type="file"
+                  required
+                  className="text-black text-xl file-input file-input-bordered w-full"
+                  onChange={handlePhotoUpload}
+                />
+                <select
+                  name="category"
+                  required
+                  className="text-xl select select-bordered w-full text-black"
+                >
+                  <option defaultValue={true}>Select Category</option>
+                  {categories.map((cat, index) => 
+                    <option key={index}>{cat.categoryName}</option>
+                  )}
+                </select>
+                <select
+                  name="generic"
+                  required
+                  className="text-xl select select-bordered w-full text-black"
+                >
+                  <option defaultValue={true}>Select Generic</option>
+                  <option>Paracetamol</option>
+                  <option>Ciprofloxacin</option>
+                  <option>Azithromycin</option>
+                  <option>Metronidazole</option>
+                  <option>Esomeprazole</option>
+                  <option>Montelukast</option>
+                  <option>Amlodipine</option>
+                </select>
+                <select
+                  name="company"
+                  required
+                  className="text-xl select select-bordered w-full text-black"
+                >
+                  <option defaultValue={true}>Select Company</option>
+                  <option>Square</option>
+                  <option>Beximco</option>
+                  <option>ACI</option>
+                  <option>Opsonin Pharma Ltd</option>
+                  <option>Beacon Pharmaceuticals Ltd</option>
+                  <option>Renata Limited</option>
+                  <option>Aristopharma Ltd</option>
+                </select>
+
+                <label htmlFor="unit" className="font-bold text-2xl">
+                  Item Mass Unit
+                </label>
+                <input
+                  name="unit"
+                  type="number"
+                  required
+                  placeholder="Item Mass Unit(ML or MG)"
+                  className="text-xl input input-bordered w-full text-black"
+                />
+
+                <label htmlFor="price" className="font-bold text-2xl">
+                  Per Unit Price
+                </label>
+                <input
+                  name="price"
+                  type="number"
+                  min="0"
+                  required
+                  placeholder="Per Unit Price"
+                  className="text-xl input input-bordered w-full text-black"
+                />
+
+                <label htmlFor="discount" className="font-bold text-2xl">
+                  Add Discount(if any)
+                </label>
+                <input
+                  name="discount"
+                  type="number"
+                  defaultValue={0}
+                  min="0"
+                  max="50"
+                  placeholder="Discount (%)"
+                  className="text-xl input input-bordered w-full text-black"
+                />
+
+                <div className="modal-action">
+                  <button
+                    type="submit"
+                    className="btn bg-[#98A1BC] text-[#080c3b] text-xl hover:bg-gray-300 border-none"
+                  >
+                    Add Medicine
+                  </button>
+                  <button
+                    onClick={() => setShowModal(false)}
+                    type="button"
+                    className="btn bg-[#98A1BC] text-[#080c3b] text-xl hover:bg-gray-300 border-none"
+                  >
+                    Close
+                  </button>
+                </div>
+              </form>
+            </div>
+          </dialog>
+        )}
+      </div>
+    </ReTitleProvider>
   );
 };
 

@@ -1,10 +1,14 @@
 import React from 'react';
+import { ReTitleProvider } from 're-title';
+
 
 const SellerHome = () => {
     return (
-        <div>
-            SellerHome
-        </div>
+        <ReTitleProvider defaultTitle='Seller Home Page'>
+            <div>
+                SellerHome
+            </div>
+        </ReTitleProvider>
     );
 };
 

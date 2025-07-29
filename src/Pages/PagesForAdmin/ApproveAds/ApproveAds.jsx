@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import UseAxiosSecureAPI from "../../../CustomHooks/UseAxiosSecureAPI";
 import { toast } from "react-toastify";
+import { ReTitleProvider } from "re-title";
 
 const ApproveAds = () => {
   const axiosSecure = UseAxiosSecureAPI();
@@ -54,7 +55,8 @@ const ApproveAds = () => {
   }
 
   return (
-    <div className="p-6">
+    <ReTitleProvider defaultTitle="Approve Ads">
+      <div className="p-6 mt-10">
       <h2 className="text-4xl font-bold text-[#080c3b] mb-8">Manage Advertised Medicines</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -98,7 +100,9 @@ const ApproveAds = () => {
           </div>
         ))}
       </div>
-    </div>
+      </div>
+    </ReTitleProvider>
+  
   );
 };
 

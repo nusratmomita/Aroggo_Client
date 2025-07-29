@@ -5,6 +5,8 @@ import { AuthContext } from "../../Authentication/AuthContext";
 import Swal from "sweetalert2";
 import { FaPlus, FaMinus, FaTrash, FaCartPlus } from "react-icons/fa";
 import { Link } from "react-router";
+import { ReTitleProvider } from 're-title';
+
 
 const CartPage = () => {
   const { user } = useContext(AuthContext);
@@ -119,115 +121,117 @@ const CartPage = () => {
   console.log(cartItems)
 
   return (
-    <div className="p-8">
-      {isLoading ? (
-        <p className="text-xl">Loading your cart...</p>
-      ) : isError ? (
-        <p className="text-xl text-red-600">Failed to load cart.</p>
-      ) : (
-        <div className="p-8">
-          <h2 className="text-4xl font-bold text-[#080c3b] mb-6">Your Cart</h2>
-          {cartItems.length === 0 ? (
-            <div className=" flex flex-col gap-5 items-center justify-center text-center">
-              <p className="text-[#080c3b] text-4xl">No items in cart</p>
-              <Link to="/shop">
-                <button className="btn text-[#080c3b] text-3xl font-bold bg-[#98A1BC] btn-lg hover:opacity-90">
-                    <FaCartPlus></FaCartPlus>Add Medicines to Cart
-                </button>
-              </Link>
-            </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="table table-zebra w-full bg-white rounded-lg shadow">
-                <thead className="bg-[#DED3C4] text-[#080c3b] text-center text-2xl">
-                  <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Company</th>
-                    <th>Added On</th>
-                    <th>Price (৳)</th>
-                    <th>Quantity</th>
-                    <th>Total (৳)</th>
-                    <th>Payment</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cartItems.map((item, index) => (
-                    <tr key={item._id} className="text-[#080c3b] text-center text-2xl">
-                      <td>{index + 1}</td>
-                      <td>{item.name}</td>
-                      <td>{item.company}</td>
-                      <td>{formatDate(item.added_at)}</td>
-                      <td>{item.price}</td>
-                      <td>
-                        <div className="flex items-center justify-center gap-2">
-                          <button 
-                            className="btn btn-sm"
-                            onClick={()=> item.quantity > 1 && changeQuantity({id: item._id,change: -1})}
-                          >
-                            <FaMinus />
-                          </button>
-                          {item.quantity}
-                          <button 
-                            className="btn btn-sm"
-                            onClick={()=> changeQuantity({id: item._id,change: 1})}
-                          >
-                            <FaPlus />
-                          </button>
-                        </div>
-                      </td>
-                      <td>৳{item.quantity * item.price}</td>
-                      <td>
-                        <span
-                          className={`px-10 py-1 rounded-full text-2xl font-semibold 
-                            ${item.payment_status === 'Paid' 
-                              ? 'bg-green-100 text-green-700 border border-green-400' 
-                              : 'bg-yellow-100 text-yellow-700 border border-yellow-400'}
-                          `}
-                        >
-                          {item.payment_status.charAt(0).toUpperCase() + item.payment_status.slice(1)}
-                        </span>
-                      </td>
-                      <td>
-                        <button className="btn text-[#080c3b] text-2xl font-bold bg-[#98A1BC] btn-lg" onClick={() => handleRemoveItem(item._id)}><FaTrash></FaTrash>Remove</button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-
-          {cartItems.length > 0 && (
-            <div className="mt-12 flex items-center justify-center gap-5">
-              <div className="text-3xl font-bold text-[#080c3b]">
-                  Your Total: <span className="italic">৳{calculateTotal()}</span>
-              </div>
-              <button
-                  onClick={handleClearCart}
-                  className="btn text-[#080c3b] text-3xl font-bold bg-[#98A1BC] btn-lg hover:opacity-90"
-                >
-                  Clear Cart
-              </button>
-              {
-                cartItems.some(medicine => medicine.payment_status !== "Paid") ? (
-                  <Link to="/payment">
-                    <button className="btn text-[#080c3b] text-3xl font-bold bg-[#98A1BC] btn-lg hover:opacity-90">
-                      Proceed to Checkout
-                    </button>
-                  </Link>
-                ) : (
+    <ReTitleProvider defaultTitle="My Cart">
+      <div className="p-8">
+        {isLoading ? (
+          <p className="text-xl">Loading your cart...</p>
+        ) : isError ? (
+          <p className="text-xl text-red-600">Failed to load cart.</p>
+        ) : (
+          <div className="p-8">
+            <h2 className="text-4xl font-bold text-[#080c3b] mb-6">Your Cart</h2>
+            {cartItems.length === 0 ? (
+              <div className=" flex flex-col gap-5 items-center justify-center text-center">
+                <p className="text-[#080c3b] text-4xl">No items in cart</p>
+                <Link to="/shop">
                   <button className="btn text-[#080c3b] text-3xl font-bold bg-[#98A1BC] btn-lg hover:opacity-90">
-                    You already paid
+                      <FaCartPlus></FaCartPlus>Add Medicines to Cart
                   </button>
-                )
-              }
-            </div>
-          )}
-            </div>
-          )}
-        </div>
+                </Link>
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="table table-zebra w-full bg-white rounded-lg shadow">
+                  <thead className="bg-[#DED3C4] text-[#080c3b] text-center text-2xl">
+                    <tr>
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Company</th>
+                      <th>Added On</th>
+                      <th>Price (৳)</th>
+                      <th>Quantity</th>
+                      <th>Total (৳)</th>
+                      <th>Payment</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {cartItems.map((item, index) => (
+                      <tr key={item._id} className="text-[#080c3b] text-center text-2xl">
+                        <td>{index + 1}</td>
+                        <td>{item.name}</td>
+                        <td>{item.company}</td>
+                        <td>{formatDate(item.added_at)}</td>
+                        <td>{item.price}</td>
+                        <td>
+                          <div className="flex items-center justify-center gap-2">
+                            <button 
+                              className="btn btn-sm"
+                              onClick={()=> item.quantity > 1 && changeQuantity({id: item._id,change: -1})}
+                            >
+                              <FaMinus />
+                            </button>
+                            {item.quantity}
+                            <button 
+                              className="btn btn-sm"
+                              onClick={()=> changeQuantity({id: item._id,change: 1})}
+                            >
+                              <FaPlus />
+                            </button>
+                          </div>
+                        </td>
+                        <td>৳{item.quantity * item.price}</td>
+                        <td>
+                          <span
+                            className={`px-10 py-1 rounded-full text-2xl font-semibold 
+                              ${item.payment_status === 'Paid' 
+                                ? 'bg-green-100 text-green-700 border border-green-400' 
+                                : 'bg-yellow-100 text-yellow-700 border border-yellow-400'}
+                            `}
+                          >
+                            {item.payment_status.charAt(0).toUpperCase() + item.payment_status.slice(1)}
+                          </span>
+                        </td>
+                        <td>
+                          <button className="btn text-[#080c3b] text-2xl font-bold bg-[#98A1BC] btn-lg" onClick={() => handleRemoveItem(item._id)}><FaTrash></FaTrash>Remove</button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {cartItems.length > 0 && (
+              <div className="mt-12 flex items-center justify-center gap-5">
+                <div className="text-3xl font-bold text-[#080c3b]">
+                    Your Total: <span className="italic">৳{calculateTotal()}</span>
+                </div>
+                <button
+                    onClick={handleClearCart}
+                    className="btn text-[#080c3b] text-3xl font-bold bg-[#98A1BC] btn-lg hover:opacity-90"
+                  >
+                    Clear Cart
+                </button>
+                {
+                  cartItems.some(medicine => medicine.payment_status !== "Paid") ? (
+                    <Link to="/payment">
+                      <button className="btn text-[#080c3b] text-3xl font-bold bg-[#98A1BC] btn-lg hover:opacity-90">
+                        Proceed to Checkout
+                      </button>
+                    </Link>
+                  ) : (
+                    <button className="btn text-[#080c3b] text-3xl font-bold bg-[#98A1BC] btn-lg hover:opacity-90">
+                      You already paid
+                    </button>
+                  )
+                }
+              </div>
+            )}
+              </div>
+            )}
+      </div>
+    </ReTitleProvider>
   );
 };
 

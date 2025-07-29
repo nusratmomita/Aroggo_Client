@@ -1,10 +1,14 @@
 import React from 'react';
+import { ReTitleProvider } from 're-title';
+
 
 const PaymentHistory = () => {
     return (
-        <div>
-            PaymentHistory
-        </div>
+        <ReTitleProvider defaultTitle='Payment History'>
+            <div>
+                PaymentHistory
+            </div>
+        </ReTitleProvider>
     );
 };
 

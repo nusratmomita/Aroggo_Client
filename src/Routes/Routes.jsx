@@ -10,7 +10,6 @@ import DashboardRoot from "../Root/DashboardRoot";
 import ManageMedicine from "../Pages/SellerPages/ManageMedicine/ManageMedicine";
 import PaymentHistory from "../Pages/SellerPages/PaymentHistory/PaymentHistory";
 import AskForAd from "../Pages/SellerPages/AskForAd/AskForAd";
-import CategoryDetails from "../CategoryDetails/CategoryDetails";
 import PaymentIntegration from "../Pages/PaymentGateway/PaymentIntegration";
 import InvoicePage from "../Pages/InvoicePage/InvoicePage";
 import ManagePayment from "../Pages/PagesForAdmin/ManagePayment/ManagePayment";
@@ -23,6 +22,7 @@ import SellerHome from "../Pages/SellerPages/SellerHome/SellerHome";
 import AdminPrivateRoute from "../Pages/PrivateRoute/AdminPrivateRoute";
 import SellerPrivateRoute from "../Pages/PrivateRoute/SellerPrivateRoute";
 import ForbiddenRoute from "../Pages/ForbiddenRoute/ForbiddenRoute";
+import CategoryDetails from "../Pages/CategoryDetails/CategoryDetails";
 
 
 
