@@ -76,14 +76,14 @@ const CategoryDetails = () => {
   //     return res.data.total; // not .count
   //   },
   // });
-  // // console.log(count);
+  // console.log(count);
 
   const medicines = data?.result || [];
   const totalCount = data?.total || [];
 
   const numberOfPages = Math.ceil(totalCount / itemsPerPage);
   const pages = [...Array(numberOfPages).keys()];
-  console.log(pages);
+  // console.log(pages);
 
   const handleItemsPerPage = (e) => {
     setItemsPerPage(parseInt(e.target.value));

@@ -25,7 +25,7 @@ const CartPage = () => {
     },
   });
 
-  console.log(cartItems)
+  // console.log(cartItems)
 
   // to update the quantity
   const { mutateAsync: changeQuantity } = useMutation({
@@ -118,7 +118,7 @@ const CartPage = () => {
     };
     return date.toLocaleString('en-US', options);
   };
-  console.log(cartItems)
+  // console.log(cartItems)
 
   return (
     <ReTitleProvider defaultTitle="My Cart">

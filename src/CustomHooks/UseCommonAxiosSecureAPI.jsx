@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 const commonAxiosAPI  = axios.create({
-    baseURL: `http://localhost:3000`
+    baseURL: `https://aroggo-server.vercel.app`
 })
 const UseCommonAxiosSecureAPI = () => {
     return commonAxiosAPI;

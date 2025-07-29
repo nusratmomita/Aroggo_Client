@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import UseAxiosSecureAPI from '../../../CustomHooks/UseAxiosSecureAPI';
 import { toast } from 'react-toastify';
 import { ReTitleProvider } from 're-title';
+import axios from 'axios';
 
 
 const ManageCategories = () => {
@@ -22,7 +23,7 @@ const ManageCategories = () => {
     queryKey: ["categories"],
     queryFn: async () => {
       const res = await axiosApi.get("/categories");
-      console.log(res.data)
+      // console.log(res.data)
       return res.data;
     },
   });
@@ -44,17 +45,19 @@ const ManageCategories = () => {
     },
   });
 
-  const handlePhotoUpload = async (e) => {
-    const image = e.target.files[0];
+   const handlePhotoUpload = async(e) => {
+      const image = e.target.files[0];
+      // console.log(image);
 
-    const formData = new FormData();
-    formData.append("image" , image);
+      const formData = new FormData();
+      formData.append("image" , image);
+      
+      const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_key_api}`;
+      // console.log(imageUploadUrl)
 
-    const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_key_api}`;
-
-    const res = await axiosApi.post(imageUploadUrl,formData);
-    setCategoryImage(res.data.data.url);
-  };
+      const res = await axios.post(imageUploadUrl,formData);
+      setCategoryImage(res.data.data.url);
+    }
 
   const onSubmit = async (data) => {
    const categoryInfo = {
@@ -101,7 +104,7 @@ const ManageCategories = () => {
     if(result.isConfirmed){
       try{
         const res = await axiosApi.delete(`/categories/${id}`);
-        console.log(res.data)
+        // console.log(res.data)
         if(res.data?.deletedCount > 0){
           toast.success("Category deleted successfully!");
           refetch();

@@ -58,9 +58,9 @@ const ManageMedicine = () => {
       discount: parseFloat(form.discount.value || 0),
       added_at: new Date().toISOString(),
     };
-    console.log(medicineInfo);
+    // console.log(medicineInfo);
     const res = await axiosApi.post("/medicines", medicineInfo);
-    console.log(res.data);
+    // console.log(res.data);
     if (res.data.insertedId) {
       toast.success("New medicine added successfully!");
 
@@ -94,7 +94,7 @@ const ManageMedicine = () => {
     queryKey: ["categories"],
     queryFn: async () => {
       const res = await axiosApi.get("/categories");
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     },
   });

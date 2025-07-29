@@ -67,11 +67,11 @@ const PaymentCheckoutForm = ({ totalPrice, user, cartItems }) => {
             transactionId: result.paymentIntent.id,
             paymentMethod: result.paymentIntent.payment_method_types
         }
-        console.log(paymentData)
+        // console.log(paymentData)
 
 
         const paymentRes = await axiosApi.post("/payment", paymentData)
-        console.log(paymentRes)
+        // console.log(paymentRes)
         if(paymentRes.data.insertedId){
             await Swal.fire({
             icon: 'success',

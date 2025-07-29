@@ -81,7 +81,7 @@ const SalesReport = () => {
   };
 
   
-  console.log(sales);
+  // console.log(sales);
 
   return (
     <ReTitleProvider defaultTitle="Sales Report">

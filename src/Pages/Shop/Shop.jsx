@@ -39,7 +39,7 @@ const Shop = () => {
       return res.data;
     },
   });
-  // console.log(allMedicines);
+  // console.log(data.result)
 
   const handleAddToCart = async (medicine) => {
     if (!user?.email) {
@@ -58,12 +58,13 @@ const Shop = () => {
       quantity: 1,
       payment_status: "Pending",
       email: user.email,
-      //  sellerEmail: medicine.sellerEmail,
+      sellerEmail: medicine.sellerEmail,
     };
+    // console.log(cartItem)
 
     try {
       const res = await axiosApi.post("/myCart", cartItem);
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.insertedId) {
         Swal.fire("Added!", "Medicine added to cart", "success");
       }
@@ -204,8 +205,6 @@ const Shop = () => {
                   <th>#</th>
                   <th>Seller Email</th>
                   <th>Medicine Name</th>
-                  <th>Company</th>
-                  <th>Added On</th>
                   <th>Price</th>
                   <th>Actions</th>
                 </tr>
@@ -216,8 +215,8 @@ const Shop = () => {
                     <td>{currentPage * itemsPerPage + index + 1}</td>
                     <td>{medicine.sellerEmail}</td>
                     <td>{medicine.name}</td>
-                    <td>{medicine.company}</td>
-                    <td>{formateDate(medicine.added_at)}</td>
+                    {/* <td>{medicine.company}</td> */}
+                    {/* <td>{formateDate(medicine.added_at)}</td> */}
                     <td>৳{medicine.price}</td>
                     <td className="flex gap-3 justify-center items-center">
                       <button
@@ -281,13 +280,19 @@ const Shop = () => {
                 alt={selectedMedicine.name}
                 className="w-52 mx-auto my-4 rounded"
               />
-              <p>
+              <p className="text-2xl">
                 <strong>Company:</strong> {selectedMedicine.company}
               </p>
-              <p>
+              <p className="text-2xl">
                 <strong>Price:</strong> ৳{selectedMedicine.price}
               </p>
-              <p className="mt-2">{selectedMedicine.description}</p>
+              <p className="text-2xl">
+                <strong>Added At:</strong> {formateDate(selectedMedicine.added_at)}
+              </p>
+              <p className="text-2xl">
+                <strong>Company:</strong> {selectedMedicine.company}
+              </p>
+              <p className="mt-2 text-2xl">{selectedMedicine.description}</p>
 
               <div className="modal-action">
                 <form method="dialog">

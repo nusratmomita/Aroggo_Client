@@ -5,6 +5,7 @@ import { AuthContext } from "../../Authentication/AuthContext";
 import { toast } from "react-toastify";
 import UseCommonAxiosSecureAPI from "../../CustomHooks/UseCommonAxiosSecureAPI";
 
+
 const Register = () => {
   const {
     register,
@@ -20,7 +21,7 @@ const Register = () => {
 
   const [profileImage , setProfileImage] = useState('');
 
-  console.log(user)
+  // console.log(user)
 
     if(user){
         user.getIdToken().then((token)=>{
@@ -70,7 +71,7 @@ const Register = () => {
       handleGoogleAuth()
       .then(async (result)=>{
         const user = result.user;
-        console.log(user);
+        // console.log(user);
 
         const userInfo = {
           email : user.email,

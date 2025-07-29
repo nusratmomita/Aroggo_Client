@@ -25,8 +25,8 @@ const ManagePayment = () => {
       return res.data;
     },
   });
-  console.log(paymentStatuses)
-  console.log(acceptanceStatuses)
+  // console.log(paymentStatuses)
+  // console.log(acceptanceStatuses)
 
   // Mutation to accept payment
   const handleAcceptPayment = useMutation({

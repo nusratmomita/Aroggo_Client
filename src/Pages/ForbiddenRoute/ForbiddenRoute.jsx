@@ -13,6 +13,9 @@ const ForbiddenRoute = () => {
       className="mt-5 min-h-screen flex items-center justify-center  px-4"
     >
       <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md w-full text-center">
+        <p className="text-gray-600 mb-6 text-2xl">
+          Kindly create an account to continue
+        </p>
         <img
           src="https://media.giphy.com/media/jQqU9dG4zEMjyz0Gyy/giphy.gif"
           alt="Access Denied"
@@ -23,6 +26,7 @@ const ForbiddenRoute = () => {
         <p className="text-gray-600 mb-6 text-2xl">
           Sorry, you don’t have permission to access this page.
         </p>
+        
 
         <Link
           to="/"

@@ -11,7 +11,7 @@ import UseRoleQuery from '../CustomHooks/UseRoleQuery';
 const DashboardRoot = () => {
 
     const {role , roleLoading} = UseRoleQuery();
-    console.log(role , roleLoading)
+    // console.log(role , roleLoading)
 
     return (
         <div className="drawer lg:drawer-open">
@@ -62,10 +62,10 @@ const DashboardRoot = () => {
                         !roleLoading && role === "seller" && 
                         <div>
                             <li className='navLink'>
-                            <NavLink to="/dashboard/sellerHome">
+                            {/* <NavLink to="/dashboard/sellerHome">
                                 <FaHome className="inline-block mr-2" />
-                                Seller's Home
-                            </NavLink>
+                                Seller Home
+                            </NavLink> */}
                             </li>
                             <li className='navLink'>
                             <NavLink to="/dashboard/manageMedicine">
@@ -76,7 +76,7 @@ const DashboardRoot = () => {
                             <li className='navLink'>
                             <NavLink to="/dashboard/paymentHistory">
                                 <FaCreditCard className="inline-block mr-2" />
-                                Payment History(seller)
+                                Payment History
                             </NavLink>
                             </li>
                             <li className='navLink'>
@@ -95,7 +95,7 @@ const DashboardRoot = () => {
                             <li className='navLink mt-4'>
                             <NavLink to="/dashboard/paymentHistoryUser">
                                 <FaCreditCard className="inline-block mr-2" />
-                                Payment History(user)
+                                Payment History
                             </NavLink>
                             </li>
                             
