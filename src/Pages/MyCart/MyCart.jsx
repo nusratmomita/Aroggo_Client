@@ -104,7 +104,7 @@ const CartPage = () => {
 
 
   // to formate date
-  const formatDate = (isoString) => {
+  const formateDate = (isoString) => {
     const date = new Date(isoString);
 
     const options = {
@@ -161,7 +161,7 @@ const CartPage = () => {
                         <td>{index + 1}</td>
                         <td>{item.name}</td>
                         <td>{item.company}</td>
-                        <td>{formatDate(item.added_at)}</td>
+                        <td>{formateDate(item.added_at)}</td>
                         <td>{item.price}</td>
                         <td>
                           <div className="flex items-center justify-center gap-2">

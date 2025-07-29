@@ -55,7 +55,7 @@ const ManageUsers = () => {
   // console.log(allUsers)
   
   // Format date
-  const formatDate = (isoString) => {
+  const formateDate = (isoString) => {
     const date = new Date(isoString);
     return date.toLocaleString("en-US", {
       timeZone: "UTC",
@@ -94,7 +94,7 @@ const ManageUsers = () => {
                 <tr className="text-2xl text-[#080c3b]" key={user._id}>
                   <td>{i + 1}</td>
                   <td>{user.email}</td>
-                  <td>{formatDate(user.created_at)}</td>
+                  <td>{formateDate(user.created_at)}</td>
                   <td className="font-bold capitalize">{user.role}</td>
                   <td className="flex flex-wrap gap-2 justify-center">
                     {/* Admin control */}

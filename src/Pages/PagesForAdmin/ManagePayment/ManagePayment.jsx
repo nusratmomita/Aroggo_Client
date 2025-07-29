@@ -44,7 +44,7 @@ const ManagePayment = () => {
   });
 
   // Format ISO date
-  const formatDate = (isoString) => {
+  const formateDate = (isoString) => {
     const date = new Date(isoString);
     return date.toLocaleString("en-US", {
       timeZone: "UTC",
@@ -93,7 +93,7 @@ const ManagePayment = () => {
                     <td className={status.payment_status === "Paid" ? "text-[#080c3b] font-extrabold" : "text-[#555879] font-extrabold"}>
                       {status.payment_status}
                     </td>
-                    <td>{status.added_at ? formatDate(status.added_at) : "Not Paid Yet"}</td>
+                    <td>{status.added_at ? formateDate(status.added_at) : "Not Paid Yet"}</td>
                     {/* <td className="font-bold">{acceptanceStatus}</td> */}
                     <td>
                       {acceptanceStatus === "Accepted" & status.payment_status === "Paid" ? (

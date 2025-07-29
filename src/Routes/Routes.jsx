@@ -23,6 +23,9 @@ import AdminPrivateRoute from "../Pages/PrivateRoute/AdminPrivateRoute";
 import SellerPrivateRoute from "../Pages/PrivateRoute/SellerPrivateRoute";
 import ForbiddenRoute from "../Pages/ForbiddenRoute/ForbiddenRoute";
 import CategoryDetails from "../Pages/CategoryDetails/CategoryDetails";
+import UserPrivateRoute from "../Pages/PrivateRoute/UserPrivateRoute";
+import PaymentHistoryUser from "../Pages/PagesForUser/PaymentHistoryUser/PaymentHistoryUser";
+
 
 
 
@@ -116,6 +119,10 @@ export const routers = createBrowserRouter([
             {
                 path: "/dashboard/sellerHome",
                 element: <SellerPrivateRoute> <SellerHome></SellerHome> </SellerPrivateRoute>
+            },
+            {
+                path: "/dashboard/paymentHistoryUser",
+                element: <UserPrivateRoute> <PaymentHistoryUser></PaymentHistoryUser> </UserPrivateRoute>
             }
         ]
     }

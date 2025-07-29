@@ -81,7 +81,7 @@ const Shop = () => {
   };
 
   // to formate date
-  const formatDate = (isoString) => {
+  const formateDate = (isoString) => {
     const date = new Date(isoString);
     const options = {
       timeZone: "UTC",
@@ -217,7 +217,7 @@ const Shop = () => {
                     <td>{medicine.sellerEmail}</td>
                     <td>{medicine.name}</td>
                     <td>{medicine.company}</td>
-                    <td>{formatDate(medicine.added_at)}</td>
+                    <td>{formateDate(medicine.added_at)}</td>
                     <td>৳{medicine.price}</td>
                     <td className="flex gap-3 justify-center items-center">
                       <button

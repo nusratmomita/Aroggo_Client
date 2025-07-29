@@ -36,7 +36,7 @@ const SalesReport = () => {
     refetch();
   };
 
-  const formatDate = (isoString) => {
+  const formateDate = (isoString) => {
     const date = new Date(isoString);
 
     const options = {
@@ -150,7 +150,7 @@ const SalesReport = () => {
                     className="hover text-2xl text-center text-[#080c3b]"
                   >
                     <th>{index + 1}</th>
-                    <td className="whitespace-nowrap">{formatDate(sale.date)}</td>
+                    <td className="whitespace-nowrap">{formateDate(sale.date)}</td>
                     <td>{sale.buyerEmail}</td>
                     <td>{sale.sellerEmails}</td>
                     <td>{sale.medicineNames}</td>

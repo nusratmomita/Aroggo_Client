@@ -18,7 +18,7 @@ const AskForAd = () => {
   
 
   // to format the date
-  const formatDate = (isoString) => {
+  const formateDate = (isoString) => {
     const date = new Date(isoString);
 
     const options = {
@@ -133,7 +133,7 @@ const AskForAd = () => {
                     <td>{med.name}</td>
                     <td>{med.generic}</td>
                     <td>৳{med.price.toFixed(2)}</td>
-                    <td>{formatDate(med.added_at)}</td>
+                    <td>{formateDate(med.added_at)}</td>
                     <td>
                       <span
                         className={`p-2 whitespace-nowrap rounded-2xl text-white ${

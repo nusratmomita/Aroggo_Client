@@ -119,7 +119,7 @@ const ManageCategories = () => {
 
 
   // to formate date
-  const formatDate = (isoString) => {
+  const formateDate = (isoString) => {
     const date = new Date(isoString);
 
     const options = {
@@ -170,7 +170,7 @@ const ManageCategories = () => {
                   <td>
                     <img src={cat.categoryImage} alt={cat.category_name} className="w-12 h-12 rounded" />
                   </td>
-                  <td>{formatDate(cat.added_at)}</td>
+                  <td>{formateDate(cat.added_at)}</td>
                   <td className="flex justify-center items-center mt-5 px-4 py-2 text-center space-x-2">
                       <button
                           className="cursor-pointer text-[#DED3C4] bg-[#555879] flex justify-center items-center gap-2 rounded-2xl p-2 transition"

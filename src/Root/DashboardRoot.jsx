@@ -86,6 +86,20 @@ const DashboardRoot = () => {
                         </div>
                     }
 
+                    {/* sidebar for seller */}
+                    {
+                        !roleLoading && role === "user" && 
+                        <div>
+                            <li className='navLink'>
+                            <NavLink to="/dashboard/paymentHistoryUser">
+                                <FaCreditCard className="inline-block mr-2" />
+                                Payment History(user)
+                            </NavLink>
+                            </li>
+                            
+                        </div>
+                    }
+
                     {/* sidebar for Admin */}
                     {
                         !roleLoading && role === "admin" && 

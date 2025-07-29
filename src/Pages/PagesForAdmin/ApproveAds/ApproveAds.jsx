@@ -36,7 +36,7 @@ const ApproveAds = () => {
   };
 
    // Format ISO date
-  const formatDate = (isoString) => {
+  const formateDate = (isoString) => {
     const date = new Date(isoString);
     return date.toLocaleString("en-US", {
       timeZone: "UTC",
@@ -73,7 +73,7 @@ const ApproveAds = () => {
             <div className="p-4 space-y-2">
               <h3 className="text-2xl font-semibold text-[#080c3b]">Medicine Name: {ad.itemName}</h3>
               <p className="text-2xl text-[#555879]">Discounted Price: ৳{(ad.previousPrice*(ad.discount/100)).toFixed(2)}</p>
-              <h3 className="text-sm font-semibold text-[#080c3b]">Requested At: {formatDate(ad.requestedAt)}</h3>
+              <h3 className="text-sm font-semibold text-[#080c3b]">Requested At: {formateDate(ad.requestedAt)}</h3>
               <p className="text-sm font-medium text-gray-500">
                 Status:{" "}
                 <span
