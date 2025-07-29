@@ -25,6 +25,7 @@ import ForbiddenRoute from "../Pages/ForbiddenRoute/ForbiddenRoute";
 import CategoryDetails from "../Pages/CategoryDetails/CategoryDetails";
 import UserPrivateRoute from "../Pages/PrivateRoute/UserPrivateRoute";
 import PaymentHistoryUser from "../Pages/PagesForUser/PaymentHistoryUser/PaymentHistoryUser";
+import DashboardDefault from "../Root/DashboardDefault";
 
 
 
@@ -77,8 +78,12 @@ export const routers = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <PrivateRoute> <DashboardRoot></DashboardRoot> </PrivateRoute>,
+        element: <DashboardRoot></DashboardRoot>,
         children: [
+            {
+                index: true, // this matches "/dashboard"
+                element: <DashboardDefault/>
+            },
             {
                 path: "/dashboard/manageMedicine",
                 element: <SellerPrivateRoute> <ManageMedicine></ManageMedicine> </SellerPrivateRoute>
