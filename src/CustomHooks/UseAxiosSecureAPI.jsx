@@ -32,7 +32,7 @@ const UseAxiosSecureAPI = () => {
         const errorStatus = error.status;
 
         if (errorStatus === 403) {
-            navigate("/forbiddenRoute");
+            navigate("/");
         } 
         else if (errorStatus === 401) {
             handleLogout()

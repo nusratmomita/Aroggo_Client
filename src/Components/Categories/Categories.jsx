@@ -31,7 +31,7 @@ const Categories = () => {
               >
                 <figure  className="h-48 bg-[#F4EBD3]">
                   <img
-                    src={cat.categoryImage || "https://i.ibb.co/WpYzJMz/healthcare.jpg"}
+                    src={cat.categoryImage || ""}
                     alt={cat.categoryName}
                     className="w-full h-full object-cover"
                   />

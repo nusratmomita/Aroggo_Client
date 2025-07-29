@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Slider from '../../Components/Slider/Slider';
 import Categories from '../../Components/Categories/Categories';
 import DiscountOffers from '../../Components/DiscountOffers/DiscountOffers';
@@ -8,71 +8,40 @@ import { ReTitleProvider } from 're-title';
 import UseRoleQuery from '../../CustomHooks/UseRoleQuery';
 import SellerHome from '../SellerPages/SellerHome/SellerHome';
 import AdminHome from '../PagesForAdmin/AdminHome/AdminHome';
-import { AuthContext } from '../../Authentication/AuthContext';
 
 const Home = () => {
-  const { role, roleLoading } = UseRoleQuery();
+    const { role, roleLoading } = UseRoleQuery();
 
-//   const {user} = useContext(AuthContext);
-//   console.log(user)
+    const commonComponents = (
+        <>
+            <Slider />
+            <Categories />
+            <DiscountOffers />
+            <SuccessInNumber />
+            <CustomerReview />
+        </>
+    );
 
-    if (roleLoading) 
-        return null;
-
-    if (role === 'admin') {
-        return (
-            <ReTitleProvider defaultTitle="Home">
-                <AdminHome />
-                <Slider />
-                <Categories />
-                <DiscountOffers />
-                <SuccessInNumber />
-                <CustomerReview />
-            </ReTitleProvider>
-        );
-    }
-
-    if (role === 'seller') {
-        return (
-            <ReTitleProvider defaultTitle="Home">
-                <SellerHome />
-                <Slider />
-                <Categories />
-                <DiscountOffers />
-                <SuccessInNumber />
-                <CustomerReview />
-            </ReTitleProvider>
-        );
-    }
-
-    // if (role === 'user') {
-    //     return (
-    //         <ReTitleProvider defaultTitle="Home">
-    //             {/* <SellerHome /> */}
-    //             <Slider />
-    //             <Categories />
-    //             <DiscountOffers />
-    //             <SuccessInNumber />
-    //             <CustomerReview />
-    //         </ReTitleProvider>
-    //     );
-    // }
-
-    // default for new or unauthenticated users
     return (
         <ReTitleProvider defaultTitle="Home">
-            {
-                role === 'user' || role === 'undefined' && 
-                <div>
-                    <Slider />
-                    <Categories />
-                    <DiscountOffers />
-                    <SuccessInNumber />
-                    <CustomerReview />
-                </div>
-            }
-            </ReTitleProvider>
-            
+            {roleLoading && commonComponents}
+
+            {!roleLoading && role === 'admin' && (
+                <>
+                    <AdminHome />
+                    {commonComponents}
+                </>
+            )}
+
+            {!roleLoading && role === 'seller' && (
+                <>
+                    <SellerHome />
+                    {commonComponents}
+                </>
+            )}
+
+            {!roleLoading && role === 'user' && commonComponents}
+        </ReTitleProvider>
     );
 };
 

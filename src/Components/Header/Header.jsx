@@ -82,7 +82,7 @@ const Header = () => {
                                 className="flex items-center gap-3 cursor-pointer"
                                 onClick={() => setShowDropdown(!showDropdown)}
                             >
-                                <h1 className='text-2xl'>{user?.email}</h1>
+                                {/* <h1 className='text-2xl'>{user?.email}</h1> */}
                                 <img
                                 className="w-15 h-15 bg-white p-1 rounded-full"
                                 src={user?.photoURL}

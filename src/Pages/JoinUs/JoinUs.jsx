@@ -79,12 +79,12 @@ const Register = () => {
           created_at : new Date().toISOString(),
         }
         const res = await axiosApi.post("/users" , userInfo);
-        // console.log(res.data);
+        console.log(res.data);
 
-        if(!res.data.inserted){
-          toast.error("This user already exits");
-          return;
-        }
+        // if(!res.data.inserted){
+        //   toast.error("This user already exits");
+        //   return;
+        // }
         toast.success("You've successfully created an account!");
         setTimeout(()=>{
           navigate('/');
