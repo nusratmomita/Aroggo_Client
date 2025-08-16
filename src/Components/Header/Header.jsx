@@ -35,7 +35,7 @@ const Header = () => {
 
 
     return (
-        <div className="navbar bg-gradient-to-l from-[#555879] to-[#98A1BC] shadow-sm">
+        <div className="navbar bg-gradient-to-l from-[#555879] to-[#98A1BC] shadow-sm fixed top-0 z-50">
             <div className="navbar-start p-5">
                 <div className="dropdown">
                 <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden w-15 h-15 hover:bg-gray-100 hover:rounded-4xl mr-2">
@@ -65,9 +65,9 @@ const Header = () => {
             </div>
            <div className="mr-5 navbar-end">
                 <div className='flex gap-2 lg:gap-4 justify-center items-center text-[#080c3b] font-bold'>
-                    <button className="ml-6 lg:ml-3 p-3 flex gap-2 bg-[#98A1BC] rounded-2xl justify-center items-center cursor-pointer hover:rounded-4xl hover:bg-[#c2cce8] text-2xl" popoverTarget="popover-1" style={{ anchorName: "--anchor-1" } /* as React.CSSProperties */}>
+                    {/* <button className="ml-6 lg:ml-3 p-3 flex gap-2 bg-[#98A1BC] rounded-2xl justify-center items-center cursor-pointer hover:rounded-4xl hover:bg-[#c2cce8] text-2xl" popoverTarget="popover-1" style={{ anchorName: "--anchor-1" } }>
                         Select Languages
-                    </button>
+                    </button> */}
 
                     <ul className="dropdown menu w-52 rounded-box bg-base-100 shadow-sm"
                         popover="auto" id="popover-1" style={{ positionAnchor: "--anchor-1" } /* as React.CSSProperties */ }>

@@ -68,22 +68,22 @@ const DashboardRoot = () => {
                             </NavLink> */}
                             </li>
                             <li className='navLink'>
-                            <NavLink to="/dashboard/manageMedicine">
-                                <FaCapsules className="inline-block mr-2" />
-                                Manage Medicines
-                            </NavLink>
+                                <NavLink to="/dashboard/manageMedicine">
+                                    <FaCapsules className="inline-block mr-2" />
+                                    Manage Medicines
+                                </NavLink>
                             </li>
                             <li className='navLink'>
-                            <NavLink to="/dashboard/paymentHistory">
-                                <FaCreditCard className="inline-block mr-2" />
-                                Payment History
-                            </NavLink>
+                                <NavLink to="/dashboard/paymentHistory">
+                                    <FaCreditCard className="inline-block mr-2" />
+                                    Payment History
+                                </NavLink>
                             </li>
                             <li className='navLink'>
-                            <NavLink to="/dashboard/askForAd">
-                                <FaBullhorn className="inline-block mr-2" />
-                                Ask For Advertisement
-                            </NavLink>
+                                <NavLink to="/dashboard/askForAd">
+                                    <FaBullhorn className="inline-block mr-2" />
+                                    Ask For Advertisement
+                                </NavLink>
                             </li>
                         </div>
                     }

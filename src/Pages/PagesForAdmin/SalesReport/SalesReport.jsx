@@ -31,6 +31,8 @@ const SalesReport = () => {
     },
   });
 
+  console.log(sales)
+
   const handleFilter = (e) => {
     e.preventDefault();
     refetch();
