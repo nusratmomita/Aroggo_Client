@@ -28,6 +28,8 @@ const ManageCategories = () => {
     },
   });
 
+  console.log(categories)
+
   // to a new add category
   const addCategory = useMutation({
     mutationFn: async (newCategory) => {

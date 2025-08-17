@@ -6,7 +6,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router";
 
 const Slider = () => {
-  const axiosApi= UseAxiosSecureAPI();
+  const axiosApi = UseAxiosSecureAPI();
 
   const { data: sliderAds = [], isLoading } = useQuery({
     queryKey: ["sliderAds"],
@@ -15,61 +15,63 @@ const Slider = () => {
       return res.data;
     },
   });
-  // console.log(sliderAds)
-  // console.log("Slider ad image URLs:", sliderAds.map(ad => ad.image));
 
-  if (isLoading) return <div className="text-2xl text-center font-bold">Loading slider ads...</div>;
+  if (isLoading)
+    return <div className="text-2xl text-center font-bold">Loading slider ads...</div>;
 
   return (
-    <div className="w-full mx-auto mt-40  my-10 px-4">
+    <div className="w-full max-w-7xl mx-auto mt-32 mb-10 px-4">
       <Swiper
-       modules={[Pagination, Autoplay]}
+        modules={[Pagination, Autoplay]}
         pagination={{ clickable: true }}
-        autoplay={{ delay: 3000 }}
+        autoplay={{ delay: 4000 }}
         spaceBetween={30}
         slidesPerView={1}
         loop={true}
       >
         {sliderAds.map((ad) => (
           <SwiperSlide key={ad._id}>
-            <div className="relative w-full h-[520px] bg-opacity-80  rounded-xl overflow-hidden shadow-lg bg-white animate-fade-in">
-              {/* Medicine image */}
-              <img
-                src={ad.image}
-                alt={ad.itemName}
-                className="w-full h-full object-cover opacity-80"
-              />
-
-              {/* Overlay content */}
-              <div className="absolute inset-0 bg-opacity-80 flex flex-col justify-center items-center text-center px-6">
-                {/* Discount badge */}
+            <div className="mt-20 w-full flex flex-col lg:flex-row items-center justify-between gap-8 bg-gradient-to-br from-[#f0f4ff] to-[#e6ecfa] border border-blue-200 rounded-2xl shadow-2xl p-6 lg:p-10 h-full transition-all duration-300">
+              {/* Text Content */}
+              <div className="flex-1 text-left space-y-4">
                 {ad.discount && (
-                  <div className="absolute top-5 right-5 bg-blue-200 text-[#080c3b] px-4 py-1 rounded-full text-sm font-semibold shadow-md">
+                  <span className="inline-block bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-sm font-semibold shadow-sm border border-blue-300">
                     {ad.discount}% OFF
-                  </div>
+                  </span>
                 )}
 
-                {/* Item name & message */}
-                <h3 className="text-[#080c3b] text-4xl font-bold mb-2 drop-shadow-lg">
-                  {ad.itemName}
-                </h3>
-                <div className="flex gap-3">
-                    <h3 className="line-through text-[#080c3b] text-2xl font-bold mb-2 drop-shadow-lg">৳{ad.previousPrice}</h3>
-                    <h3 className="text-[#080c3b] text-2xl font-bold mb-2 drop-shadow-lg">৳{Math.floor((ad.previousPrice*(ad.discount)/100))}</h3>
-                </div>
-                <p className="text-[#080c3b] text-xl max-w-xl mb-4 drop-shadow-sm">
-                  {ad.message}
-                </p>
+                <h2 className="text-4xl font-bold text-[#0f172a]">{ad.itemName}</h2>
 
-                {/* Shop now button */}
+                <div className="flex gap-4 items-center">
+                  <span className="line-through text-xl text-gray-500">৳{ad.previousPrice}</span>
+                  <span className="text-2xl font-bold text-green-700">
+                    ৳{Math.floor(ad.previousPrice - (ad.previousPrice * ad.discount) / 100)}
+                  </span>
+                </div>
+
+                <p className="text-[#334155] max-w-lg leading-relaxed">{ad.message==="N/A" ? "" : ad.message}</p>
+
                 <Link to="/shop">
-                    <button className="flex gap-2 items-center mt-2 bg-[#98A1BC] cursor-pointer text-2xl font-bold text-[#080c3b] py-2 px-4 rounded transition">
-                        <FaShoppingCart />
-                        Shop Now
-                    </button>
+                  <button className="flex gap-2 items-center mt-4 cursor-pointer bg-[#475569] hover:bg-[#334155] transition-colors text-white py-2 px-6 rounded-full font-semibold text-lg shadow-md">
+                    <FaShoppingCart />
+                    Shop Now
+                  </button>
                 </Link>
               </div>
+
+              {/* Image */}
+              <div className="flex-1 w-full h-full">
+                <div className="w-full aspect-video rounded-xl overflow-hidden border border-gray-300">
+                  <img
+                    src={ad.image}
+                    alt={ad.itemName}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
             </div>
+
           </SwiperSlide>
         ))}
       </Swiper>
