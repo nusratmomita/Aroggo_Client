@@ -21,7 +21,7 @@ const Slider = () => {
   if (isLoading) return <div className="text-2xl text-center font-bold">Loading slider ads...</div>;
 
   return (
-    <div className="w-full mx-auto my-10 px-4">
+    <div className="w-full mx-auto mt-40  my-10 px-4">
       <Swiper
        modules={[Pagination, Autoplay]}
         pagination={{ clickable: true }}

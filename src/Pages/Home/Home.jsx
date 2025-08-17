@@ -28,14 +28,14 @@ const Home = () => {
 
             {!roleLoading && role === 'admin' && (
                 <>
-                    <AdminHome />
+                    {/* <AdminHome /> */}
                     {commonComponents}
                 </>
             )}
 
             {!roleLoading && role === 'seller' && (
                 <>
-                    <SellerHome />
+                    {/* <SellerHome /> */}
                     {commonComponents}
                 </>
             )}

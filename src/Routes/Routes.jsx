@@ -38,6 +38,7 @@ export const routers = createBrowserRouter([
         children: [
             {
                 index: true,
+                path: "/",
                 Component: Home
             },
             {
