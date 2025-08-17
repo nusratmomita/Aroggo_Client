@@ -8,6 +8,7 @@ import { ReTitleProvider } from 're-title';
 import UseRoleQuery from '../../CustomHooks/UseRoleQuery';
 import SellerHome from '../SellerPages/SellerHome/SellerHome';
 import AdminHome from '../PagesForAdmin/AdminHome/AdminHome';
+import SharedCompanies from '../../Components/SharedCompanies/SharedCompanies';
 
 const Home = () => {
     const { role, roleLoading } = UseRoleQuery();
@@ -17,6 +18,7 @@ const Home = () => {
             <Slider />
             <Categories />
             <DiscountOffers />
+            <SharedCompanies></SharedCompanies>
             <SuccessInNumber />
             <CustomerReview />
         </>

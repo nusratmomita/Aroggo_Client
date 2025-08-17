@@ -20,7 +20,7 @@ const Slider = () => {
     return <div className="text-2xl text-center font-bold">Loading slider ads...</div>;
 
   return (
-    <div className="w-full max-w-7xl mx-auto mt-32 mb-10 px-4">
+    <div className="w-full max-w-8xl mx-auto mt-10 mb-5 py-10 px-5 md:px-10 ">
       <Swiper
         modules={[Pagination, Autoplay]}
         pagination={{ clickable: true }}
@@ -35,7 +35,7 @@ const Slider = () => {
               {/* Text Content */}
               <div className="flex-1 text-left space-y-4">
                 {ad.discount && (
-                  <span className="inline-block bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-sm font-semibold shadow-sm border border-blue-300">
+                  <span className="inline-block bg-blue-100 text-[#080c3b] px-4 py-1 rounded-full text-xl font-semibold shadow-sm border border-blue-300">
                     {ad.discount}% OFF
                   </span>
                 )}
@@ -44,7 +44,7 @@ const Slider = () => {
 
                 <div className="flex gap-4 items-center">
                   <span className="line-through text-xl text-gray-500">৳{ad.previousPrice}</span>
-                  <span className="text-2xl font-bold text-green-700">
+                  <span className="text-2xl font-bold text-[#080c3b]">
                     ৳{Math.floor(ad.previousPrice - (ad.previousPrice * ad.discount) / 100)}
                   </span>
                 </div>

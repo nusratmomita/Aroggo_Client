@@ -20,7 +20,7 @@ const Categories = () => {
   if (error) return <p className="text-center text-red-500">Failed to load categories.</p>;
 
   return (
-      <div className="p-6 mt-10">
+      <div className="py-10 px-5 md:px-20 ">
         <h1 className="text-5xl font-bold text-[#080c3b] mb-10 text-center">Top Medicine Categories</h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {categories.map((cat, index) => (
@@ -37,11 +37,13 @@ const Categories = () => {
                 </figure>
                 <div className="card-body items-center text-center text-[#080c3b]">
                   <h2 className="card-title text-2xl capitalize">{cat.categoryName}</h2>
-                  <p className="text-lg">{cat.count} Medicines Available</p>
+                  <p className="text-xl">{cat.count} Medicines Available</p>
                 </div>
 
                 <Link to={`/category/${cat.categoryName}`}>
-                  <button className="w-full my-20 text-center flex gap-2 items-center mt-4 bg-[#98A1BC] hover:bg-[#7f88a1] transition-colors text-white py-2 px-6 rounded-full font-semibold text-lg">View More Medicines</button>
+                  <div className="px-2">
+                    <button className="mt-4 px-4 w-full my-5 bg-[#98A1BC] cursor-pointer text-2xl font-bold text-[#080c3b] py-2 rounded transition whitespace-nowrap" >View More</button>
+                  </div>                
                 </Link>
                 
               </div>
