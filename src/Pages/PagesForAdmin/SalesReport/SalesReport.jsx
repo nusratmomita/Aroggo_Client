@@ -91,7 +91,7 @@ const SalesReport = () => {
         <h2 className="text-4xl font-bold mb-6 text-[#080c3b]">Sales Report</h2>
 
         {/* Date Filter */}
-        <form
+        {/* <form
           onSubmit={handleFilter}
           className="flex flex-wrap gap-4 items-center mb-6"
         >
@@ -119,13 +119,13 @@ const SalesReport = () => {
           >
             Filter
           </button>
-        </form>
-        <button
+        </form> */}
+        {/* <button
           onClick={downloadAsPDF}
           className="btn btn-sm bg-[#080c3b] text-white mb-4"
         >
           Download as PDF
-        </button>
+        </button> */}
 
         {/* Table */}
         <div className="overflow-x-auto">

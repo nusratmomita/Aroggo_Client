@@ -13,7 +13,7 @@ const CategoryPromotion = () => {
   return (
     <div className="py-16 px-6 md:px-20  text-center">
       <h2 className="text-4xl md:text-6xl font-bold text-[#080c3b] mb-12">
-        Explore by Category
+        Explore by Popular Category
       </h2>
 
       <div className="grid grid-cols-2 md:grid-cols-5 gap-8 justify-items-center">

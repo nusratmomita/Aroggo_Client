@@ -129,7 +129,7 @@ const CartPage = () => {
           <p className="text-xl text-red-600">Failed to load cart.</p>
         ) : (
           <div className="p-8">
-            <h2 className="text-4xl font-bold text-[#080c3b] mb-6">Your Cart</h2>
+            <h2 className="text-4xl font-bold text-[#080c3b] mb-6 mt-50">Your Cart</h2>
             {cartItems.length === 0 ? (
               <div className=" flex flex-col gap-5 items-center justify-center text-center">
                 <p className="text-[#080c3b] text-4xl">No items in cart</p>
@@ -203,7 +203,7 @@ const CartPage = () => {
             )}
 
             {cartItems.length > 0 && (
-              <div className="mt-12 flex items-center justify-center gap-5">
+              <div className="mt-12 flex flex-col lg:flex-row items-center justify-center gap-5">
                 <div className="text-3xl font-bold text-[#080c3b]">
                     Your Total: <span className="italic">৳{calculateTotal()}</span>
                 </div>
@@ -216,7 +216,7 @@ const CartPage = () => {
                 {
                   cartItems.some(medicine => medicine.payment_status !== "Paid") ? (
                     <Link to="/payment">
-                      <button className="btn text-[#080c3b] text-3xl font-bold bg-[#98A1BC] btn-lg hover:opacity-90">
+                      <button className="whitespace-nowrap btn text-[#080c3b] text-3xl font-bold bg-[#98A1BC] btn-lg hover:opacity-90">
                         Proceed to Checkout
                       </button>
                     </Link>
