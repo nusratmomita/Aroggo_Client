@@ -86,13 +86,6 @@ const Header = () => {
                             {showDropdown && (
                                 <div className="absolute right-0 mt-2 w-48 bg-white shadow-md rounded-lg z-50">
                                 <Link
-                                    to="/update-profile"
-                                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                                    onClick={() => setShowDropdown(false)}
-                                >
-                                    Update Profile
-                                </Link>
-                                <Link
                                     to="/dashboard"
                                     className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                                     onClick={() => setShowDropdown(false)}

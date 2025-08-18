@@ -26,6 +26,9 @@ import CategoryDetails from "../Pages/CategoryDetails/CategoryDetails";
 import UserPrivateRoute from "../Pages/PrivateRoute/UserPrivateRoute";
 import PaymentHistoryUser from "../Pages/PagesForUser/PaymentHistoryUser/PaymentHistoryUser";
 import DashboardDefault from "../Root/DashboardDefault";
+import UserProfile from "../Pages/UserProfile/UserProfile";
+import SellerProfile from "../Pages/SellerPages/SellerProfile/SellerProfile";
+import ProfileView from "../Pages/PagesForAdmin/ProfileView/ProfileView";
 
 
 
@@ -122,12 +125,24 @@ export const routers = createBrowserRouter([
                 element: <AdminPrivateRoute> <AdminHome></AdminHome> </AdminPrivateRoute>
             },
             {
+                path: "/dashboard/adminProfile",
+                element: <AdminPrivateRoute> <ProfileView></ProfileView> </AdminPrivateRoute>
+            },
+            {
                 path: "/dashboard/sellerHome",
                 element: <SellerPrivateRoute> <SellerHome></SellerHome> </SellerPrivateRoute>
             },
             {
+                path: "/dashboard/sellerProfile",
+                element: <SellerPrivateRoute> <SellerProfile></SellerProfile> </SellerPrivateRoute>
+            },
+            {
                 path: "/dashboard/paymentHistoryUser",
                 element: <UserPrivateRoute> <PaymentHistoryUser></PaymentHistoryUser> </UserPrivateRoute>
+            },
+            {
+                path: "/dashboard/adminProfile",
+                element: <UserPrivateRoute> <UserProfile></UserProfile> </UserPrivateRoute>
             }
         ]
     }

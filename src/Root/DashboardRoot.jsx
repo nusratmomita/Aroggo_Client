@@ -1,7 +1,7 @@
 import React from 'react';
 import {  NavLink, Outlet } from 'react-router';
 import siteLogo from ".././assets/siteLogo.png";
-import { FaHome, FaCapsules, FaCreditCard, FaBullhorn, FaThList, FaChartLine } from 'react-icons/fa';
+import { FaHome, FaCapsules, FaCreditCard, FaBullhorn, FaThList, FaChartLine, FaUser } from 'react-icons/fa';
 import './DashboardRoot.css';
 import { FaPeopleGroup , FaCheckToSlot } from "react-icons/fa6";
 import UseRoleQuery from '../CustomHooks/UseRoleQuery';
@@ -61,12 +61,14 @@ const DashboardRoot = () => {
                     {
                         !roleLoading && role === "seller" && 
                         <div>
+                            {/* <li className='navLink'> */}
                             <li className='navLink'>
-                            {/* <NavLink to="/dashboard/sellerHome">
-                                <FaHome className="inline-block mr-2" />
-                                Seller Home
-                            </NavLink> */}
+                                <NavLink to="/dashboard/sellerProfile">
+                                    <FaUser className="inline-block" />
+                                    Profile
+                                </NavLink>
                             </li>
+                            {/* </li> */}
                             <li className='navLink'>
                                 <NavLink to="/dashboard/manageMedicine">
                                     <FaCapsules className="inline-block mr-2" />
@@ -85,6 +87,7 @@ const DashboardRoot = () => {
                                     Ask For Advertisement
                                 </NavLink>
                             </li>
+
                         </div>
                     }
 
@@ -93,10 +96,16 @@ const DashboardRoot = () => {
                         !roleLoading && role === "user" && 
                         <div>
                             <li className='navLink mt-4'>
-                            <NavLink to="/dashboard/paymentHistoryUser">
-                                <FaCreditCard className="inline-block mr-2" />
-                                Payment History
-                            </NavLink>
+                                <NavLink to="/dashboard/userProfile">
+                                    <FaUser className="inline-block mr-2" />
+                                    Profile
+                                </NavLink>
+                            </li>
+                            <li className='navLink mt-4'>
+                                <NavLink to="/dashboard/paymentHistoryUser">
+                                    <FaCreditCard className="inline-block mr-2" />
+                                    Payment History
+                                </NavLink>
                             </li>
                             
                         </div>
@@ -106,6 +115,12 @@ const DashboardRoot = () => {
                     {
                         !roleLoading && role === "admin" && 
                         <div>
+                            <li className='navLink'>
+                                <NavLink to="/dashboard/adminProfile">
+                                    <FaUser className="inline-block mr-2" />
+                                    Profile
+                                </NavLink>
+                            </li>
                             <li className='navLink'>
                                 <NavLink to="/dashboard/manageUsers">
                                     <FaPeopleGroup className="inline-block mr-2" />

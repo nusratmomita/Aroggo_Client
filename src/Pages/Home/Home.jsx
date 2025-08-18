@@ -10,6 +10,7 @@ import SellerHome from '../SellerPages/SellerHome/SellerHome';
 import AdminHome from '../PagesForAdmin/AdminHome/AdminHome';
 import SharedCompanies from '../../Components/SharedCompanies/SharedCompanies';
 import TopSellingProducts from '../../Components/TopSellingProducts/TopSellingProducts';
+import CategoryPromotion from '../../Components/CategoryPromotion/CategoryPromotion';
 
 const Home = () => {
     const { role, roleLoading } = UseRoleQuery();
@@ -21,6 +22,7 @@ const Home = () => {
             <DiscountOffers />
             <SharedCompanies></SharedCompanies>
             <TopSellingProducts></TopSellingProducts>
+            <CategoryPromotion></CategoryPromotion>
             <SuccessInNumber />
             <CustomerReview />
         </>
