@@ -9,6 +9,7 @@ import UseRoleQuery from '../../CustomHooks/UseRoleQuery';
 import SellerHome from '../SellerPages/SellerHome/SellerHome';
 import AdminHome from '../PagesForAdmin/AdminHome/AdminHome';
 import SharedCompanies from '../../Components/SharedCompanies/SharedCompanies';
+import TopSellingProducts from '../../Components/TopSellingProducts/TopSellingProducts';
 
 const Home = () => {
     const { role, roleLoading } = UseRoleQuery();
@@ -19,6 +20,7 @@ const Home = () => {
             <Categories />
             <DiscountOffers />
             <SharedCompanies></SharedCompanies>
+            <TopSellingProducts></TopSellingProducts>
             <SuccessInNumber />
             <CustomerReview />
         </>

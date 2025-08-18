@@ -37,7 +37,7 @@ const SharedCompanies = () => {
                     ))}
                 </Marquee>
               </div>
-            </div>
+        </div>
     );
 };
 
