@@ -141,7 +141,7 @@ export const routers = createBrowserRouter([
                 element: <UserPrivateRoute> <PaymentHistoryUser></PaymentHistoryUser> </UserPrivateRoute>
             },
             {
-                path: "/dashboard/adminProfile",
+                path: "/dashboard/userProfile",
                 element: <UserPrivateRoute> <UserProfile></UserProfile> </UserPrivateRoute>
             }
         ]

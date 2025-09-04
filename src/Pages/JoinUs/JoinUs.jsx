@@ -23,11 +23,11 @@ const Register = () => {
 
   // console.log(user)
 
-    if(user){
-        user.getIdToken().then((token)=>{
-            localStorage.setItem("AccessToken" , token)
-        })
-    }
+  if(user){
+      user.getIdToken().then((token)=>{
+          localStorage.setItem("AccessToken" , token)
+      })
+  }
 
 
   const handleRegisterForm = (data) => {
