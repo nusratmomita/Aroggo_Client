@@ -55,7 +55,7 @@ const Header = () => {
                 <Link to='/'>
                     <div className='flex justify-center items-center gap-2'>
                         <img className="hidden lg:block w-20 h-20" src={siteLogo} alt="logo" />
-                        <h1 className='text-4xl text-[#080c3b] font-extrabold -ml-4'>Arrogo</h1>
+                        <h1 className='text-2xl lg:text-4xl text-[#080c3b] font-extrabold -ml-4'>Arrogo</h1>
                     </div>
                 </Link>
             </div>
