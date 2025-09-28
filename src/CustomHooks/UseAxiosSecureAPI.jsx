@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { AuthContext } from "../Authentication/AuthContext";
 
 const axiosAPI = axios.create({
-    baseURL: `https://aroggo-server.vercel.app`
+    baseURL: `http://localhost:3000`
 });
 
 
@@ -14,13 +14,13 @@ const UseAxiosSecureAPI = () => {
     // console.log(user?.accessToken)
 
     axiosAPI.interceptors.request.use(
-    (config) => {
-        config.headers.Authorization = `Bearer ${user?.accessToken}`;
-        return config;
-    },
-    (error) => {
-        return Promise.reject(error);
-    }
+        (config) => {
+            config.headers.Authorization = `Bearer ${user?.accessToken}`;
+            return config;
+        },
+        (error) => {
+            return Promise.reject(error);
+        }
     );
 
     axiosAPI.interceptors.response.use(
