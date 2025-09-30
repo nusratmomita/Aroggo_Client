@@ -8,7 +8,9 @@ const Root = () => {
     return (
         <div>
             <Header></Header>
-            <Outlet></Outlet>
+            <main className='min-h-screen'>
+                <Outlet></Outlet>
+            </main>
             <Footer></Footer>
         </div>
     );

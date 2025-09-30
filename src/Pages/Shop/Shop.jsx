@@ -129,7 +129,7 @@ const Shop = () => {
 
   return (
     <ReTitleProvider defaultTitle="Shop">
-      <div className="p-5">
+      <div className="mt-20 p-5">
         <h2 className="mt-15 text-5xl font-bold mb-4 text-center text-[#080c3b]">
           Available Medicine(s): {allMedicines.length}
         </h2>
