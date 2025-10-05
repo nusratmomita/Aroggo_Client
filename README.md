@@ -3,7 +3,7 @@
 Arrogo is a role-based medicine e-commerce platform that helps users **find, buy, and pay** for medicines securely.  
 It provides separate dashboards for **Users, Sellers, and Admins**.
 
-🔗 **Live Link:** [Click here](http://localhost:5000//)
+🔗 **Live Link:** [Click here](https://aroggo-e998e.web.app/)
 
 ---
 
