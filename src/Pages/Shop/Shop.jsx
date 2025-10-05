@@ -134,8 +134,8 @@ const Shop = () => {
           Available Medicine(s): {allMedicines.length}
         </h2>
 
-        <div className="flex justify-between items-center mx-20">
-          <div className="mt-10 flex gap-4 items-center mb-6">
+        <div className="flex flex-col lg:flex-row  justify-between items-center mx-20">
+          <div className="mt-10 flex flex-col lg:flex-row gap-4 items-center mb-6">
             <label className="text-2xl text-[#080c3b] whitespace-nowrap">Sort by:</label>
             <select
               value={sortBy}
@@ -143,7 +143,7 @@ const Shop = () => {
                 setSortBy(e.target.value);
                 setCurrentPage(0); // reset pagination
               }}
-              className="select border text-xl"
+              className="select border text-xl w-[200%] lg:w-auto"
             >
               <option value="name">Name</option>
               <option value="price">Price</option>
@@ -157,14 +157,14 @@ const Shop = () => {
                 setSortOrder(e.target.value);
                 setCurrentPage(0);
               }}
-              className="select border text-xl"
+              className="select border text-xl w-[200%] lg:w-auto"
             >
               <option value="asc">Ascending</option>
               <option value="desc">Descending</option>
             </select>
           </div>
 
-          <div className="mt-10 flex gap-3 mb-4 items-center">
+          <div className="mt-10 flex flex-col lg:flex-row gap-3 mb-4 items-center">
             <label className="text-2xl text-[#080c3b] whitespace-nowrap">Search Medicine:</label>
             <input
               type="text"
@@ -174,7 +174,7 @@ const Shop = () => {
                 setSearchText(e.target.value);
                 setCurrentPage(0);
               }}
-              className="input text-2xl input-bordered w-full max-w-xs"
+              className="input text-2xl input-bordered w-full max-w-xl"
             />
 
             <button
@@ -218,16 +218,16 @@ const Shop = () => {
                     {/* <td>{medicine.company}</td> */}
                     {/* <td>{formateDate(medicine.added_at)}</td> */}
                     <td>৳{medicine.price}</td>
-                    <td className="flex gap-3 justify-center items-center">
+                    <td className="flex flex-col lg:flex-row gap-3 justify-center items-center">
                       <button
                         onClick={() => setSelectedMedicine(medicine)}
-                        className="btn btn-sm text-xl bg-[#98A1BC] hover:bg-[#7f89a4]"
+                        className="whitespace-nowrap btn btn-sm text-xl bg-[#98A1BC] hover:bg-[#7f89a4]"
                       >
                         <FaEye /> View
                       </button>
                       <button
                         onClick={() => handleAddToCart(medicine)}
-                        className="btn btn-sm text-xl bg-[#98A1BC] hover:bg-[#7f89a4]"
+                        className="whitespace-nowrap btn btn-sm text-xl bg-[#98A1BC] hover:bg-[#7f89a4]"
                       >
                         <BsFillCartCheckFill></BsFillCartCheckFill>Add to Cart
                       </button>
