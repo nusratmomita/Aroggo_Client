@@ -100,7 +100,7 @@ const Login = () => {
                                     Login with Google
                                 </button>
                                 <div className="m-5 border-b-2 border-dashed border-black"></div>
-                                <p className="whitespace-nowrap px-6 text-xl text-center dark:text-gray-600">
+                                <p className="lg:whitespace-nowrap px-6 text-xl text-center dark:text-gray-600">
                                 Don't have an account?
                                 <NavLink className="underline text-[#080c3b]"to="/register"> Register here</NavLink>
                                 </p>

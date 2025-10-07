@@ -112,12 +112,12 @@ const Register = () => {
 
 
   return (
-    <div className="hero min-h-screen">
-      <div className="hero-content w-full rounded-3xl mt-20 p-25  flex-col justify-evenly lg:flex-row">
-        <div className="p-2 rounded-2xl w-full max-w-lg shrink-0 shadow-2xl">
-          <div className="p-6 flex flex-col max-w-lg rounded-2xl sm:p-10 bg-gray-50 text-gray-800">
+    <div className="">
+      <div className=" rounded-3xl mt-20 lg:p-10 flex-col justify-evenly lg:flex-row">
+        <div className="p-6 flex flex-col rounded-2xl sm:p-10 bg-white text-gray-800">
+          <div className="p-6 flex flex-col rounded-2xl max-w-4xl mx-auto sm:p-5 bg-gray-100 text-gray-800">
             <div className="mb-8 text-center">
-              <h1 className="my-3 text-[#080c3b] text-4xl  font-bold underline">Join Us</h1>
+              <h1 className="my-3 text-[#080c3b] text-2xl lg:text-4xl font-bold">Join Us</h1>
               <p className="text-lg text-[#080c3b] dark:text-gray-600">
                 Create an Account to Continue
               </p>
@@ -129,7 +129,7 @@ const Register = () => {
             >
               <div className="space-y-4 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-1">
                 <div>
-                  <label htmlFor="name" className="block mb-2 text-3xl">
+                  <label htmlFor="name" className="block mb-2 text-xl lg:text-3xl">
                     Name
                   </label>
                   <input
@@ -140,14 +140,14 @@ const Register = () => {
                     name="name"
                     id="name"
                     placeholder="Enter Name"
-                    className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 text-3xl"
+                    className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 text-xl lg:text-3xl"
                   />
                   {errors.name?.type === "required" && (
                     <p className="text-red-700">Password is required</p>
                   )}
                 </div>
                 <div>
-                  <label htmlFor="email" className="block mb-2 text-3xl">
+                  <label htmlFor="email" className="block mb-2 text-xl lg:text-3xl">
                     Enter Email
                   </label>
                   <input
@@ -158,14 +158,14 @@ const Register = () => {
                     name="email"
                     id="email"
                     placeholder="Enter email"
-                    className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 text-3xl"
+                    className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 text-xl lg:text-3xl"
                   />
                   {errors.email?.type === "required" && (
                     <p className="text-red-700">Password is required</p>
                   )}
                 </div>
                 <div>
-                  <label htmlFor="photo" className="block mb-2 text-3xl">
+                  <label htmlFor="photo" className="block mb-2 text-xl lg:text-3xl">
                     Photo URL
                   </label>
                   <input
@@ -175,7 +175,7 @@ const Register = () => {
                     name="photo"
                     id="photoURL"
                     placeholder="photo URL"
-                    className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 text-3xl"
+                    className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 text-xl lg:text-3xl"
                   />
                   {errors.photo?.type === "required" && (
                     <p className="text-red-700">Photo is required</p>
@@ -183,7 +183,7 @@ const Register = () => {
                 </div>
                 <div>
                   <div className="flex justify-between mb-2">
-                    <label htmlFor="password" className="text-3xl">
+                    <label htmlFor="password" className="text-xl lg:text-3xl">
                       Enter Password
                     </label>
                   </div>
@@ -200,7 +200,7 @@ const Register = () => {
                     name="password"
                     id="password"
                     placeholder="Enter password"
-                    className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 text-3xl"
+                    className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 text-xl lg:text-3xl"
                   />
                   {errors.password?.type === "required" && (
                     <p className="text-red-700">Password is required</p>
@@ -217,7 +217,7 @@ const Register = () => {
                   )}
                 </div>
                 <div className="md:col-span-2 lg:col-span-1">
-                    <label className="block mb-2 text-3xl">Select a Role</label>
+                    <label className="block mb-2 text-xl lg:text-3xl">Select a Role</label>
                     <div className="flex gap-6 text-2xl text-[#080c3b]">
                         <label className="flex items-center gap-2">
                         <input
@@ -247,7 +247,7 @@ const Register = () => {
                 <div>
                   <button
                     type="submit"
-                    className="cursor-pointer w-full px-8 py-3 text-3xl font-semibold rounded-md bg-[#98A1BC] text-[#080c3b]"
+                    className="cursor-pointer w-full px-8 py-3 text-xl lg:text-3xl font-semibold rounded-md bg-[#98A1BC] text-[#080c3b]"
                   >
                     Register
                   </button>
@@ -288,7 +288,7 @@ const Register = () => {
                   Register with Google
                 </button>
                 <div className="divider"></div>
-                <p className="whitespace-nowrap px-6 text-xl text-center dark:text-gray-600">
+                <p className="lg:whitespace-nowrap px-6 text-xl text-center dark:text-gray-600">
                   Already Have An Account?
                   <NavLink className="underline text-[#080c3b]" to="/login">
                     {" "}

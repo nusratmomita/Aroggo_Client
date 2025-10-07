@@ -6,24 +6,19 @@ import {
   FaPhoneAlt,
   FaMapMarkerAlt,
 } from "react-icons/fa";
-import { MdEmail, MdCheckCircle } from "react-icons/md";
+import { MdEmail } from "react-icons/md";
 import { BsTwitterX } from "react-icons/bs";
 import siteLogo from '../../assets/siteLogo.png';
 
-
 const Footer = () => {
   return (
-    <footer
-      className="bg-gradient-to-l from-[#555879] to-[#98A1BC] pt-16 pb-10 px-6"
-    >
+    <div className="bg-gradient-to-tr from-[#555879] to-[#98A1BC] lg:bg-gradient-to-l lg:from-[#555879] lg:to-[#98A1BC] pt-16 pb-10 px-6 lg:w-[100%]">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Branding */}
         <div className="space-y-0">
           <div className="flex items-center space-x-1">
-            <img className="hidden lg:block w-20 h-20" src={siteLogo} alt="logo" />
-            <span
-              className="text-2xl font-bold text-[#080c3b]"
-            >
+            <img className="w-20 h-20 max-w-full" src={siteLogo} alt="logo" />
+            <span className="text-2xl font-bold text-[#080c3b]">
               Aroggo
             </span>
           </div>
@@ -32,24 +27,11 @@ const Footer = () => {
             doorstep with care and convenience.
           </p>
           <div className="flex space-x-4 mt-2">
-            {/* Social Icons */}
             {[
-              {
-                icon: <FaFacebookF />,
-                href: "https://www.facebook.com/",
-              },
-              {
-                icon: <BsTwitterX />,
-                href: "https://www.x.com/",
-              },
-              {
-                icon: <FaInstagram />,
-                href: "https://www.instagram.com/",
-              },
-              {
-                icon: <FaLinkedinIn />,
-                href: "https://www.linkedin.com/",
-              },
+              { icon: <FaFacebookF />, href: "https://www.facebook.com/" },
+              { icon: <BsTwitterX />, href: "https://www.x.com/" },
+              { icon: <FaInstagram />, href: "https://www.instagram.com/" },
+              { icon: <FaLinkedinIn />, href: "https://www.linkedin.com/" },
             ].map((social, idx) => (
               <a
                 key={idx}
@@ -93,12 +75,8 @@ const Footer = () => {
                 <a
                   href={item.href}
                   className="transition-colors duration-200 hover:underline"
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.color = "#DED3C4")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = "#080c3b")
-                  }
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#DED3C4")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "#080c3b")}
                 >
                   {item.label}
                 </a>
@@ -124,12 +102,8 @@ const Footer = () => {
                 <a
                   href={item.href}
                   className="transition-colors duration-200 hover:underline"
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.color = "#F4EBD3")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = "#080c3b")
-                  }
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#F4EBD3")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "#080c3b")}
                 >
                   {item.label}
                 </a>
@@ -149,12 +123,12 @@ const Footer = () => {
               <span>
                 +880 1234-567890
                 <br />
-              [ 24/7 Support ]
+                [ 24/7 Support ]
               </span>
             </li>
             <li className="flex items-start space-x-2">
-              <MdEmail className="mt-1 flex-shrink-0" size={14} />
-              <span>nushrathhussain961@gmail.com</span>
+              <MdEmail className="mt-1 flex-shrink-0 whitespace-wrap" size={14} />
+              <span>nushrathhussain961 <br />@gmail.com</span>
             </li>
             <li className="flex items-start space-x-2">
               <FaMapMarkerAlt className="mt-1 flex-shrink-0" size={14} />
@@ -178,12 +152,8 @@ const Footer = () => {
             <button
               className="px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 cursor-pointer"
               style={{ backgroundColor: "#98A1BC", color: "#080c3b" }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor = "#F4EBD3")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.backgroundColor = "#98A1BC")
-              }
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F4EBD3")}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#98A1BC")}
             >
               Subscribe
             </button>
@@ -192,10 +162,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom bar */}
-      <div
-        className="mt-10 pt-6 text-center text-lg"
-        style={{ borderTop: "1px solid #080c3b", color: "#080c3b" }}
-      >
+      <div className="mt-10 pt-6 text-center text-lg" style={{ borderTop: "1px solid #080c3b", color: "#080c3b" }}>
         <p className="mb-2">
           © {new Date().getFullYear()} Aroggo. All rights reserved.
         </p>
@@ -203,7 +170,7 @@ const Footer = () => {
           Licensed Pharmacy | Safe & Secure Payment | Genuine Medicines
         </p>
       </div>
-    </footer>
+    </div>
   );
 };
 

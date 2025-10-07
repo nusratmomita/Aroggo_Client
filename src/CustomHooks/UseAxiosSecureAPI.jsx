@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { AuthContext } from "../Authentication/AuthContext";
 
 const axiosAPI = axios.create({
-    baseURL: `https://aroggo-server.vercel.app//`
+    baseURL: `https://aroggo-server.vercel.app/`
 });
 
 

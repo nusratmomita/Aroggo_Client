@@ -46,7 +46,7 @@ export const routers = createBrowserRouter([
             },
             {
                 path: "/shop",
-                loader: () => fetch("https://aroggo-server.vercel.app//medicineCount"), 
+                loader: () => fetch("https://aroggo-server.vercel.app/medicineCount"), 
                 // element: <PrivateRoute> <Shop></Shop> </PrivateRoute>
                 Component: Shop
             },
