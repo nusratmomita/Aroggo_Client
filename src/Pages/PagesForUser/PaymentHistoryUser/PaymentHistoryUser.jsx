@@ -79,7 +79,7 @@ const PaymentHistoryUser = () => {
                 {paymentHistory.map((item, index) => (
                   <tr key={index} className="text-2xl text-center text-[#080c3b]">
                     <td>{index + 1}</td>
-                    <td className="text-2xl break-all">{item.transactionId}</td>
+                    <td className="text-2xl break-all whitespace-nowrap">{item.transactionId}</td>
                     <td>৳{item.amount/100}</td>
                     <td>
                       <span
@@ -92,7 +92,7 @@ const PaymentHistoryUser = () => {
                         {item.paymentStatus}
                       </span>
                     </td>
-                    <td>{formateDate(item.paidAt) || "N/A"}</td>
+                    <td className=" whitespace-nowrap">{formateDate(item.paidAt) || "N/A"}</td>
                     <td className="font-extrabold">
                     {item.acceptance_status === "Accepted" ? "Accepted" : "Pay first"}
                     </td>

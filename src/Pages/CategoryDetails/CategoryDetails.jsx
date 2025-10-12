@@ -105,13 +105,13 @@ const CategoryDetails = () => {
 
   return (
     <ReTitleProvider defaultTitle="Category Medicine">
-      <div className="p-6 mt-10">
+      <div className="p-6 mt-30">
         <h1 className="mb-20 text-4xl font-bold text-[#080c3b]">
           Medicines in "{decodeURIComponent(categoryName)}"
         </h1>
 
-        <div className="flex justify-between items-center mx-20">
-          <div className="mt-10 flex gap-4 items-center mb-6">
+        <div className="flex flex-col lg:flex-row justify-between items-center mx-20">
+          <div className="mt-10 flex flex-col lg:flex-row gap-4 items-center mb-6">
             <label className="text-2xl text-[#080c3b] whitespace-nowrap">Sort by:</label>
             <select
               value={sortBy}
@@ -119,7 +119,7 @@ const CategoryDetails = () => {
                 setSortBy(e.target.value);
                 setCurrentPage(0); // reset pagination
               }}
-              className="select border text-xl"
+              className="select border text-xl w-[200%] lg:w-auto"
             >
               <option value="name">Name</option>
               <option value="price">Price</option>
@@ -133,14 +133,14 @@ const CategoryDetails = () => {
                 setSortOrder(e.target.value);
                 setCurrentPage(0);
               }}
-              className="select border text-xl"
+              className="select border text-xl w-[200%] lg:w-auto"
             >
               <option value="asc">Ascending</option>
               <option value="desc">Descending</option>
             </select>
           </div>
 
-          <div className="mt-10 flex gap-3 mb-4 items-center">
+          <div className="mt-10 flex flex-col lg:flex-row gap-3 mb-4 items-center">
             <label className="text-2xl text-[#080c3b] whitespace-nowrap">Search Medicine:</label>
             <input
               type="text"

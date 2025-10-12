@@ -13,7 +13,7 @@ const DashboardDefault = () => {
       } else if (role === 'seller') {
         navigate('/dashboard/sellerHome');
       } else if (role === 'user') {
-        navigate('/dashboard/paymentHistoryUser');
+        navigate('/dashboard/userProfile');
       }
     }
   }, [role, roleLoading, navigate]);
