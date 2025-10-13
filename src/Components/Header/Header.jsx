@@ -36,7 +36,6 @@ const Header = () => {
         })
     }
 
-
     return (
         <div className="navbar bg-gradient-to-l from-[#555879] to-[#98A1BC] shadow-sm fixed top-0 z-50">
             <div className="navbar-start">
@@ -111,7 +110,7 @@ const Header = () => {
                             <div className='flex gap-2 lg:gap-3'>
                             <Link to="/register">
                                 <button className="whitespace-nowrap lg:ml-3 p-2 lg:p-3 flex gap-2 bg-[#98A1BC] rounded-2xl justify-center items-center cursor-pointer hover:rounded-4xl hover:bg-[#c2cce8] text-xl">
-                                Join us
+                                Join Aroggo
                                 </button>
                             </Link>
                             <Link to="/login">

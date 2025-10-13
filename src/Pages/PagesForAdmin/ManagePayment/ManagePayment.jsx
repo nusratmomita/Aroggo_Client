@@ -87,7 +87,7 @@ const ManagePayment = () => {
                 // console.log(id)
 
                 return (
-                  <tr key={status._id} className="text-[#080c3b] text-2xl text-center">
+                  <tr key={status._id} className="text-[#080c3b] text-2xl text-center whitespace-nowrap">
                     <td>{index + 1}</td>
                     <td>{status.email || "N/A"}</td>
                     <td className={status.payment_status === "Paid" ? "text-[#080c3b] font-extrabold" : "text-[#555879] font-extrabold"}>

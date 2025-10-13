@@ -149,7 +149,7 @@ const SalesReport = () => {
                 {sales.map((sale, index) => (
                   <tr
                     key={index}
-                    className="hover text-2xl text-center text-[#080c3b]"
+                    className="hover text-2xl text-center text-[#080c3b] whitespace-nowrap"
                   >
                     <th>{index + 1}</th>
                     <td className="whitespace-nowrap">{formateDate(sale.date)}</td>

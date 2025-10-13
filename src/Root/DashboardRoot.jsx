@@ -47,7 +47,7 @@ const DashboardRoot = () => {
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu bg-base-200 text-2xl min-h-full w-80 p-4 flex flex-col justify-between"> 
+                <ul className="menu bg-base-200 text-xl min-h-full w-80 p-4 flex flex-col justify-between"> 
                 {/* Sidebar content */}
                 <div className='mt-10'>
                     <li>

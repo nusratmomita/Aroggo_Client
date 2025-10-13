@@ -143,7 +143,7 @@ const ManageCategories = () => {
   return (
     <ReTitleProvider defaultTitle="Manage Categories">
       <div className="p-6 mt-10">
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex flex-col lg:flex-row gap-5 justify-between items-center mb-6">
           <h2 className="text-4xl font-bold text-[#080c3b]">Manage Categories</h2>
           <button onClick={() => setShowModal(true)} className="btn bg-[#98A1BC] text-[#080c3b] text-2xl  hover:bg-[#7f89a4]">
             <FaPlus /> Add Category
@@ -169,7 +169,7 @@ const ManageCategories = () => {
             </thead>
             <tbody>
               {categories.map((cat, index) => (
-                <tr key={cat._id} className='text-2xl text-center text-[#080c3b]'>
+                <tr key={cat._id} className='text-2xl text-center text-[#080c3b] whitespace-nowrap'>
                   <td>{index + 1}</td>
                   <td>{cat.categoryName}</td>
                   <td>

@@ -116,8 +116,8 @@ const ManageMedicine = () => {
   return (
     <ReTitleProvider defaultTitle="Manage Medicine">
       <div className="p-6 mt-10">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-4xl font-bold text-[#080c3b]">
+        <div className="flex flex-col lg:flex-row gap-5 justify-between items-center mb-15">
+          <h1 className="text-4xl whitespace-nowrap font-bold text-[#080c3b]">
             Manage Your Medicines
           </h1>
           <button
@@ -128,7 +128,7 @@ const ManageMedicine = () => {
           </button>
         </div>
 
-        <div className="flex gap-4 items-center mb-6">
+        <div className="flex flex-col lg:flex-row gap-4 items-center mb-6">
           <label className="text-2xl text-[#080c3b]">Sort by:</label>
           <select
             value={sortBy}
@@ -157,17 +157,17 @@ const ManageMedicine = () => {
           </select>
         </div>
 
-        <div className="flex gap-3 mb-4 items-center">
+        <div className="flex flex-col lg:flex-row gap-3 mb-4 items-center">
           <label className="text-2xl text-[#080c3b]">Search Medicine:</label>
           <input
             type="text"
-            placeholder="Search by name..."
+            placeholder="Search by name...."
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
               setCurrentPage(0);
             }}
-            className="input text-2xl input-bordered w-full max-w-xs"
+            className="input text-2xl input-bordered w-full max-w-sm"
           />
 
           <button

@@ -20,7 +20,7 @@ const Slider = () => {
     return <div className="text-2xl text-center font-bold">Loading slider ads...</div>;
 
   return (
-    <div className="w-full max-w-7xl mx-auto mt-10 mb-5 py-10 px-5 md:px-10 ">
+    <div className="mt-30 mx-5 lg:mx-0">
       <Swiper
         modules={[Pagination, Autoplay]}
         pagination={{ clickable: true }}
@@ -31,28 +31,28 @@ const Slider = () => {
       >
         {sliderAds.map((ad) => (
           <SwiperSlide key={ad._id}>
-            <div className="mt-20 w-full flex flex-col lg:flex-row items-center justify-between gap-8 bg-gradient-to-br from-[#f0f4ff] to-[#e6ecfa] border border-blue-200 rounded-2xl shadow-2xl p-6 lg:p-10 h-full transition-all duration-300">
+            <div className=" flex flex-col lg:flex-row items-center justify-between gap-8 bg-gradient-to-br from-[#98A1BC] to-[#e6ecfa] border border-blue-200 rounded-2xl shadow-2xl p-6 lg:p-10 h-full transition-all duration-300">
               {/* Text Content */}
-              <div className="flex-1 lg:text-center space-y-4">
+              <div className="flex-1 lg:ml-30 space-y-4">
                 {ad.discount && (
                   <span className="inline-block bg-blue-100 text-[#080c3b] px-4 py-1 rounded-full text-xl font-semibold shadow-sm border border-blue-300 mr-20">
                     {ad.discount}% OFF
                   </span>
                 )}
 
-                <h2 className="text-6xl font-bold text-[#0f172a]">{ad.itemName}</h2>
+                <h2 className="text-2xl lg:text-4xl font-bold text-[#0f172a]">{ad.itemName}</h2>
 
-                <div className="lg:text-center">
+                <div className="">
                   <span className="line-through text-2xl text-gray-500">৳{ad.previousPrice}</span>
                   <span className="text-2xl font-bold text-[#080c3b] lg:ml-4">
                     ৳{Math.floor(ad.previousPrice - (ad.previousPrice * ad.discount) / 100)}
                   </span>
                 </div>
 
-                <p className="text-[#334155] font-extrabold text-2xl leading-relaxed lg:text-center">{ad.message==="N/A" ? "" : ad.message}</p>
+                <p className="text-[#334155] font-extrabold text-2xl leading-relaxed">{ad.message==="N/A" ? "" : ad.message}</p>
 
                 <Link to="/shop">
-                  <button className="lg:ml-50 flex gap-2 items-center mt-4 cursor-pointer bg-[#475569] hover:bg-[#334155] transition-colors text-white py-2 px-6 rounded-full font-semibold text-lg shadow-md">
+                  <button className="flex gap-2 items-center mt-4 cursor-pointer bg-[#475569] hover:bg-[#334155] transition-colors text-white py-2 px-6 rounded-full font-semibold text-lg shadow-md">
                     <FaShoppingCart />
                     Shop Now
                   </button>

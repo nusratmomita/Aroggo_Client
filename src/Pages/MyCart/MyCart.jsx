@@ -129,7 +129,7 @@ const CartPage = () => {
           <p className="text-xl text-red-600">Failed to load cart.</p>
         ) : (
           <div className="p-8">
-            <h2 className="text-4xl font-bold text-[#080c3b] mb-6 mt-50">Your Cart</h2>
+            <h2 className="text-4xl font-bold text-[#080c3b] mb-6 mt-30">Your Cart</h2>
             {cartItems.length === 0 ? (
               <div className=" flex flex-col gap-5 items-center justify-center text-center">
                 <p className="text-[#080c3b] text-4xl">No items in cart</p>
@@ -157,7 +157,7 @@ const CartPage = () => {
                   </thead>
                   <tbody>
                     {cartItems.map((item, index) => (
-                      <tr key={item._id} className="text-[#080c3b] text-center text-2xl">
+                      <tr key={item._id} className="text-[#080c3b] text-center text-2xl whitespace-nowrap">
                         <td>{index + 1}</td>
                         <td>{item.name}</td>
                         <td>{item.company}</td>

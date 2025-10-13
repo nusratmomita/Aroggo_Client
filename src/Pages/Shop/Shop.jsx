@@ -174,7 +174,7 @@ const Shop = () => {
                 setSearchText(e.target.value);
                 setCurrentPage(0);
               }}
-              className="input text-2xl input-bordered w-full max-w-xl"
+              className="input text-2xl input-bordered w-full max-w-sm"
             />
 
             <button

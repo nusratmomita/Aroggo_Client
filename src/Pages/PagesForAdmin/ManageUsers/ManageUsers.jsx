@@ -91,7 +91,7 @@ const ManageUsers = () => {
             </thead>
             <tbody>
               {allUsers.map((user, i) => (
-                <tr className="text-2xl text-[#080c3b]" key={user._id}>
+                <tr className="text-2xl text-[#080c3b] whitespace-nowrap" key={user._id}>
                   <td>{i + 1}</td>
                   <td>{user.email}</td>
                   <td>{formateDate(user.created_at)}</td>
