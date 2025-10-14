@@ -109,12 +109,12 @@ const Header = () => {
                         ) : (
                             <div className='flex gap-2 lg:gap-3'>
                             <Link to="/register">
-                                <button className="whitespace-nowrap lg:ml-3 p-2 lg:p-3 flex gap-2 bg-[#98A1BC] rounded-2xl justify-center items-center cursor-pointer hover:rounded-4xl hover:bg-[#c2cce8] text-xl">
+                                <button className="whitespace-nowrap lg:ml-3 p-2 lg:p-3 flex gap-2 bg-[#c2cce8] text-[#021038] rounded-xl justify-center items-center cursor-pointer hover:rounded-2xl text-xl">
                                 Join Aroggo
                                 </button>
                             </Link>
                             <Link to="/login">
-                                <button className="lg:ml-3 p-2 lg:p-3 flex gap-2 bg-[#98A1BC] rounded-2xl justify-center items-center cursor-pointer hover:rounded-4xl hover:bg-[#c2cce8] text-xl">
+                                <button className="lg:ml-3 p-2 lg:p-3 flex gap-2 bg-white text-[#021038] rounded-xl justify-center items-center cursor-pointer hover:rounded-2xl text-xl">
                                 Login
                                 </button>
                             </Link>
